@@ -1,0 +1,4 @@
+enum ConnectionEnum {
+  local,
+  server
+}
