@@ -1,11 +1,10 @@
 
-import '../../helper/sql_queries.dart';
 import '../connection.dart';
 import 'dio_manager.dart';
 
 void main() {
-  final list = RemoteConnection()
-      .readQuery(SqlQueries.getAllDb);
+  // final list = RemoteConnection()
+  //     .readQuery(SqlQueries.getAllDb);
 }
 
 class RemoteConnection implements IConnection {

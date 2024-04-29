@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import 'dart:io';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/widgets/app_bar.dart';
 import '../../../configuration/branch/data/repositories/branch_repo_impl.dart';
