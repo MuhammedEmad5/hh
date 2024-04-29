@@ -26,10 +26,6 @@ import '../../../configuration/unit/data/repositories/unit_repo.dart';
 import '../../../configuration/unit/di/unit_service.dart';
 import '../../../configuration/unit/presentation/manager/unit_cubit.dart';
 import '../../../configuration/unit/presentation/views/unit_page.dart';
-import '../../../configuration/user_registration/data/repositories/user_registration_impl.dart';
-import '../../../configuration/user_registration/di/user_registration_service.dart';
-import '../../../configuration/user_registration/presentation/manager/user_registration_cubit.dart';
-import '../../../configuration/user_registration/presentation/pages/users_view.dart';
 import '../../home_models/screen_item_model.dart';
 import '../widgets/screen_item_card.dart';
 
@@ -101,37 +97,6 @@ class InfraDataView extends StatelessWidget {
               },
             ),
           );
-        },
-      ),
-      ScreenItem(
-        appLocalizations.user_registration,
-        'userregisteration',
-        () {
-          UserRegistrationService().initDi();
-          BranchService().initDi();
-
-          AppNavigation.pushPageRoute(_buildPageRoute(builder: (context) {
-            return MultiRepositoryProvider(
-                providers: [
-                  RepositoryProvider(
-                    create: (context) => GetIt.I<UserRegistrationRepo>(),
-                  ),
-                  RepositoryProvider(
-                    create: (context) => GetIt.I<BranchRepo>(),
-                  )
-                ],
-                child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider.value(
-                      value: GetIt.I<UserRegistrationCubit>()..getAllUsers(),
-                    ),
-                    BlocProvider.value(
-                      value: GetIt.I<BranchCubit>(),
-                    )
-                  ],
-                  child: UsersView(),
-                ));
-          }));
         },
       ),
       ScreenItem(
