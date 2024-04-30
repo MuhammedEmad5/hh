@@ -4,9 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/constants/colors.dart';
-import '../../../../core/presentation/widgets/app_bar.dart';
-
+import '../../../../../../../core/constants/colors.dart';
+import '../../../../../../../core/presentation/widgets/app_bar.dart';
 
 class A4ReportPage extends StatefulWidget {
   const A4ReportPage({super.key});
