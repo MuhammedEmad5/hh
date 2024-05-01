@@ -1,8 +1,7 @@
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/mapper/invoice_sell_mapper.auto_mappr.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/models/invoice_sell_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
-
-import '../../domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
-import '../models/invoice_sell_model.dart';
-import 'invoice_sell_mapper.auto_mappr.dart';
 
 @AutoMappr([
   MapType<InvoiceSell, InvoiceSellEntity>(fields: [

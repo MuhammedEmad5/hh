@@ -1,19 +1,22 @@
+import 'package:InvoiceF_Sales/core/utils/logger.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/create_invoice_sell_unit_use_case%20.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/create_invoice_sell_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/insert_invoice_sale_return_invoice_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/delete_invoice_sell_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_brances_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_clients_vendors_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_data_count_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_items_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_last_index_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_all_invoice_sells_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_invoice_sell_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/search_item_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/update_invoice_sell_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../../../core/utils/logger.dart';
-import '../../domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
-import '../../domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/create_invoice_sell_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/delete_invoice_sell_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/get_brances_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/get_clients_vendors_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/get_items_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/get_last_index_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/read_all_invoice_sells_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/read_invoice_sell_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/search_item_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/update_invoice_sell_use_case.dart';
 
 part 'invoice_sell_state.dart';
 part 'invoice_sell_cubit.freezed.dart';
@@ -24,11 +27,14 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
   final ReadInvoiceSellUseCase readInvoiceSellUseCase;
   final UpdateInvoiceSellUseCase updateInvoiceSellUseCase;
   final DeleteInvoiceSellUseCase deleteInvoiceSellUseCase;
-  final GetLastIndexUseCase getLastIndexUseCase;
-  final GetClientsVendorsUseCase getClientsVendorsUseCase;
-  final GetBranchesUseCase getBranchesUseCase;
-  final GetItemsUseCase getItemsUseCase;
-  final SearchItemUseCase searchItemUseCase;
+  final GetLastIndexInvoiceSellUseCase getLastIndexInvoiceSellUseCase;
+  final GetClientsVendorsInvoiceSellUseCase getClientsVendorsInvoiceSellUseCase;
+  final GetBranchesInvoiceSellUseCase getBranchesInvoiceSellUseCase;
+  final GetItemsInvoiceSellUseCase getItemsInvoiceSellUseCase;
+  final SearchItemInvoiceSellUseCase searchItemInvoiceSellUseCase;
+  final GetDataCountInvoiceSellUseCase getDataCountInvoiceSellUseCase;
+  final CreateInvoiceSellUnitUseCase createInvoiceSellUnitUseCase;
+  final InsertInvoiceSaleReturnUseCase insertInvoiceSaleReturnUseCase;
 
   InvoiceSellCubit(
     this.readAllInvoiceSalesUseCase,
@@ -36,17 +42,40 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
     this.readInvoiceSellUseCase,
     this.updateInvoiceSellUseCase,
     this.deleteInvoiceSellUseCase,
-    this.getLastIndexUseCase,
-    this.getClientsVendorsUseCase,
-    this.getBranchesUseCase,
-    this.getItemsUseCase,
-    this.searchItemUseCase,
+    this.getLastIndexInvoiceSellUseCase,
+    this.getClientsVendorsInvoiceSellUseCase,
+    this.getBranchesInvoiceSellUseCase,
+    this.getItemsInvoiceSellUseCase,
+    this.searchItemInvoiceSellUseCase,
+    this.getDataCountInvoiceSellUseCase,
+    this.createInvoiceSellUnitUseCase,
+    this.insertInvoiceSaleReturnUseCase,
   ) : super(const InvoiceSellState.loading());
 
   void insertInvoiceSell(InvoiceSellEntity invoiceSellEntity) async {
     try {
       await createInvoiceSellUseCase.execute(invoiceSellEntity);
-      // emit(const InvoiceSellState.success(true));
+      emit(const InvoiceSellState.success(true));
+    } catch (e) {
+      emit(InvoiceSellState.error(e.toString()));
+    }
+  }
+
+  void insertInvoiceSellUnit(InvoiceSellUnitEntity invoiceSellUnitEntity,
+      int orderNo, int quantity) async {
+    try {
+      await createInvoiceSellUnitUseCase.execute(
+          invoiceSellUnitEntity, orderNo, quantity);
+    } catch (e) {
+      emit(InvoiceSellState.error(e.toString()));
+    }
+  }
+
+  void insertInvoiceSellReturn(
+      InvoiceSellReturn invoiceSellReturnEntity) async {
+    try {
+      await insertInvoiceSaleReturnUseCase.execute(invoiceSellReturnEntity);
+      emit(const InvoiceSellState.success(true));
     } catch (e) {
       emit(InvoiceSellState.error(e.toString()));
     }
@@ -90,15 +119,21 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
     }
   }
 
+  Future<int> getDataCount() async {
+    int dataCount = await getDataCountInvoiceSellUseCase.execute();
+    return dataCount;
+  }
+
   void getInvoiceData(String invoiceNo, bool isEdit) async {
     var data = {};
     try {
-      var index = await getLastIndexUseCase.execute('InvoiceSell', 'invoiceNo');
-      var clientsVendors = await getClientsVendorsUseCase.execute();
-      var branches = await getBranchesUseCase.execute();
+      var index = await getLastIndexInvoiceSellUseCase.execute(
+          'InvoiceSell', 'invoiceNo');
+      var clientsVendors = await getClientsVendorsInvoiceSellUseCase.execute();
+      var branches = await getBranchesInvoiceSellUseCase.execute();
       List<InvoiceSellUnitEntity> items = [];
       if (isEdit) {
-        items = await getItemsUseCase.execute(invoiceNo);
+        items = await getItemsInvoiceSellUseCase.execute(invoiceNo);
       }
       data = {
         'index': index,
@@ -115,7 +150,7 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
   Future<InvoiceSellUnitEntity> searchItem(
       String barCode, String invoiceNo) async {
     InvoiceSellUnitEntity item =
-        await searchItemUseCase.execute(barCode, invoiceNo);
+        await searchItemInvoiceSellUseCase.execute(barCode, invoiceNo);
     return item;
   }
 }

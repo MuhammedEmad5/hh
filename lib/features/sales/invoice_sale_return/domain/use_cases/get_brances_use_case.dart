@@ -1,11 +1,11 @@
-import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/repositories/invoice_sell_repo_impl.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/repositories/invoice_sale_return_repo.dart';
 
-class GetBranchesInvoiceSellUseCase {
-  final InvoiceSellRepo invoiceSellRepo;
+class GetBranchesInvoiceSaleReturnUseCase {
+  final InvoiceSaleReturnRepo invoiceSaleReturnRepo;
 
-  GetBranchesInvoiceSellUseCase({required this.invoiceSellRepo});
+  GetBranchesInvoiceSaleReturnUseCase({required this.invoiceSaleReturnRepo});
   Future<List> execute() async {
-    final branches = await invoiceSellRepo.getBranches();
+    final branches = await invoiceSaleReturnRepo.getBranches();
     List<String> branchNames = [];
     List<int> buildingNumbers = [];
     try {

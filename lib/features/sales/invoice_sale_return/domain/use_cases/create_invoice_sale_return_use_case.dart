@@ -1,6 +1,5 @@
-
-import '../../data/models/invoice_sell_return_model.dart';
-import '../../data/repositories/invoice_sale_return_repo.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/repositories/invoice_sale_return_repo.dart';
 
 class CreateInvoiceSaleReturnUseCase {
   final InvoiceSaleReturnRepo invoiceSaleReturnRepo;
@@ -8,8 +7,6 @@ class CreateInvoiceSaleReturnUseCase {
   CreateInvoiceSaleReturnUseCase({required this.invoiceSaleReturnRepo});
 
   Future<void> execute(InvoiceSellReturn invoiceSellReturnEntity) async {
-    // final InvoiceSellReturn invoiceSellReturn =
-    //     InvoiceSellMapper().convert(invoiceSellReturnEntity);
     await invoiceSaleReturnRepo.insert(invoiceSellReturnEntity);
   }
 }

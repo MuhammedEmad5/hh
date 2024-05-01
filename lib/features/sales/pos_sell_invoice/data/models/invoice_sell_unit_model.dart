@@ -1,6 +1,6 @@
+import 'package:InvoiceF_Sales/core/model/json_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../core/model/json_model.dart';
 part 'invoice_sell_unit_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)

@@ -1,14 +1,17 @@
+import 'package:InvoiceF_Sales/core/utils/logger.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/entities/invoice_sell_return_entity/invoice_sell_return_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/create_invoice_sale_return_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/delete_invoice_sale_return_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/get_brances_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/get_invoice_data_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/get_last_index_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/read_all_invoice_sale_return_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/read_invoice_sale_return_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/use_cases/update_invoice_sale_return_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../../../core/utils/logger.dart';
-import '../../data/models/invoice_sell_return_model.dart';
-import '../../domain/entities/invoice_sell_return_entity/invoice_sell_return_entity_model.dart';
-import '../../domain/use_cases/create_invoice_sale_return_use_case.dart';
-import '../../domain/use_cases/delete_invoice_sale_return_use_case.dart';
-import '../../domain/use_cases/read_all_invoice_sale_return_use_case.dart';
-import '../../domain/use_cases/read_invoice_sale_return_use_case.dart';
-import '../../domain/use_cases/update_invoice_sale_return_use_case.dart';
 
 part 'invoice_sale_return_state.dart';
 part 'invoice_sale_return_cubit.freezed.dart';
@@ -19,14 +22,22 @@ class InvoiceSaleReturnCubit extends Cubit<InvoiceSaleReturnState> {
   final ReadInvoiceSaleReturnUseCase readInvoiceSaleReturnUseCase;
   final UpdateInvoiceSaleReturnUseCase updateInvoiceSaleReturnUseCase;
   final DeleteInvoiceSaleReturnUseCase deleteInvoiceSaleReturnUseCase;
+  final GetBranchesInvoiceSaleReturnUseCase getBranchesInvoiceSaleReturnUseCase;
+  final GetLastIndexInvoiceSaleReturnUseCase
+      getLastIndexInvoiceSaleReturnUseCase;
+  final GetInvoiceDataInvoiceSaleReturnUseCase
+      getInvoiceDataInvoiceSaleReturnUseCase;
 
   InvoiceSaleReturnCubit(
-      this.readAllInvoiceSalesReturnUseCase,
-      this.createInvoiceSaleReturnUseCase,
-      this.readInvoiceSaleReturnUseCase,
-      this.updateInvoiceSaleReturnUseCase,
-      this.deleteInvoiceSaleReturnUseCase)
-      : super(const InvoiceSaleReturnState.loading());
+    this.readAllInvoiceSalesReturnUseCase,
+    this.createInvoiceSaleReturnUseCase,
+    this.readInvoiceSaleReturnUseCase,
+    this.updateInvoiceSaleReturnUseCase,
+    this.deleteInvoiceSaleReturnUseCase,
+    this.getBranchesInvoiceSaleReturnUseCase,
+    this.getLastIndexInvoiceSaleReturnUseCase,
+    this.getInvoiceDataInvoiceSaleReturnUseCase,
+  ) : super(const InvoiceSaleReturnState.loading());
 
   void insertInvoiceSaleReturn(
       InvoiceSellReturn invoiceSellReturnEntity) async {
@@ -79,5 +90,23 @@ class InvoiceSaleReturnCubit extends Cubit<InvoiceSaleReturnState> {
     } catch (e) {
       emit(InvoiceSaleReturnState.error(e.toString()));
     }
+  }
+
+  Future<String> getLastIndex() async {
+    String dataCount = await getLastIndexInvoiceSaleReturnUseCase.execute(
+        'InvoiceSellReturn', 'invoiceNo');
+    return dataCount;
+  }
+
+  Future<List> getBranches() async {
+    List branches = await getBranchesInvoiceSaleReturnUseCase.execute();
+    return branches;
+  }
+
+  Future<InvoiceSellEntity> getInvoiceData(
+      String invoiceNo, String buildingNo, String table) async {
+    InvoiceSellEntity invoiceData = await getInvoiceDataInvoiceSaleReturnUseCase
+        .execute(invoiceNo, buildingNo, table);
+    return invoiceData;
   }
 }

@@ -1,8 +1,9 @@
+import 'package:InvoiceF_Sales/core/presentation/widgets/card.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/label.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/text_icon_button.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/presentation/widgets/card.dart';
-import '../../../../../core/presentation/widgets/label.dart';
-import '../../../../../core/presentation/widgets/text_icon_button.dart';
 
 class SellInvoiceDataCard extends StatelessWidget {
   const SellInvoiceDataCard({super.key});

@@ -1,22 +1,17 @@
 import 'dart:io';
+
+import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/data_grid_paginated_ss.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/manager/invoice_sell_cubit.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/pages/sell_invoice_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
-import '../../../../../core/data/datasources/connection.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
-import '../../../../../core/navigation/navigation.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/data_grid_paginated_ss.dart';
-import '../../../../../core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../../../../core/presentation/widgets/ok_alert.dart';
-import '../../domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
-import '../manager/invoice_sell_cubit.dart';
 
 class SellInvoiceSSPage extends StatefulWidget {
   const SellInvoiceSSPage({super.key});
@@ -28,25 +23,17 @@ class SellInvoiceSSPage extends StatefulWidget {
 class _SellInvoiceSSPageState extends State<SellInvoiceSSPage> {
   int dataCount = 0;
   bool isLoading = true;
-  late IConnection connection;
 
   getDataCount() async {
-    var response =
-        await connection.readQuery('SELECT Count(invoiceNo) FROM InvoiceSell');
+    dataCount = await context.read<InvoiceSellCubit>().getDataCount();
     setState(() {
-      dataCount = response[0].values.first;
       isLoading = false;
     });
-    print(response[0].values.first);
   }
 
   @override
   void initState() {
     super.initState();
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
     getDataCount();
   }
 
@@ -93,11 +80,7 @@ class _SellInvoiceSSPageState extends State<SellInvoiceSSPage> {
                     onEditPressed: (id, data) {
                       AppNavigation.push(
                         SellInvoiceDetailsPage(
-                          newIndex: id.round(),
-                          isEdit: true,
-                          data: data
-                              .firstWhere((element) => element.invoiceNo == id),
-                        ),
+                            newIndex: id.round(), isEdit: true, data: data),
                       );
                     },
                     onDeletePressed: (id) {

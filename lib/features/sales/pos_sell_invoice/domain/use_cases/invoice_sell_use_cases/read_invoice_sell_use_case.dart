@@ -1,9 +1,8 @@
-
-import '../../../../../../core/utils/logger.dart';
-import '../../../data/mapper/invoice_sell_mapper.dart';
-import '../../../data/models/invoice_sell_model.dart';
-import '../../../data/repositories/invoice_sell_repo_impl.dart';
-import '../../entities/invoice_sell_entity/invoice_sell_entity_model.dart';
+import 'package:InvoiceF_Sales/core/utils/logger.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/mapper/invoice_sell_mapper.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/models/invoice_sell_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/repositories/invoice_sell_repo_impl.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
 
 class ReadInvoiceSellUseCase {
   final InvoiceSellRepo invoiceSellRepo;

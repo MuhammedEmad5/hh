@@ -1,6 +1,6 @@
 class SellInvoiceQueries {
   static String getItems(String invoiceNo) {
-    return 'SELECT * FROM invoicebuyunit WHERE invoiceNo = $invoiceNo';
+    return 'SELECT * FROM invoicesellunit WHERE invoiceNo = $invoiceNo';
   }
 
   static String searchItems(String barcode) {
@@ -17,5 +17,9 @@ class SellInvoiceQueries {
 
   static String getLastIndex(String tName, String key) {
     return 'SELECT MAX($key) AS maxNo FROM $tName';
+  }
+
+  static String getDataCount() {
+    return 'SELECT Count(invoiceNo) FROM InvoiceSell';
   }
 }

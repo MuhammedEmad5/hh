@@ -1,6 +1,5 @@
-
-import '../../../data/models/invoice_sell_model.dart';
-import '../../../data/repositories/invoice_sell_repo_impl.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/models/invoice_sell_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/repositories/invoice_sell_repo_impl.dart';
 
 class DeleteInvoiceSellUseCase {
   final InvoiceSellRepo invoiceSellRepo;

@@ -1,8 +1,7 @@
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/mapper/invoice_sell_return_mapper.auto_mappr.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/domain/entities/invoice_sell_return_entity/invoice_sell_return_entity_model.dart';
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
-
-import '../../domain/entities/invoice_sell_return_entity/invoice_sell_return_entity_model.dart';
-import '../models/invoice_sell_return_model.dart';
-import 'invoice_sell_return_mapper.auto_mappr.dart';
 
 @AutoMappr([
   MapType<InvoiceSellReturn, InvoiceSellReturnEntity>(fields: [

@@ -1,40 +1,32 @@
+import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/bottom_tab_bar.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/card.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/checkbox.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/custom_button.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/dropdown_search.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/icon_button.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/label.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/split_screen.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/repositories/invoice_sale_return_repo.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/presentation/manager/invoice_sale_return_cubit.dart';
+import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/presentation/pages/invoice_sale_return_list.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/data/repositories/invoice_sell_repo_impl.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/manager/invoice_sell_cubit.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/pages/sell_invoice_list_ss_page.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/widgets/sell_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:InvoiceF_Sales/core/presentation/widgets/text_box.dart';
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/data/datasources/connection.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
-import '../../../../../core/navigation/navigation.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/bottom_tab_bar.dart';
-import '../../../../../core/presentation/widgets/card.dart';
-import '../../../../../core/presentation/widgets/checkbox.dart';
-import '../../../../../core/presentation/widgets/custom_button.dart';
-import '../../../../../core/presentation/widgets/dropdown.dart';
-import '../../../../../core/presentation/widgets/dropdown_search.dart';
-import '../../../../../core/presentation/widgets/icon_button.dart';
-import '../../../../../core/presentation/widgets/label.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../../../../core/presentation/widgets/ok_alert.dart';
-import '../../../../../core/presentation/widgets/split_screen.dart';
-import '../../../invoice_sale_return/data/models/invoice_sell_return_model.dart';
-import '../../../invoice_sale_return/data/repositories/invoice_sale_return_repo.dart';
-import '../../../invoice_sale_return/domain/use_cases/create_invoice_sale_return_use_case.dart';
-import '../../../invoice_sale_return/presentation/manager/invoice_sale_return_cubit.dart';
-import '../../../invoice_sale_return/presentation/pages/invoice_sale_return_list.dart';
-import '../../data/repositories/invoice_sell_repo_impl.dart';
-import '../../domain/entities/invoice_sell_entity/invoice_sell_entity_model.dart';
-import '../../domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/create_invoice_sell_use_case.dart';
-import '../../domain/use_cases/invoice_sell_use_cases/update_invoice_sell_use_case.dart';
-import '../manager/invoice_sell_cubit.dart';
-import '../widgets/sell_item_card.dart';
 
 class SellInvoiceDetailsPage extends StatefulWidget {
   final int newIndex;
@@ -43,6 +35,7 @@ class SellInvoiceDetailsPage extends StatefulWidget {
   final bool isAddInvoiceReturn;
   final bool isHomeCalled;
   final bool disableSave;
+  final String? newIndexReturn;
   const SellInvoiceDetailsPage({
     super.key,
     required this.newIndex,
@@ -51,6 +44,7 @@ class SellInvoiceDetailsPage extends StatefulWidget {
     this.isAddInvoiceReturn = false,
     this.isHomeCalled = false,
     this.disableSave = false,
+    this.newIndexReturn,
   });
 
   @override
@@ -59,18 +53,16 @@ class SellInvoiceDetailsPage extends StatefulWidget {
 
 class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
     with TickerProviderStateMixin {
-  late IConnection connection;
   String dateG =
       '${DateTime.now().toString().substring(0, 10)} ${TimeOfDay.now().toString().substring(10, 15)}';
   String invoiceNo = '0';
-  TextEditingController subNetTotal = TextEditingController();
   int clientVendorNo = 0;
+  TextEditingController subNetTotal = TextEditingController();
   TextEditingController subTotalDiscount = TextEditingController();
   TextEditingController aName = TextEditingController();
   TextEditingController invoiceVATID = TextEditingController();
   TextEditingController telephone = TextEditingController();
   TextEditingController subNetTotalPlusTax = TextEditingController();
-  int buildingNo = 0;
   TextEditingController amountLeft = TextEditingController();
   TextEditingController eName = TextEditingController();
   TextEditingController amountPayed = TextEditingController();
@@ -79,39 +71,28 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
   TextEditingController vATTypeNO = TextEditingController();
   TextEditingController note = TextEditingController();
   TextEditingController barCode = TextEditingController();
-  bool isPosted = false;
-
   TextEditingController cash = TextEditingController();
   TextEditingController span = TextEditingController();
   TextEditingController visa = TextEditingController();
   TextEditingController vATNo = TextEditingController();
-
-// Item Data
-  TextEditingController quantityItem = TextEditingController();
-  TextEditingController priceItem = TextEditingController();
-  TextEditingController totalPlusTaxItem = TextEditingController();
-  TextEditingController aNameItem = TextEditingController();
   TextEditingController taxRate1_Total = TextEditingController();
+  int buildingNo = 0;
+  bool isPosted = false;
+
+  late TabController tabController;
   List<String> branchNames = [
-    'Main Branch',
+    'Main Branch - الفرع الرئيسى',
   ];
   List<int> buildingNumbers = [0];
   List<String> clientVendorNamesList = ['ClientVendor'];
   List<int> clientVendorNumbers = [0];
-
-  late TabController tabController;
-
-  bool isLoadingClientVendor = true;
-  bool isLoadingBranches = true;
   List<InvoiceSellUnitEntity> items = [];
+  List<InvoiceSellUnitEntity> addedItems = [];
+  List addedItemsValues = [];
 
   @override
   void initState() {
     super.initState();
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
 
     tabController = TabController(
       initialIndex: 0,
@@ -124,14 +105,11 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
     dateG = widget.data?.dateG ??
         '${DateTime.now().toString().substring(0, 10)} ${TimeOfDay.now().toString().substring(10, 15)}';
     subNetTotal.text = '${widget.data?.subNetTotal ?? '0'}';
-
     clientVendorNo =
         int.parse('${widget.data?.clientVendorNo?.round() ?? '0'}');
     subTotalDiscount.text = '${widget.data?.subTotalDiscount ?? '0'}';
-
     aName.text = widget.data?.aName ?? 'فاتورة بيع';
     invoiceVATID.text = widget.data?.invoiceVATID ?? '0';
-
     telephone.text = widget.data?.telephone ?? '';
     subNetTotalPlusTax.text = '${widget.data?.subNetTotalPlusTax ?? '0'}';
     buildingNo = (widget.data?.buildingNo == null
@@ -151,16 +129,10 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
         : false;
     note.text = '';
     barCode.text = '';
-
     cash.text = '${widget.data?.amountPayed01 ?? '0'}';
     span.text = '${widget.data?.amountPayed02 ?? '0'}';
     visa.text = '${widget.data?.amountPayed03 ?? '0'}';
     vATNo.text = '0';
-
-    quantityItem.text = '';
-    priceItem.text = '';
-    totalPlusTaxItem.text = '';
-    aNameItem.text = '';
   }
 
   @override
@@ -184,10 +156,6 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
     span.dispose();
     visa.dispose();
     vATNo.dispose();
-    quantityItem.dispose();
-    priceItem.dispose();
-    totalPlusTaxItem.dispose();
-    aNameItem.dispose();
     taxRate1_Total.dispose();
     super.dispose();
   }
@@ -214,15 +182,20 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
     });
   }
 
+  bool isLoaded = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<InvoiceSellCubit>.value(
       value: GetIt.I<InvoiceSellCubit>(),
       child: BlocBuilder<InvoiceSellCubit, InvoiceSellState>(
         builder: (context, state) {
-          context
-              .read<InvoiceSellCubit>()
-              .getInvoiceData(invoiceNo, widget.isEdit);
+          if (!isLoaded) {
+            context
+                .read<InvoiceSellCubit>()
+                .getInvoiceData(invoiceNo, widget.isEdit);
+            isLoaded = true;
+          }
           if (state is InvoiceSellDataLoaded) {
             if (widget.newIndex == -1) {
               invoiceNo = state.data['index'];
@@ -239,7 +212,9 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
             appBar: CustomAppBar(
               title: widget.isAddInvoiceReturn
                   ? AppLocalizations.of(context)!.sell_invoice_return
-                  : AppLocalizations.of(context)!.pos_sell_invoice,
+                  : widget.disableSave
+                      ? AppLocalizations.of(context)!.sell_invoice_return
+                      : AppLocalizations.of(context)!.pos_sell_invoice,
               color: AppColors.primaryColor,
               textColor: AppColors.onPrimary,
               addBtnColor: AppColors.onPrimary,
@@ -249,7 +224,7 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                           InvoiceSellReturn(
                         Inv_invoiceNo: int.parse(invoiceNo),
                         Inv_buildingNo: buildingNo,
-                        invoiceNo: int.parse(invoiceNo),
+                        invoiceNo: int.parse(widget.newIndexReturn!),
                         userNumber: invoiceNo,
                         aName: aName.text.isEmpty ? 'فاتورة بيع' : aName.text,
                         eName: eName.text.isEmpty ? 'Sale Invoice' : eName.text,
@@ -272,10 +247,9 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                             double.parse(span.text) +
                             double.parse(visa.text),
                       );
-                      CreateInvoiceSaleReturnUseCase(
-                              invoiceSaleReturnRepo:
-                                  InvoiceSaleReturnRepo(connection))
-                          .execute(invoiceSellReturnEntity);
+                      context
+                          .read<InvoiceSellCubit>()
+                          .insertInvoiceSellReturn(invoiceSellReturnEntity);
                       showOKDialog(
                           context: context,
                           title: AppLocalizations.of(context)!.success,
@@ -328,12 +302,22 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                             double.parse(visa.text),
                       );
                       widget.isEdit
-                          ? UpdateInvoiceSellUseCase(
-                                  invoiceSellRepo: InvoiceSellRepo(connection))
-                              .execute(newInvoice, id: newInvoice.invoiceNo)
-                          : CreateInvoiceSellUseCase(
-                                  invoiceSellRepo: InvoiceSellRepo(connection))
-                              .execute(newInvoice);
+                          ? context
+                              .read<InvoiceSellCubit>()
+                              .updateInvoiceSell(invoiceSellEntity: newInvoice)
+                          : context
+                              .read<InvoiceSellCubit>()
+                              .insertInvoiceSell(newInvoice);
+
+                      // for (var item in addedItems) {
+                      //   item.buildingNo = buildingNo;
+                      //   context.read<InvoiceSellCubit>().insertInvoiceSellUnit(
+                      //       item,
+                      //       addedItems.indexOf(item) + 1,
+                      //       addedItemsValues.firstWhere((element) =>
+                      //           element['itemNo'] == item.itemNo)['quantity']);
+                      // }
+
                       showOKDialog(
                           context: context,
                           title: AppLocalizations.of(context)!.success,
@@ -343,7 +327,14 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                               AppNavigation.pop();
                               if (!widget.isHomeCalled) {
                                 AppNavigation.pushReplacement(
-                                    const SellInvoiceSSPage());
+                                    RepositoryProvider(
+                                        create: (context) =>
+                                            GetIt.I<InvoiceSellRepo>(),
+                                        child: BlocProvider<
+                                            InvoiceSellCubit>.value(
+                                          value: GetIt.I<InvoiceSellCubit>(),
+                                          child: const SellInvoiceSSPage(),
+                                        )));
                               }
                             }
                           });
@@ -404,7 +395,6 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                               onChanged: (value) {
                                 clientVendorNo = clientVendorNumbers[
                                     clientVendorNamesList.indexOf(value)];
-                                print(clientVendorNo);
                               },
                             ),
                             child2: TextBox(
@@ -448,8 +438,6 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                             onChanged: (value) {
                               buildingNo =
                                   buildingNumbers[branchNames.indexOf(value)];
-                              print(buildingNo =
-                                  buildingNumbers[branchNames.indexOf(value)]);
                             },
                           ),
                           const Divider(),
@@ -535,7 +523,13 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                                             .read<InvoiceSellCubit>()
                                             .searchItem(
                                                 barCode.text, invoiceNo);
-                                    items.insert(0, newItem);
+                                    if (addedItems.contains(newItem)) {
+                                      addedItemsValues.firstWhere((element) =>
+                                          element['itemNo'] ==
+                                          newItem.itemNo)['quantity'] += 1;
+                                    } else {
+                                      addedItems.insert(0, newItem);
+                                    }
                                     setState(() {});
                                   },
                                   textColor: Colors.black,
@@ -550,7 +544,13 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                                               .read<InvoiceSellCubit>()
                                               .searchItem(
                                                   barCode.text, invoiceNo);
-                                      items.insert(0, newItem);
+                                      if (addedItems.contains(newItem)) {
+                                        addedItemsValues.firstWhere((element) =>
+                                            element['itemNo'] ==
+                                            newItem.itemNo)['quantity'] += 1;
+                                      } else {
+                                        addedItems.insert(0, newItem);
+                                      }
                                       setState(() {});
                                     },
                                   ),
@@ -600,6 +600,41 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                             ),
                           ),
                           const SizedBox(height: 10),
+                          ...addedItems.map((e) {
+                            // if (addedItemsValues.contains(
+                            //   addedItemsValues.firstWhere(
+                            //     (element) => element['itemNo'] == e.itemNo,
+                            //   ),
+                            // )) {
+                            //   print('MATCH FOUND');
+                            // } else {
+                            //   print('MATCH NOT FOUND');
+                            // }
+                            // addedItemsValues.add({
+                            //   'itemNo': e.itemNo,
+                            //   'quantity': e.quantity,
+                            //   'onQuantityChange': (value) {
+                            //     addedItemsValues.firstWhere((element) =>
+                            //         element['itemNo'] ==
+                            //         e.itemNo)['quantity'] = int.parse(value);
+                            //   }
+                            // });
+                            return SellItemCard(
+                              // onQuantityChanged: addedItemsValues.firstWhere(
+                              //     (element) =>
+                              //         element['itemNo'] ==
+                              //         e.itemNo)['onQuantityChange'],
+                              data: e,
+                              onDelete: () {
+                                setState(() {
+                                  addedItems
+                                      .removeWhere((element) => element == e);
+                                  addedItemsValues.removeWhere((element) =>
+                                      element['itemNo'] == e.itemNo);
+                                });
+                              },
+                            );
+                          }),
                           ...items.map((e) => SellItemCard(
                                 data: e,
                                 onDelete: () {

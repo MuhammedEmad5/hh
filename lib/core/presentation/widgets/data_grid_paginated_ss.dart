@@ -1,22 +1,17 @@
-
+import 'package:InvoiceF_Sales/core/blocs/connection_type_bloc/connection_bloc.dart';
+import 'package:InvoiceF_Sales/core/data/datasources/connection.dart';
+import 'package:InvoiceF_Sales/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'package:InvoiceF_Sales/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/loader_widget.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../blocs/connection_type_bloc/connection_bloc.dart';
 import '../../constants/colors.dart';
-import '../../data/datasources/connection.dart';
-import '../../data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../data/datasources/remote_data_source/remote_connection.dart';
 import '../../enums/connection_enum.dart';
-import '../../navigation/navigation.dart';
-import 'loader_widget.dart';
-
-
-AppLocalizations _appLocalizations =
-    AppLocalizations.of(AppNavigation.context)!;
 
 late int _rowsPerPage;
 bool _isLoading = false;
@@ -70,7 +65,6 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
             ConnectionEnum.local
         ? LocalConnection()
         : RemoteConnection();
-    print(connection.toString());
     data = widget.data;
     columns = data[0].getColumnNames();
     gridColumns = getColumns(columns);
@@ -101,7 +95,7 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
               _isLoading
                   ? Container(
                       color: Colors.black12,
-                      child:  Center(
+                      child: Center(
                         child: Loader(),
                       ),
                     )
@@ -217,20 +211,24 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
               filterMode: FilterMode.advancedFilter,
               canShowSortingOptions: false),
           allowEditing:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           allowFiltering:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           allowSorting:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           columnName: e,
           maximumWidth:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? 60
                   : double.nan,
           label: Container(
@@ -249,8 +247,6 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
   }
 }
 
-List paginatedData = [];
-
 class CustomDataGridSource extends DataGridSource {
   CustomDataGridSource(this.dataList) {
     dataGridRows = dataList
@@ -258,6 +254,7 @@ class CustomDataGridSource extends DataGridSource {
         .toList();
   }
 
+  List paginatedData = [];
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
 
@@ -272,25 +269,27 @@ class CustomDataGridSource extends DataGridSource {
       return Colors.transparent;
     }
 
+    final int rowIndex = effectiveRows.indexOf(row);
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
       return row.getCells().indexOf(dataGridCell) == 0 &&
               dataGridCell.value == -1
           ? SizedBox()
-          : dataGridCell.columnName == _appLocalizations.edit
+          : dataGridCell.columnName ==
+                  AppLocalizations.of(AppNavigation.context)!.edit
               ? Container(
                   color: getRowBackgroundColor(),
                   child: Center(
                     child: IconButton(
                       onPressed: () {
                         if (onEditPressed != null) {
-                          final Map<String, dynamic> data = {};
-                          for (int i = 0; i < row.getCells().length; i++) {
-                            data[row.getCells()[i].columnName] =
-                                row.getCells()[i].value;
-                          }
+                          // final Map<String, dynamic> data = {};
+                          // for (int i = 0; i < row.getCells().length; i++) {
+                          //   data[row.getCells()[i].columnName] =
+                          //       row.getCells()[i].value;
+                          // }
                           onEditPressed!(
-                              row.getCells()[0].value, paginatedData);
+                              row.getCells()[0].value, paginatedData[rowIndex]);
                         }
                       },
                       icon: const Icon(
@@ -300,7 +299,8 @@ class CustomDataGridSource extends DataGridSource {
                     ),
                   ),
                 )
-              : dataGridCell.columnName == _appLocalizations.delete
+              : dataGridCell.columnName ==
+                      AppLocalizations.of(AppNavigation.context)!.delete
                   ? Container(
                       color: getRowBackgroundColor(),
                       child: Center(
@@ -334,18 +334,14 @@ class CustomDataGridSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    print(oldPageIndex);
-    print(newPageIndex);
-
     try {
       var response = await connection.readQuery(connection is LocalConnection
           ? 'SELECT * FROM $tableName ORDER BY $orderBy LIMIT $_rowsPerPage OFFSET ${_rowsPerPage * newPageIndex}'
           : 'SELECT * FROM $tableName ORDER BY $orderBy OFFSET ${_rowsPerPage * newPageIndex} ROWS FETCH NEXT $_rowsPerPage ROWS ONLY;');
-      List data = [];
+      paginatedData = [];
       for (var element in response) {
-        data.add(fromJson(element));
+        paginatedData.add(fromJson(element));
       }
-      paginatedData = data;
     } catch (e) {
       showToast(context: AppNavigation.context, message: e.toString());
       print(e);
@@ -353,7 +349,6 @@ class CustomDataGridSource extends DataGridSource {
 
     buildPaginatedDataGridRows();
     notifyListeners();
-
     // int startIndex = newPageIndex * _rowsPerPage;
     // // int endIndex = startIndex + _rowsPerPage;
     // // // if (startIndex < dataList.length && endIndex <= dataList.length) {

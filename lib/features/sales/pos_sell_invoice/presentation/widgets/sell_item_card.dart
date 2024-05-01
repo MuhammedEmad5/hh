@@ -1,14 +1,19 @@
+import 'package:InvoiceF_Sales/core/presentation/widgets/card.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/label.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/nubmer_box.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/widgets/card.dart';
-import '../../../../../core/presentation/widgets/label.dart';
-import '../../../../../core/presentation/widgets/nubmer_box.dart';
-import '../../domain/entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
 
 class SellItemCard extends StatefulWidget {
   final InvoiceSellUnitEntity data;
   final Function onDelete;
-  const SellItemCard({super.key, required this.data, required this.onDelete});
+  final Function(String)? onQuantityChanged;
+  const SellItemCard({
+    super.key,
+    required this.data,
+    required this.onDelete,
+    this.onQuantityChanged,
+  });
 
   @override
   State<SellItemCard> createState() => _SellItemCardState();
@@ -23,6 +28,7 @@ class _SellItemCardState extends State<SellItemCard> {
     // TODO: implement initState
     super.initState();
     quantity.text = '${widget.data.quantity}';
+    // total.text = '${int.parse(quantity.text) * widget.data.price}';
     total.text = '${widget.data.totalPlusTax}';
   }
 
@@ -61,11 +67,17 @@ class _SellItemCardState extends State<SellItemCard> {
                 child: Align(
                   alignment: Alignment.center,
                   child: NumberBox(
-                    width: 50,
+                    width: 70,
                     controller: quantity,
                     onChanged: (value) {
                       if (value == '') {
-                        quantity.text = '1';
+                        Future.delayed(Duration(seconds: 3), () {
+                          if (quantity.text == '') {
+                            quantity.text = '1';
+                          }
+                        });
+                      } else {
+                        widget.onQuantityChanged!(value);
                       }
                       setState(() {
                         total.text =
@@ -79,7 +91,7 @@ class _SellItemCardState extends State<SellItemCard> {
                 flex: 1,
                 fit: FlexFit.tight,
                 child: Label(
-                  text: '${widget.data.price.toStringAsFixed(2)}',
+                  text: widget.data.price.toStringAsFixed(2),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -104,7 +116,7 @@ class _SellItemCardState extends State<SellItemCard> {
                 child: Align(
                   alignment: Alignment.center,
                   child: NumberBox(
-                    width: 50,
+                    width: 70,
                     controller: total,
                     isEnabled: false,
                   ),

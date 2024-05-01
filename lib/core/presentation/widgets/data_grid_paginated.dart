@@ -1,18 +1,13 @@
+import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
-import '../../navigation/navigation.dart';
-
-AppLocalizations _appLocalizations =
-    AppLocalizations.of(AppNavigation.context)!;
-
-
 
 const int _rowsPerPage = 10;
 bool isLoading = false;
-late Function(num)? onEditPressed;
+late Function(dynamic)? onEditPressed;
 late Function(num)? onDeletePressed;
 
 class DataGridPaginated extends StatefulWidget {
@@ -29,7 +24,7 @@ class DataGridPaginated extends StatefulWidget {
   final bool allowFiltering;
   final bool allowSorting;
   final bool fill;
-  final Function(num)? onEditPressed;
+  final Function(dynamic)? onEditPressed;
   final Function(num)? onDeletePressed;
   @override
   State<DataGridPaginated> createState() => _DataGridPaginatedState();
@@ -53,7 +48,6 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.data.length / _rowsPerPage);
     return Column(
       children: [
         SizedBox(
@@ -135,20 +129,24 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
               filterMode: FilterMode.advancedFilter,
               canShowSortingOptions: false),
           allowEditing:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           allowFiltering:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           allowSorting:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? false
                   : true,
           columnName: e,
           maximumWidth:
-              e == _appLocalizations.delete || e == _appLocalizations.edit
+              e == AppLocalizations.of(AppNavigation.context)!.delete ||
+                      e == AppLocalizations.of(AppNavigation.context)!.edit
                   ? 60
                   : double.nan,
           // width: 100,
@@ -191,16 +189,18 @@ class CustomDataGridSource extends DataGridSource {
       return Colors.transparent;
     }
 
+    final int rowIndex = effectiveRows.indexOf(row);
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-      return dataGridCell.columnName == _appLocalizations.edit
+      return dataGridCell.columnName ==
+              AppLocalizations.of(AppNavigation.context)!.edit
           ? Container(
               color: getRowBackgroundColor(),
               child: Center(
                 child: IconButton(
                   onPressed: () {
                     if (onEditPressed != null) {
-                      onEditPressed!(row.getCells()[0].value);
+                      onEditPressed!(paginatedData[rowIndex]);
                     }
                   },
                   icon: const Icon(
@@ -210,7 +210,8 @@ class CustomDataGridSource extends DataGridSource {
                 ),
               ),
             )
-          : dataGridCell.columnName == _appLocalizations.delete
+          : dataGridCell.columnName ==
+                  AppLocalizations.of(AppNavigation.context)!.delete
               ? Container(
                   color: getRowBackgroundColor(),
                   child: Center(
