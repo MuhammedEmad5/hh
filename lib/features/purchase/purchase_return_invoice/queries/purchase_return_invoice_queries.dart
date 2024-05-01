@@ -13,6 +13,6 @@ class PurchaseReturnInvoiceQueries {
 
   static String getInvoiceData(
       String invoiceNo, String buildingNo, String table) {
-    return 'SELECT * FROM $table WHERE invoiceNo = $invoiceNo AND buildingNo = $buildingNo';
+    return 'SELECT * FROM InvoiceBuyReturn WHERE invoiceNo = $invoiceNo AND buildingNo = $buildingNo';
   }
 }

@@ -247,8 +247,6 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
   }
 }
 
-List paginatedData = [];
-
 class CustomDataGridSource extends DataGridSource {
   CustomDataGridSource(this.dataList) {
     dataGridRows = dataList
@@ -256,6 +254,7 @@ class CustomDataGridSource extends DataGridSource {
         .toList();
   }
 
+  List paginatedData = [];
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
 
@@ -335,18 +334,14 @@ class CustomDataGridSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    print(oldPageIndex);
-    print(newPageIndex);
-
     try {
       var response = await connection.readQuery(connection is LocalConnection
           ? 'SELECT * FROM $tableName ORDER BY $orderBy LIMIT $_rowsPerPage OFFSET ${_rowsPerPage * newPageIndex}'
           : 'SELECT * FROM $tableName ORDER BY $orderBy OFFSET ${_rowsPerPage * newPageIndex} ROWS FETCH NEXT $_rowsPerPage ROWS ONLY;');
-      List data = [];
+      paginatedData = [];
       for (var element in response) {
-        data.add(fromJson(element));
+        paginatedData.add(fromJson(element));
       }
-      paginatedData = data;
     } catch (e) {
       showToast(context: AppNavigation.context, message: e.toString());
       print(e);
@@ -354,7 +349,6 @@ class CustomDataGridSource extends DataGridSource {
 
     buildPaginatedDataGridRows();
     notifyListeners();
-
     // int startIndex = newPageIndex * _rowsPerPage;
     // // int endIndex = startIndex + _rowsPerPage;
     // // // if (startIndex < dataList.length && endIndex <= dataList.length) {

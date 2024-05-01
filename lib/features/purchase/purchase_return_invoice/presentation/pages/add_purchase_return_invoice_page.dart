@@ -4,6 +4,7 @@ import 'package:InvoiceF_ClientVendor/core/presentation/widgets/custom_button.da
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/dropdown.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/toast_notification.dart';
 import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/di/invoice_buy_service.dart';
 import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
 import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/pages/purchase_invoice_details_page.dart';
@@ -34,9 +35,15 @@ class _AddPurchaseReturnInvoicePageState
   late InvoiceBuyEntity invoiceData;
   Future<InvoiceBuyEntity> getInvoiceData(
       String invoiceNo, int buildingNo) async {
-    var res = await context
-        .read<PurchaseReturnInvoiceCubit>()
-        .getInvoiceData(invoiceNo, '$buildingNo', 'InvoiceBuy');
+    var res;
+    try {
+      res = await context
+          .read<PurchaseReturnInvoiceCubit>()
+          .getInvoiceData(invoiceNo, '$buildingNo', 'InvoiceBuy');
+    } catch (e) {
+      showToast(
+          context: context, message: AppLocalizations.of(context)!.failed_a4);
+    }
     return res;
   }
 

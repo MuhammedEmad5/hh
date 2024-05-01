@@ -87,44 +87,42 @@ class _PurchaseReturnInvoiceListPageState
           }, success: (data) {
             return ListView(
               children: [
-                data == []
-                    ? Text('No Records')
-                    : SizedBox(
-                        height: MediaQuery.of(context).size.height - 100,
-                        child: DataGridPaginated(
-                          onEditPressed: (itemData) async {
-                            var inv = await getInvoiceData(
-                                itemData.invoiceNo.toString(),
-                                itemData.buildingNo.toString());
-                            InvoiceBuyService().initDi();
-                            AppNavigation.push(
-                              AddBuyInvoicePage(
-                                newIndex: itemData.invoiceNo.round(),
-                                data: inv,
-                                isEdit: true,
-                                disableSave: true,
-                              ),
-                            );
-                          },
-                          onDeletePressed: (id) {
-                            context
-                                .read<PurchaseReturnInvoiceCubit>()
-                                .deletePurchaseReturnInvoice(id: id);
-                            data.removeWhere(
-                                (element) => element.clientVendorNo == id);
-                            showOKDialog(
-                              context: context,
-                              title: AppLocalizations.of(context)!.success,
-                              message: '',
-                            );
-                          },
-                          data: data,
-                          allowFiltering: true,
-                          fill: Platform.isLinux ||
-                              Platform.isMacOS ||
-                              Platform.isWindows,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height - 100,
+                  child: DataGridPaginated(
+                    onEditPressed: (itemData) async {
+                      var inv = await getInvoiceData(
+                          itemData.invoiceNo.toString(),
+                          itemData.buildingNo.toString());
+                      InvoiceBuyService().initDi();
+                      AppNavigation.push(
+                        AddBuyInvoicePage(
+                          newIndex: itemData.invoiceNo.round(),
+                          data: inv,
+                          isEdit: true,
+                          disableSave: true,
                         ),
-                      ),
+                      );
+                    },
+                    onDeletePressed: (id) {
+                      context
+                          .read<PurchaseReturnInvoiceCubit>()
+                          .deletePurchaseReturnInvoice(id: id);
+                      data.removeWhere(
+                          (element) => element.clientVendorNo == id);
+                      showOKDialog(
+                        context: context,
+                        title: AppLocalizations.of(context)!.success,
+                        message: '',
+                      );
+                    },
+                    data: data,
+                    allowFiltering: true,
+                    fill: Platform.isLinux ||
+                        Platform.isMacOS ||
+                        Platform.isWindows,
+                  ),
+                ),
               ],
             );
           }, error: (e) {
