@@ -1,25 +1,22 @@
 import 'dart:io';
+import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/custom_error_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/data_grid_paginated.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF_ClientVendor/core/utils/logger.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/di/invoice_buy_service.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/pages/purchase_invoice_details_page.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/presentation/manager/purchase_return_invoice_cubit.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/presentation/pages/add_purchase_return_invoice_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
-import '../../../../../core/data/datasources/connection.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
-import '../../../../../core/navigation/navigation.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/custom_error_widget.dart';
-import '../../../../../core/presentation/widgets/data_grid_paginated.dart';
-import '../../../../../core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../../../../core/presentation/widgets/ok_alert.dart';
-import '../../../../../core/utils/logger.dart';
-import '../../../purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
-import '../../../purchase_invoice/presentation/pages/purchase_invoice_details_page.dart';
-import '../manager/purchase_return_invoice_cubit.dart';
-import 'add_purchase_return_invoice_page.dart';
+import 'package:get_it/get_it.dart';
 
 class PurchaseReturnInvoiceListPage extends StatefulWidget {
   const PurchaseReturnInvoiceListPage({super.key});
@@ -31,22 +28,29 @@ class PurchaseReturnInvoiceListPage extends StatefulWidget {
 
 class _PurchaseReturnInvoiceListPageState
     extends State<PurchaseReturnInvoiceListPage> {
-  late IConnection connection;
-  Future<InvoiceBuyEntity> getInvoiceData(String invoiceNo) async {
-    var response = await connection
-        .readQuery('SELECT * FROM invoicesell WHERE invoiceNo = $invoiceNo');
-    return InvoiceBuyEntity.fromJson(response[0]);
+  Future<InvoiceBuyEntity> getInvoiceData(
+      String invoiceNo, String buildingNo) async {
+    var res = await context
+        .read<PurchaseReturnInvoiceCubit>()
+        .getInvoiceData(invoiceNo, buildingNo, 'InvoiceBuyReturn');
+    return res;
+  }
+
+  Route buildPageRoute({
+    required WidgetBuilder builder,
+  }) {
+    return Platform.isIOS
+        ? CupertinoPageRoute(
+            builder: builder,
+          )
+        : MaterialPageRoute(
+            builder: builder,
+          );
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
   }
 
   int newIndex = 0;
@@ -59,7 +63,19 @@ class _PurchaseReturnInvoiceListPageState
       appBar: CustomAppBar(
         title: AppLocalizations.of(context)!.purchase_invoice_return,
         onAddPressed: () {
-          AppNavigation.push(const AddPurchaseReturnInvoicePage());
+          AppNavigation.pushPageRoute(
+            buildPageRoute(
+              builder: (context) {
+                return RepositoryProvider(
+                    create: (context) => GetIt.I<PurchaseReturnInvoiceState>(),
+                    child: BlocProvider<PurchaseReturnInvoiceCubit>.value(
+                      value: GetIt.I<PurchaseReturnInvoiceCubit>()
+                        ..getAllPurchaseReturnInvoice(),
+                      child: const AddPurchaseReturnInvoicePage(),
+                    ));
+              },
+            ),
+          );
         },
       ),
       body: BlocBuilder<PurchaseReturnInvoiceCubit, PurchaseReturnInvoiceState>(
@@ -76,11 +92,14 @@ class _PurchaseReturnInvoiceListPageState
                     : SizedBox(
                         height: MediaQuery.of(context).size.height - 100,
                         child: DataGridPaginated(
-                          onEditPressed: (id) async {
-                            var inv = await getInvoiceData(id.toString());
+                          onEditPressed: (itemData) async {
+                            var inv = await getInvoiceData(
+                                itemData.invoiceNo.toString(),
+                                itemData.buildingNo.toString());
+                            InvoiceBuyService().initDi();
                             AppNavigation.push(
                               AddBuyInvoicePage(
-                                newIndex: id.round(),
+                                newIndex: itemData.invoiceNo.round(),
                                 data: inv,
                                 isEdit: true,
                                 disableSave: true,

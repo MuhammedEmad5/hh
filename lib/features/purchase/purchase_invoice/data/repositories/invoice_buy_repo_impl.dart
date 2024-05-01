@@ -1,7 +1,8 @@
-import '../../../../../core/data/datasources/connection.dart';
+import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/repositories/invoice_buy_repo.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/queries/purchase_invoice_queries.dart';
+
 import '../../../../../core/data/repos/base_repo_class.dart';
-import '../../domain/repositories/invoice_buy_repo.dart';
-import '../../queries/purchase_invoice_queries.dart';
 
 class InvoiceBuyRepo extends BaseRepoClass implements IInvoiceBuyRepo {
   InvoiceBuyRepo(IConnection connection) : super(connection) {

@@ -1,8 +1,7 @@
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/data/mapper/invoice_buy_return_mapper.auto_mappr.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/data/models/invoice_buy_return_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/domain/entities/invoice_buy_return_entity/invoice_buy_return_entity_model.dart';
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
-
-import '../../domain/entities/invoice_buy_return_entity/invoice_buy_return_entity_model.dart';
-import '../models/invoice_buy_return_model.dart';
-import 'invoice_buy_return_mapper.auto_mappr.dart';
 
 @AutoMappr([
   MapType<InvoiceBuyReturn, InvoiceBuyReturnEntity>(fields: [

@@ -1,9 +1,8 @@
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/card.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/label.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/nubmer_box.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/widgets/card.dart';
-import '../../../../../core/presentation/widgets/label.dart';
-import '../../../../../core/presentation/widgets/nubmer_box.dart';
-import '../../domain/entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
 
 class BuyItemCard extends StatefulWidget {
   final InvoiceBuyUnitEntity data;

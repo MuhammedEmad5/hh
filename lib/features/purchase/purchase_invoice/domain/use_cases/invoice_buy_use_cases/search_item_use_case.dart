@@ -1,7 +1,6 @@
-
-import '../../../../../shared/shared_entities/item_entity/item_entity_model.dart';
-import '../../../data/repositories/invoice_buy_repo_impl.dart';
-import '../../entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/repositories/invoice_buy_repo_impl.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/item_entity/item_entity_model.dart';
 
 class SearchItemInvoiceBuyUseCase {
   final InvoiceBuyRepo invoiceBuyRepo;

@@ -1,6 +1,5 @@
+import 'package:InvoiceF_ClientVendor/core/model/json_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../../../../core/model/json_model.dart';
 
 part 'invoice_buy_unit_model.g.dart';
 

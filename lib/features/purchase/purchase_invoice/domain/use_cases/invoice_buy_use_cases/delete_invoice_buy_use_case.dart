@@ -1,6 +1,5 @@
-
-import '../../../data/models/invoice_buy_model.dart';
-import '../../../data/repositories/invoice_buy_repo_impl.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/models/invoice_buy_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/repositories/invoice_buy_repo_impl.dart';
 
 class DeleteInvoiceBuyUseCase {
   final InvoiceBuyRepo invoiceBuyRepo;

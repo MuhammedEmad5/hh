@@ -1,15 +1,11 @@
+import 'package:InvoiceF_ClientVendor/core/model/business_model.dart';
+import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/src/datagrid_widget/sfdatagrid.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../../core/model/business_model.dart';
-import '../../../../../../core/navigation/navigation.dart';
-
 part 'invoice_buy_return_entity_model.g.dart';
-
-AppLocalizations _appLocalizations =
-    AppLocalizations.of(AppNavigation.context)!;
 
 @JsonSerializable(explicitToJson: true)
 class InvoiceBuyReturnEntity implements BusinessModel {
@@ -61,23 +57,29 @@ class InvoiceBuyReturnEntity implements BusinessModel {
 
   @override
   List<String> getColumnNames() => [
-        _appLocalizations.number,
-        _appLocalizations.edit,
-        _appLocalizations.arabic_name,
-        _appLocalizations.english_name,
-        // _appLocalizations.delete,
+        AppLocalizations.of(AppNavigation.context)!.number,
+        AppLocalizations.of(AppNavigation.context)!.edit,
+        AppLocalizations.of(AppNavigation.context)!.arabic_name,
+        AppLocalizations.of(AppNavigation.context)!.english_name,
+        // AppLocalizations.of(AppNavigation.context)!.delete,
       ];
 
   @override
   DataGridRow getDataGridRow() {
     return DataGridRow(cells: [
-      DataGridCell<num>(columnName: _appLocalizations.number, value: invoiceNo),
-      DataGridCell<Widget>(columnName: _appLocalizations.edit, value: null),
+      DataGridCell<num>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.number,
+          value: invoiceNo),
+      DataGridCell<Widget>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.edit,
+          value: null),
       DataGridCell<String>(
-          columnName: _appLocalizations.arabic_name, value: aName),
+          columnName: AppLocalizations.of(AppNavigation.context)!.arabic_name,
+          value: aName),
       DataGridCell<String>(
-          columnName: _appLocalizations.english_name, value: eName),
-      // DataGridCell<Widget>(columnName: _appLocalizations.delete, value: null),
+          columnName: AppLocalizations.of(AppNavigation.context)!.english_name,
+          value: eName),
+      // DataGridCell<Widget>(columnName: AppLocalizations.of(AppNavigation.context)!.delete, value: null),
       // DataGridCell<Widget>(columnName: 'Delete', value: null),
     ]);
   }

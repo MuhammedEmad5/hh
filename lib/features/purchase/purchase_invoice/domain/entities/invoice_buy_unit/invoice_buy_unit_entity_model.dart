@@ -1,8 +1,7 @@
+import 'package:InvoiceF_ClientVendor/core/model/business_model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/src/datagrid_widget/sfdatagrid.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../../../../../core/model/business_model.dart';
 
 part 'invoice_buy_unit_entity_model.g.dart';
 

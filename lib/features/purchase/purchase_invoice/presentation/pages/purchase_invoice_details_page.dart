@@ -1,41 +1,32 @@
+import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/bottom_tab_bar.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/card.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/checkbox.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/custom_button.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/dropdown_search.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/icon_button.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/label.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/split_screen.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/repositories/invoice_buy_repo_impl.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/manager/invoice_buy_cubit.dart';
 import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/pages/purchase_invoice_list_ss_page.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/widgets/purchase_item_card.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/data/models/invoice_buy_return_model.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/data/repositories/purchase_return_invoice_repo.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/presentation/manager/purchase_return_invoice_cubit.dart';
+import 'package:InvoiceF_ClientVendor/features/purchase/purchase_return_invoice/presentation/pages/purchase_return_invoice_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/data/datasources/connection.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
-import '../../../../../core/navigation/navigation.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/bottom_tab_bar.dart';
-import '../../../../../core/presentation/widgets/card.dart';
-import '../../../../../core/presentation/widgets/checkbox.dart';
-import '../../../../../core/presentation/widgets/custom_button.dart';
-import '../../../../../core/presentation/widgets/dropdown.dart';
-import '../../../../../core/presentation/widgets/dropdown_search.dart';
-import '../../../../../core/presentation/widgets/icon_button.dart';
-import '../../../../../core/presentation/widgets/label.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../../../../core/presentation/widgets/ok_alert.dart';
-import '../../../../../core/presentation/widgets/split_screen.dart';
-import '../../../purchase_return_invoice/data/models/invoice_buy_return_model.dart';
-import '../../../purchase_return_invoice/data/repositories/purchase_return_invoice_repo.dart';
-import '../../../purchase_return_invoice/domain/use_cases/create_purchase_return_invoice_use_case.dart';
-import '../../../purchase_return_invoice/presentation/manager/purchase_return_invoice_cubit.dart';
-import '../../../purchase_return_invoice/presentation/pages/purchase_return_invoice_list.dart';
-import '../../data/repositories/invoice_buy_repo_impl.dart';
-import '../../domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
-import '../../domain/entities/invoice_buy_unit/invoice_buy_unit_entity_model.dart';
-import '../../domain/use_cases/invoice_buy_use_cases/create_invoice_buy_use_case.dart';
-import '../../domain/use_cases/invoice_buy_use_cases/update_invoice_sell_buy_case.dart';
-import '../manager/invoice_buy_cubit.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_box.dart';
-
-import '../widgets/purchase_item_card.dart';
 
 class AddBuyInvoicePage extends StatefulWidget {
   final int newIndex;
@@ -44,6 +35,7 @@ class AddBuyInvoicePage extends StatefulWidget {
   final bool isAddPurchaseReturnInvoice;
   final bool isHomeCalled;
   final bool disableSave;
+  final String? newIndexReturn;
   const AddBuyInvoicePage({
     super.key,
     required this.newIndex,
@@ -52,6 +44,7 @@ class AddBuyInvoicePage extends StatefulWidget {
     this.isAddPurchaseReturnInvoice = false,
     this.isHomeCalled = false,
     this.disableSave = false,
+    this.newIndexReturn,
   });
 
   @override
@@ -60,7 +53,6 @@ class AddBuyInvoicePage extends StatefulWidget {
 
 class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
     with TickerProviderStateMixin {
-  late IConnection connection;
   String dateG =
       '${DateTime.now().toString().substring(0, 10)} ${TimeOfDay.now().toString().substring(10, 15)}';
   String invoiceNo = '0';
@@ -100,10 +92,6 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
   @override
   void initState() {
     super.initState();
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
 
     tabController = TabController(
       initialIndex: 0,
@@ -223,7 +211,9 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
           appBar: CustomAppBar(
             title: widget.isAddPurchaseReturnInvoice
                 ? AppLocalizations.of(context)!.purchase_invoice_return
-                : AppLocalizations.of(context)!.purchase_invoice,
+                : widget.disableSave
+                    ? AppLocalizations.of(context)!.purchase_invoice_return
+                    : AppLocalizations.of(context)!.purchase_invoice,
             color: AppColors.primaryColor,
             textColor: AppColors.onPrimary,
             addBtnColor: AppColors.onPrimary,
@@ -232,7 +222,7 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
                     InvoiceBuyReturn invoiceBuyReturnEntity = InvoiceBuyReturn(
                       Inv_invoiceNo: int.parse(invoiceNo),
                       Inv_buildingNo: buildingNo,
-                      invoiceNo: int.parse(invoiceNo),
+                      invoiceNo: int.parse(widget.newIndexReturn!),
                       userNumber:
                           widget.isEdit ? invoiceNo.toString() : invoiceNo,
                       aName: aName.text.isEmpty ? 'فاتورة بيع' : aName.text,
@@ -255,10 +245,9 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
                           double.parse(span.text) +
                           double.parse(visa.text),
                     );
-                    CreatePurchaseReturnInvoiceUseCase(
-                            purchaseReturnInvoiceRepo:
-                                PurchaseReturnInvoiceRepo(connection))
-                        .execute(invoiceBuyReturnEntity);
+                    context
+                        .read<InvoiceBuyCubit>()
+                        .insertPurchaseReturnInvoice(invoiceBuyReturnEntity);
                     showOKDialog(
                         context: context,
                         title: AppLocalizations.of(context)!.success,
@@ -312,12 +301,12 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
                           double.parse(visa.text),
                     );
                     widget.isEdit
-                        ? UpdateInvoiceBuyUseCase(
-                                invoiceBuyRepo: InvoiceBuyRepo(connection))
-                            .execute(newInvoice, id: newInvoice.invoiceNo)
-                        : CreateInvoiceBuyUseCase(
-                                invoiceBuyRepo: InvoiceBuyRepo(connection))
-                            .execute(newInvoice);
+                        ? context
+                            .read<InvoiceBuyCubit>()
+                            .updateInvoiceBuy(invoiceBuyEntity: newInvoice)
+                        : context
+                            .read<InvoiceBuyCubit>()
+                            .insertInvoiceBuy(newInvoice);
                     showOKDialog(
                         context: context,
                         title: AppLocalizations.of(context)!.success,
@@ -326,8 +315,13 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
                           if (!widget.isAddPurchaseReturnInvoice) {
                             AppNavigation.pop();
                             if (!widget.isHomeCalled) {
-                              AppNavigation.pushReplacement(
-                                  const BuyInvoiceSSPage());
+                              AppNavigation.pushReplacement(RepositoryProvider(
+                                  create: (context) =>
+                                      GetIt.I<InvoiceBuyRepo>(),
+                                  child: BlocProvider<InvoiceBuyCubit>.value(
+                                    value: GetIt.I<InvoiceBuyCubit>(),
+                                    child: const BuyInvoiceSSPage(),
+                                  )));
                             }
                           }
                         });
@@ -431,8 +425,6 @@ class _AddBuyInvoicePageState extends State<AddBuyInvoicePage>
                           onChanged: (value) {
                             buildingNo =
                                 buildingNumbers[branchNames.indexOf(value)];
-                            print(buildingNo =
-                                buildingNumbers[branchNames.indexOf(value)]);
                           },
                         ),
                         const Divider(),

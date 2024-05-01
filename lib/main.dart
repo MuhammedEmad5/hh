@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:InvoiceF_ClientVendor/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF_ClientVendor/core/enums/connection_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
@@ -10,18 +11,15 @@ import 'core/blocs/connection_type_bloc/connection_bloc.dart';
 import 'core/blocs/connection_type_bloc/connection_state.dart';
 import 'core/blocs/language_bloc/language_bloc.dart';
 import 'core/blocs/language_bloc/language_state.dart';
-import 'core/data/datasources/local_data_source/sqlLite/local_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
 import 'features/shared/di/shared_service.dart';
 
-
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
-
 
 void main() async {
   if (Platform.isWindows || Platform.isLinux) {
@@ -36,7 +34,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
@@ -52,6 +49,9 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
+              context
+                  .read<ConnectionTypeBloc>()
+                  .emit(ConnectionTypeState(ConnectionEnum.server));
               LoggerSingleton.logger
                   .t("${connectionTypeState.connection} in MAIIIIN");
 
@@ -64,7 +64,7 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                  AppLocalizations.localizationsDelegates,
+                      AppLocalizations.localizationsDelegates,
                   locale: Locale(languageState.languageCode),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(
