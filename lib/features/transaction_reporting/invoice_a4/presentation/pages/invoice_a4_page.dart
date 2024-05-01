@@ -10,7 +10,7 @@ import 'package:InvoiceF_ClientVendor/core/presentation/widgets/toast_notificati
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/client_vendor_entity/client_vendor_entity_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/presentation/pages/invoice_a4/presentation/manager/invoice_a4_cubit.dart';
+import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/presentation/manager/invoice_a4_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'report_a4_page.dart';
