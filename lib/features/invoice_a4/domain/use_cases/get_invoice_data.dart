@@ -1,5 +1,6 @@
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/data/repositories/invoice_a4_repo_impl.dart';
+
+import '../../data/repositories/invoice_a4_repo_impl.dart';
 
 class GetInvoiceDataInvoiceA4UseCase {
   final InvoiceA4Repo invoiceA4Repo;

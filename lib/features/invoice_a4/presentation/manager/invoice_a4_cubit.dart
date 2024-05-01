@@ -1,13 +1,14 @@
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/client_vendor_entity/client_vendor_entity_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/use_cases/get_brances_use_case.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/use_cases/get_client_vendor_data_use_case.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/use_cases/get_company_data_use_case.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/use_cases/get_invoice_data.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/use_cases/get_items_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../domain/use_cases/get_brances_use_case.dart';
+import '../../domain/use_cases/get_client_vendor_data_use_case.dart';
+import '../../domain/use_cases/get_company_data_use_case.dart';
+import '../../domain/use_cases/get_invoice_data.dart';
+import '../../domain/use_cases/get_items_use_case.dart';
 
 part 'invoice_a4_state.dart';
 part 'invoice_a4_cubit.freezed.dart';

@@ -1,7 +1,8 @@
 import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
 import 'package:InvoiceF_ClientVendor/core/data/repos/base_repo_class.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/domain/repositories/invoice_a4_repo.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/queries/invoice_a4_queries.dart';
+
+import '../../domain/repositories/invoice_a4_repo.dart';
+import '../../queries/invoice_a4_queries.dart';
 
 class InvoiceA4Repo extends BaseRepoClass implements IInvoiceA4Repo {
   InvoiceA4Repo(IConnection connection) : super(connection) {

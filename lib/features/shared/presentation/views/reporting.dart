@@ -1,9 +1,5 @@
 import 'dart:io';
 
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/presentation/pages/report_a4_page.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/data/repositories/invoice_a4_repo_impl.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/di/invoice_a4_service.dart';
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/presentation/manager/invoice_a4_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +9,11 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/widgets/app_bar.dart';
-import '../../../transaction_reporting/invoice_a4/presentation/pages/invoice_a4_page.dart';
+import '../../../invoice_a4/data/repositories/invoice_a4_repo_impl.dart';
+import '../../../invoice_a4/di/invoice_a4_service.dart';
+import '../../../invoice_a4/presentation/manager/invoice_a4_cubit.dart';
+import '../../../invoice_a4/presentation/pages/invoice_a4_page.dart';
+import '../../..//invoice_a4/presentation/pages/invoice_a4_page.dart';
 import '../../home_models/screen_item_model.dart';
 import '../widgets/screen_item_card.dart';
 

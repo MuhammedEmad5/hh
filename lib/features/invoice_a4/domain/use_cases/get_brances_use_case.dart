@@ -1,4 +1,5 @@
-import 'package:InvoiceF_ClientVendor/features/transaction_reporting/invoice_a4/data/repositories/invoice_a4_repo_impl.dart';
+
+import '../../data/repositories/invoice_a4_repo_impl.dart';
 
 class GetBranchesInvoiceA4UseCase {
   final InvoiceA4Repo invoiceA4Repo;
