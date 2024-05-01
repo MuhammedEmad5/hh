@@ -26,11 +26,29 @@ class InvoiceA4Cubit extends Cubit<InvoiceA4State> {
     this.getInvoiceItemsInvoiceA4UseCase,
   ) : super(const InvoiceA4State.loading());
 
-  void getData() async {}
-
   Future<List> getBranches() async {
     var res = await getBranchesInvoiceA4UseCase.execute();
     return res;
+  }
+
+  Future getData(String invoiceNo, String buildingNo, String table,
+      String unitTable) async {
+    ClientVendorEntity companyData =
+        await getCompanyDataInvoiceA4UseCase.execute();
+    InvoiceSell invoiceData = await getInvoiceDataInvoiceA4UseCase.execute(
+        invoiceNo, buildingNo, table);
+    ClientVendorEntity clientVendorData =
+        await getClientVendorDataInvoiceA4UseCase
+            .execute('${invoiceData.clientVendorNo}');
+    List<InvoiceSellUnitEntity> items = await getInvoiceItemsInvoiceA4UseCase
+        .execute(invoiceNo, buildingNo, unitTable);
+    var data = {
+      'company': companyData,
+      'clientVendor': clientVendorData,
+      'invoice': invoiceData,
+      'items': items,
+    };
+    emit(InvoiceA4State.a4DataFetched(data));
   }
 
   Future<ClientVendorEntity> getCompanyData() async {

@@ -12,8 +12,7 @@ class GetInvoiceDataInvoiceA4UseCase {
     try {
       invoiceData = InvoiceSell.fromJson(res[0]);
     } catch (e) {
-      print(e);
-      invoiceData = InvoiceSell();
+      throw Exception(e);
     }
 
     return invoiceData;

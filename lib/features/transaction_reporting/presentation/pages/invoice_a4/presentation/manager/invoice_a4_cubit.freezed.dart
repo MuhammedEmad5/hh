@@ -21,7 +21,7 @@ mixin _$InvoiceA4State<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$InvoiceA4State<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$InvoiceA4State<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) =>
@@ -133,7 +133,7 @@ class _$InitialImpl<T> implements Initial<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) {
     return initial();
@@ -145,7 +145,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) {
     return initial?.call();
@@ -157,7 +157,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -253,7 +253,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) {
     return loading();
@@ -265,7 +265,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) {
     return loading?.call();
@@ -277,7 +277,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -400,7 +400,7 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) {
     return success(data);
@@ -412,7 +412,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) {
     return success?.call(data);
@@ -424,7 +424,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -489,6 +489,8 @@ abstract class _$$A4DataFetchedImplCopyWith<T, $Res> {
   factory _$$A4DataFetchedImplCopyWith(_$A4DataFetchedImpl<T> value,
           $Res Function(_$A4DataFetchedImpl<T>) then) =
       __$$A4DataFetchedImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({T data});
 }
 
 /// @nodoc
@@ -498,26 +500,52 @@ class __$$A4DataFetchedImplCopyWithImpl<T, $Res>
   __$$A4DataFetchedImplCopyWithImpl(_$A4DataFetchedImpl<T> _value,
       $Res Function(_$A4DataFetchedImpl<T>) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$A4DataFetchedImpl<T>(
+      freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$A4DataFetchedImpl<T> implements A4DataFetched<T> {
-  const _$A4DataFetchedImpl();
+  const _$A4DataFetchedImpl(this.data);
+
+  @override
+  final T data;
 
   @override
   String toString() {
-    return 'InvoiceA4State<$T>.a4DataFetched()';
+    return 'InvoiceA4State<$T>.a4DataFetched(data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$A4DataFetchedImpl<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$A4DataFetchedImpl<T> &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$A4DataFetchedImplCopyWith<T, _$A4DataFetchedImpl<T>> get copyWith =>
+      __$$A4DataFetchedImplCopyWithImpl<T, _$A4DataFetchedImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -525,10 +553,10 @@ class _$A4DataFetchedImpl<T> implements A4DataFetched<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) {
-    return a4DataFetched();
+    return a4DataFetched(data);
   }
 
   @override
@@ -537,10 +565,10 @@ class _$A4DataFetchedImpl<T> implements A4DataFetched<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) {
-    return a4DataFetched?.call();
+    return a4DataFetched?.call(data);
   }
 
   @override
@@ -549,12 +577,12 @@ class _$A4DataFetchedImpl<T> implements A4DataFetched<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
     if (a4DataFetched != null) {
-      return a4DataFetched();
+      return a4DataFetched(data);
     }
     return orElse();
   }
@@ -601,7 +629,12 @@ class _$A4DataFetchedImpl<T> implements A4DataFetched<T> {
 }
 
 abstract class A4DataFetched<T> implements InvoiceA4State<T> {
-  const factory A4DataFetched() = _$A4DataFetchedImpl<T>;
+  const factory A4DataFetched(final T data) = _$A4DataFetchedImpl<T>;
+
+  T get data;
+  @JsonKey(ignore: true)
+  _$$A4DataFetchedImplCopyWith<T, _$A4DataFetchedImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -672,7 +705,7 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function() a4DataFetched,
+    required TResult Function(T data) a4DataFetched,
     required TResult Function(String errorMessage) error,
   }) {
     return error(errorMessage);
@@ -684,7 +717,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function()? a4DataFetched,
+    TResult? Function(T data)? a4DataFetched,
     TResult? Function(String errorMessage)? error,
   }) {
     return error?.call(errorMessage);
@@ -696,7 +729,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function()? a4DataFetched,
+    TResult Function(T data)? a4DataFetched,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {

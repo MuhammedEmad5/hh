@@ -4,7 +4,9 @@ import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/custom_button.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/dropdown.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/ok_alert.dart';
 import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/toast_notification.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/client_vendor_entity/client_vendor_entity_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
 import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
@@ -71,28 +73,6 @@ class _InvoiceA4PageState extends State<InvoiceA4Page> {
     }
   }
 
-  getInvoiceItems(String invoiceNo, String buildingNo) async {
-    invoiceSellUnits = await context
-        .read<InvoiceA4Cubit>()
-        .getInvoiceItems(invoiceNo, buildingNo, itemsTableName);
-  }
-
-  getInvoiceData(String invoiceNo, String buildingNo) async {
-    invoiceData = await context
-        .read<InvoiceA4Cubit>()
-        .getInvoiceData(invoiceNo, buildingNo, tableName);
-  }
-
-  getClientVendorData(String clientVendorNo) async {
-    clientVendorData = await context
-        .read<InvoiceA4Cubit>()
-        .getClientVendorData(clientVendorNo);
-  }
-
-  getCompanyData() async {
-    companyData = await context.read<InvoiceA4Cubit>().getCompanyData();
-  }
-
   void getBranches() async {
     var res = await context.read<InvoiceA4Cubit>().getBranches();
     setState(() {
@@ -101,6 +81,25 @@ class _InvoiceA4PageState extends State<InvoiceA4Page> {
       isLoading = false;
     });
   }
+
+  Future createPdfFromData() async {
+    try {
+      await context
+          .read<InvoiceA4Cubit>()
+          .getData(invoiceNoC.text, '$buildingNo', tableName, itemsTableName)
+          .then((value) {});
+      await createA4InvoicePdf(
+          type, invoiceSellUnits, clientVendorData, invoiceData, companyData);
+      AppNavigation.push(const A4ReportPage());
+    } catch (e) {
+      if (context.mounted) {
+        showToast(
+            context: context, message: AppLocalizations.of(context)!.failed_a4);
+      }
+    }
+  }
+
+  bool dataSuccess = false;
 
   @override
   void initState() {
@@ -118,6 +117,12 @@ class _InvoiceA4PageState extends State<InvoiceA4Page> {
       ),
       body: BlocBuilder<InvoiceA4Cubit, InvoiceA4State>(
         builder: (context, state) {
+          if (state is A4DataFetched) {
+            companyData = state.data['company'];
+            clientVendorData = state.data['clientVendor'];
+            invoiceData = state.data['invoice'];
+            invoiceSellUnits = state.data['items'];
+          }
           return isLoading
               ? Loader()
               : Padding(
@@ -166,16 +171,7 @@ class _InvoiceA4PageState extends State<InvoiceA4Page> {
                           CustomButton(
                             text: AppLocalizations.of(context)!.view,
                             onPressed: () async {
-                              await getInvoiceData(
-                                  invoiceNoC.text, '$buildingNo');
-                              await getClientVendorData(
-                                  '${invoiceData.clientVendorNo}');
-                              await getInvoiceItems(
-                                  invoiceNoC.text, '$buildingNo');
-                              await getCompanyData();
-                              await createA4InvoicePdf(type, invoiceSellUnits,
-                                  clientVendorData, invoiceData, companyData);
-                              AppNavigation.push(const A4ReportPage());
+                              await createPdfFromData();
                             },
                             isExpanded: false,
                           ),

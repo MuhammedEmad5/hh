@@ -11,9 +11,11 @@ class GetInvoiceItemsInvoiceA4UseCase {
         await invoiceA4Repo.getInvoiceItems(invoiceNo, buildingNo, table);
     List<InvoiceSellUnitEntity> invoiceSellUnits = [];
     try {
-      for (var element in items) {
-        invoiceSellUnits.add(InvoiceSellUnitEntity.fromJson(element));
-        print(InvoiceSellUnitEntity.fromJson(element));
+      if (items.isNotEmpty) {
+        for (var element in items) {
+          invoiceSellUnits.add(InvoiceSellUnitEntity.fromJson(element));
+          print(InvoiceSellUnitEntity.fromJson(element));
+        }
       }
     } catch (e) {
       print(e);
