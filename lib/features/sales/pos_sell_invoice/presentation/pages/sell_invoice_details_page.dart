@@ -207,7 +207,9 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
           // VAT
           num totalVAT = 0;
           for (var element in items) {
-            totalVAT += element.taxRate1_Total;
+            totalVAT += element.quantity *
+                (element.taxRate1_Percentage *
+                    (element.price - element.discount));
           }
           for (var element in addedItems) {
             var itemData = addedItemsValues[addedItemsValues
