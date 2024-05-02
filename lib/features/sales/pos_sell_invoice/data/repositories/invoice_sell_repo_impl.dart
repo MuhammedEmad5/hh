@@ -51,4 +51,19 @@ class InvoiceSellRepo extends BaseRepoClass implements IInvoiceSellRepo {
         await _connection.readQuery(SellInvoiceQueries.searchItems(barCode));
     return res;
   }
+
+  @override
+  Future removeItem(String invoiceNo, String buildingNo, String orderNo) async {
+    var res = await _connection.readQuery(
+        SellInvoiceQueries.removeItem(invoiceNo, buildingNo, orderNo));
+    return res;
+  }
+
+  @override
+  Future updateItemQuantity(String invoiceNo, String buildingNo, String orderNo,
+      String quantity) async {
+    var res = await _connection.readQuery(SellInvoiceQueries.updateItemQuantity(
+        invoiceNo, buildingNo, orderNo, quantity));
+    return res;
+  }
 }

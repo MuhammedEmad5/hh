@@ -8,11 +8,13 @@ class SellItemCard extends StatefulWidget {
   final InvoiceSellUnitEntity data;
   final Function onDelete;
   final Function(String)? onQuantityChanged;
+  final int? quantity;
   const SellItemCard({
     super.key,
     required this.data,
     required this.onDelete,
     this.onQuantityChanged,
+    this.quantity,
   });
 
   @override
@@ -27,9 +29,21 @@ class _SellItemCardState extends State<SellItemCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    quantity.text = '${widget.data.quantity}';
+    quantity.text = '${widget.quantity ?? widget.data.quantity}';
     // total.text = '${int.parse(quantity.text) * widget.data.price}';
-    total.text = '${widget.data.totalPlusTax}';
+    calculate();
+  }
+
+  calculate() {
+    try {
+      total.text = (int.parse(quantity.text) *
+              (widget.data.price +
+                  ((widget.data.price - widget.data.discount) *
+                      widget.data.taxRate1_Percentage)))
+          .toStringAsFixed(2);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -45,7 +59,7 @@ class _SellItemCardState extends State<SellItemCard> {
                   flex: 1,
                   fit: FlexFit.tight,
                   child: Label(
-                    text: '${widget.data.itemNo}',
+                    text: '${widget.data.barCode}',
                     textAlign: TextAlign.center,
                   )),
               Flexible(
@@ -71,17 +85,18 @@ class _SellItemCardState extends State<SellItemCard> {
                     controller: quantity,
                     onChanged: (value) {
                       if (value == '') {
-                        Future.delayed(Duration(seconds: 3), () {
+                        Future.delayed(const Duration(seconds: 3), () {
                           if (quantity.text == '') {
                             quantity.text = '1';
                           }
                         });
                       } else {
-                        widget.onQuantityChanged!(value);
+                        if (widget.onQuantityChanged != null) {
+                          widget.onQuantityChanged!(value);
+                        }
                       }
                       setState(() {
-                        total.text =
-                            '${int.parse(quantity.text) * widget.data.price}';
+                        calculate();
                       });
                     },
                   ),

@@ -11,7 +11,9 @@ import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_last_index_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_all_invoice_sells_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_invoice_sell_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/remove_invoice_sell_unit_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/search_item_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/update_invoice_sell_unit_quantity_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/update_invoice_sell_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/manager/invoice_sell_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -63,9 +65,28 @@ class InvoiceSellService {
     sl.registerLazySingletonSafely<InsertInvoiceSaleReturnUseCase>(
       () => InsertInvoiceSaleReturnUseCase(invoiceSellRepo: sl()),
     );
-    sl.registerLazySingletonSafely<InvoiceSellCubit>(
-      () => InvoiceSellCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),
-          sl(), sl(), sl(), sl(), sl()),
+    sl.registerLazySingletonSafely<RemoveInvoiceSellUnitUseCase>(
+      () => RemoveInvoiceSellUnitUseCase(invoiceSellRepo: sl()),
     );
+    sl.registerLazySingletonSafely<UpdateInvoiceSellUnitQuantityUseCase>(
+      () => UpdateInvoiceSellUnitQuantityUseCase(invoiceSellRepo: sl()),
+    );
+    sl.registerLazySingletonSafely<InvoiceSellCubit>(() => InvoiceSellCubit(
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+        ));
   }
 }

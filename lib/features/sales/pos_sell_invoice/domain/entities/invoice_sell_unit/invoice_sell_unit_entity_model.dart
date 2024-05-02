@@ -23,7 +23,7 @@ class InvoiceSellUnitEntity implements BusinessModel {
   num taxRate1_Total;
   num taxRate1_Percentage;
   num total;
-  String barcode;
+  String barCode;
   InvoiceSellUnitEntity({
     this.invoiceNo = 0,
     this.buildingNo = 0,
@@ -41,7 +41,7 @@ class InvoiceSellUnitEntity implements BusinessModel {
     this.taxRate1_Percentage = 0,
     this.taxRate1_Total = 0,
     this.totalPlusTax = 0,
-    this.barcode = '0',
+    this.barCode = '0',
   });
 
   @override

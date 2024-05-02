@@ -7,20 +7,26 @@ class SearchItemInvoiceSellUseCase {
 
   SearchItemInvoiceSellUseCase({required this.invoiceSellRepo});
   Future<InvoiceSellUnitEntity> execute(
-      String barCode, String invoiceNo) async {
-    final itemDataRes = await invoiceSellRepo.searchItem(barCode, invoiceNo);
+      String barcode, String invoiceNo) async {
+    final itemDataRes = await invoiceSellRepo.searchItem(barcode, invoiceNo);
     late InvoiceSellUnitEntity item;
     try {
       var itemData = ItemEntity.fromJson(itemDataRes[0]);
       item = InvoiceSellUnitEntity(
-          invoiceNo: int.parse(invoiceNo),
-          orderNo: 1,
-          quantity: 1,
-          // buildingNo: itemData.,
-          aName: itemData.aName,
-          eName: itemData.eName,
-          itemNo: itemData.itemNo,
-          price: itemData.sellPrice);
+        invoiceNo: int.parse(invoiceNo),
+        orderNo: 1,
+        quantity: 1,
+        aName: itemData.aName,
+        eName: itemData.eName,
+        itemNo: itemData.itemNo,
+        price: itemData.sellPrice,
+        taxRate1_Percentage: itemData.taxPercent,
+        taxRate1_Total:
+            itemData.taxPercent * (itemData.sellPrice - itemData.discount),
+        discountPercent: itemData.discount_Percentage,
+        discount: itemData.discount,
+        barCode: itemData.barCode,
+      );
     } catch (e) {
       print(e);
     }

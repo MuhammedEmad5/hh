@@ -13,7 +13,9 @@ import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/get_last_index_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_all_invoice_sells_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/read_invoice_sell_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/remove_invoice_sell_unit_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/search_item_use_case.dart';
+import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/update_invoice_sell_unit_quantity_use_case.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/use_cases/invoice_sell_use_cases/update_invoice_sell_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -35,6 +37,9 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
   final GetDataCountInvoiceSellUseCase getDataCountInvoiceSellUseCase;
   final CreateInvoiceSellUnitUseCase createInvoiceSellUnitUseCase;
   final InsertInvoiceSaleReturnUseCase insertInvoiceSaleReturnUseCase;
+  final RemoveInvoiceSellUnitUseCase removeInvoiceSellUnitUseCase;
+  final UpdateInvoiceSellUnitQuantityUseCase
+      updateInvoiceSellUnitQuantityUseCase;
 
   InvoiceSellCubit(
     this.readAllInvoiceSalesUseCase,
@@ -50,6 +55,8 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
     this.getDataCountInvoiceSellUseCase,
     this.createInvoiceSellUnitUseCase,
     this.insertInvoiceSaleReturnUseCase,
+    this.removeInvoiceSellUnitUseCase,
+    this.updateInvoiceSellUnitQuantityUseCase,
   ) : super(const InvoiceSellState.loading());
 
   void insertInvoiceSell(InvoiceSellEntity invoiceSellEntity) async {
@@ -113,6 +120,26 @@ class InvoiceSellCubit extends Cubit<InvoiceSellState> {
   void deleteInvoiceSell({required num id}) async {
     try {
       await deleteInvoiceSellUseCase.execute(id: id);
+      // emit(const InvoiceSellState.success(true));
+    } catch (e) {
+      emit(InvoiceSellState.error(e.toString()));
+    }
+  }
+
+  void removeItem(InvoiceSellUnitEntity invoiceSellUnitEntity) async {
+    try {
+      await removeInvoiceSellUnitUseCase.execute(invoiceSellUnitEntity);
+      // emit(const InvoiceSellState.success(true));
+    } catch (e) {
+      emit(InvoiceSellState.error(e.toString()));
+    }
+  }
+
+  void updateItemQuantity(
+      InvoiceSellUnitEntity invoiceSellUnitEntity, String quantity) async {
+    try {
+      await updateInvoiceSellUnitQuantityUseCase.execute(
+          invoiceSellUnitEntity, quantity);
       // emit(const InvoiceSellState.success(true));
     } catch (e) {
       emit(InvoiceSellState.error(e.toString()));

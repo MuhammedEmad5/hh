@@ -50,9 +50,13 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
-              context
-                  .read<ConnectionTypeBloc>()
-                  .emit(ConnectionTypeState(ConnectionEnum.server));
+              if (context.read<ConnectionTypeBloc>().state.connection ==
+                  ConnectionEnum.local) {
+                context
+                    .read<ConnectionTypeBloc>()
+                    .emit(ConnectionTypeState(ConnectionEnum.server));
+              }
+
               LoggerSingleton.logger
                   .t("${connectionTypeState.connection} in MAIIIIN");
 

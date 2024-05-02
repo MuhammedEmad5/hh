@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/app_bar.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/bottom_tab_bar.dart';
@@ -12,6 +14,7 @@ import 'package:InvoiceF_Sales/core/presentation/widgets/loader_widget.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/ok_alert.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/split_screen.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF_Sales/core/presentation/widgets/toast_notification.dart';
 import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/models/invoice_sell_return_model.dart';
 import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/data/repositories/invoice_sale_return_repo.dart';
 import 'package:InvoiceF_Sales/features/sales/invoice_sale_return/presentation/manager/invoice_sale_return_cubit.dart';
@@ -22,6 +25,7 @@ import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/domain/entities/i
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/manager/invoice_sell_cubit.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/pages/sell_invoice_list_ss_page.dart';
 import 'package:InvoiceF_Sales/features/sales/pos_sell_invoice/presentation/widgets/sell_item_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -88,6 +92,8 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
   List<int> clientVendorNumbers = [0];
   List<InvoiceSellUnitEntity> items = [];
   List<InvoiceSellUnitEntity> addedItems = [];
+  List<InvoiceSellUnitEntity> deletedItems = [];
+  List<InvoiceSellUnitEntity> updatedItems = [];
   List addedItemsValues = [];
 
   @override
@@ -121,7 +127,7 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
     paperBillNum.text = '0';
     storeNo.text = '1';
     vATTypeNO.text = '1';
-    taxRate1_Total.text = '${widget.data?.subNetTotalPlusTax ?? '0'}';
+    taxRate1_Total.text = '${widget.data?.taxRate1_Total ?? '0'}';
     isPosted = widget.data?.isPosted != null
         ? widget.data!.isPosted == 0
             ? false
@@ -161,25 +167,69 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
   }
 
   calculate() {
-    setState(() {
-      amountLeft.text =
-          '${double.parse(cash.text) + double.parse(span.text) + double.parse(visa.text) - double.parse(subNetTotalPlusTax.text)}';
-      num tPT = 0;
-      for (var element in items) {
-        tPT += element.totalPlusTax;
-      }
-      subNetTotalPlusTax.text = tPT.toString();
-      num total = 0;
-      for (var element in items) {
-        total += element.total;
-      }
-      subNetTotal.text = total.toString();
-      num totalVAT = 0;
-      for (var element in items) {
-        totalVAT += element.taxRate1_Total;
-      }
-      taxRate1_Total.text = totalVAT.toString();
-    });
+    try {
+      setState(() {
+        try {
+          // AMOUNT LEFT
+          amountLeft.text = (double.parse(cash.text) +
+                  double.parse(span.text) +
+                  double.parse(visa.text) -
+                  double.parse(subNetTotalPlusTax.text))
+              .toStringAsFixed(2);
+          // INVOICE TOTAL (without tax)
+          num total = 0;
+          for (var element in items) {
+            total += element.quantity * element.price;
+          }
+
+          for (var element in addedItems) {
+            var itemData = addedItemsValues[addedItemsValues
+                .indexWhere((e) => e['itemNo'] == element.itemNo)];
+            total += itemData['quantity'] * element.price;
+          }
+          subNetTotal.text =
+              total is double ? total.toStringAsFixed(2) : total.toString();
+          // DISCOUNT
+          num discount = 0;
+          for (var element in addedItems) {
+            var itemData = addedItemsValues[addedItemsValues
+                .indexWhere((e) => e['itemNo'] == element.itemNo)];
+            discount += itemData['quantity'] *
+                (element.discountPercent * element.price);
+          }
+          for (var element in items) {
+            discount +=
+                element.quantity * (element.discountPercent * element.price);
+          }
+          subTotalDiscount.text = discount is double
+              ? discount.toStringAsFixed(2)
+              : discount.toString();
+          // VAT
+          num totalVAT = 0;
+          for (var element in items) {
+            totalVAT += element.taxRate1_Total;
+          }
+          for (var element in addedItems) {
+            var itemData = addedItemsValues[addedItemsValues
+                .indexWhere((e) => e['itemNo'] == element.itemNo)];
+            totalVAT += itemData['quantity'] *
+                (element.taxRate1_Percentage *
+                    (element.price - element.discount));
+          }
+          taxRate1_Total.text = totalVAT is double
+              ? totalVAT.toStringAsFixed(2)
+              : totalVAT.toString();
+          // INVOICE NET VALUE
+          num net = num.parse(subNetTotal.text) - discount + totalVAT;
+          subNetTotalPlusTax.text =
+              net is double ? net.toStringAsFixed(2) : net.toString();
+        } catch (e) {
+          print(e);
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   bool isLoaded = false;
@@ -190,6 +240,42 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
       value: GetIt.I<InvoiceSellCubit>(),
       child: BlocBuilder<InvoiceSellCubit, InvoiceSellState>(
         builder: (context, state) {
+          handleAddItem() async {
+            late InvoiceSellUnitEntity newItem;
+            try {
+              newItem = await context
+                  .read<InvoiceSellCubit>()
+                  .searchItem(barCode.text, invoiceNo);
+            } catch (e) {
+              showToast(
+                  context: context,
+                  message: AppLocalizations.of(context)!.item_not_found);
+            }
+
+            if (addedItems.indexWhere(
+                    (element) => element.itemNo == newItem.itemNo) !=
+                -1) {
+              showToast(
+                  context: context,
+                  message: AppLocalizations.of(context)!.item_already_added);
+            } else if (items.indexWhere(
+                    (element) => element.itemNo == newItem.itemNo) !=
+                -1) {
+              showToast(
+                  context: context,
+                  message: AppLocalizations.of(context)!.item_already_added);
+            } else {
+              addedItems.add(newItem);
+              showToast(
+                  context: context,
+                  message: AppLocalizations.of(context)!.success);
+              calculate();
+            }
+            Future.delayed(Duration(seconds: 1), () {
+              calculate();
+            });
+          }
+
           if (!isLoaded) {
             context
                 .read<InvoiceSellCubit>()
@@ -207,6 +293,7 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
             if (widget.isEdit) {
               items = state.data['items'];
             }
+            calculate();
           }
           return Scaffold(
             appBar: CustomAppBar(
@@ -309,14 +396,24 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                               .read<InvoiceSellCubit>()
                               .insertInvoiceSell(newInvoice);
 
-                      // for (var item in addedItems) {
-                      //   item.buildingNo = buildingNo;
-                      //   context.read<InvoiceSellCubit>().insertInvoiceSellUnit(
-                      //       item,
-                      //       addedItems.indexOf(item) + 1,
-                      //       addedItemsValues.firstWhere((element) =>
-                      //           element['itemNo'] == item.itemNo)['quantity']);
-                      // }
+                      for (var item in addedItems) {
+                        item.buildingNo = buildingNo;
+                        context.read<InvoiceSellCubit>().insertInvoiceSellUnit(
+                            item,
+                            items.length + addedItems.indexOf(item) + 1,
+                            addedItemsValues.firstWhere((element) =>
+                                element['itemNo'] == item.itemNo)['quantity']);
+                      }
+
+                      for (var item in deletedItems) {
+                        context.read<InvoiceSellCubit>().removeItem(item);
+                      }
+
+                      for (var item in updatedItems) {
+                        context
+                            .read<InvoiceSellCubit>()
+                            .updateItemQuantity(item, item.quantity.toString());
+                      }
 
                       showOKDialog(
                           context: context,
@@ -346,306 +443,315 @@ class _SellInvoiceDetailsPageState extends State<SellInvoiceDetailsPage>
                     physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
                     children: [
-                      ListView(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Label(
-                            textAlign: TextAlign.left,
-                            text:
-                                '${AppLocalizations.of(context)!.invoice} # $invoiceNo',
-                            size: 20,
-                            weight: FontWeight.w500,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SplitScreenWidget(
-                            child1: TextBox(
-                              label: AppLocalizations.of(context)!.date,
-                              initialValue: dateG,
-                              isEnabled: false,
-                              onChanged: (value) {
-                                dateG = value;
-                              },
-                            ),
-                            child2: TextBox(
-                              label:
-                                  AppLocalizations.of(context)!.invoice_total,
-                              isEnabled: false,
-                              controller: subNetTotal,
-                            ),
-                          ),
-                          SplitScreenWidget(
-                            alignment: CrossAxisAlignment.start,
-                            child1: DropdownSearch(
-                              items: clientVendorNamesList == []
-                                  ? []
-                                  : clientVendorNamesList,
-                              initialValue: clientVendorNamesList == []
-                                  ? null
-                                  : clientVendorNamesList[!clientVendorNumbers
-                                          .contains(clientVendorNo)
-                                      ? 0
-                                      : clientVendorNumbers
-                                          .indexOf(clientVendorNo)],
-                              label: AppLocalizations.of(context)!.client,
-                              onChanged: (value) {
-                                clientVendorNo = clientVendorNumbers[
-                                    clientVendorNamesList.indexOf(value)];
-                              },
-                            ),
-                            child2: TextBox(
-                              label: AppLocalizations.of(context)!.discount,
-                              isEnabled: false,
-                              controller: subTotalDiscount,
-                            ),
-                          ),
-                          SplitScreenWidget(
-                            child1: TextBox(
-                              label: AppLocalizations.of(context)!.arabic_name,
-                              controller: aName,
-                            ),
-                            child2: TextBox(
-                              label: AppLocalizations.of(context)!.vat,
-                              isEnabled: false,
-                              controller: taxRate1_Total,
-                            ),
-                          ),
-                          SplitScreenWidget(
-                            child1: TextBox(
-                              label: AppLocalizations.of(context)!.telephone1,
-                              controller: telephone,
-                            ),
-                            child2: TextBox(
-                              controller: subNetTotalPlusTax,
-                              label: AppLocalizations.of(context)!
-                                  .invoice_net_value,
-                              isEnabled: false,
-                            ),
-                          ),
-                          DropDown(
-                            items: branchNames == [] ? [] : branchNames,
-                            initialValue: branchNames == []
-                                ? null
-                                : branchNames[
-                                    !buildingNumbers.contains(buildingNo)
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Label(
+                                textAlign: TextAlign.left,
+                                text:
+                                    '${AppLocalizations.of(context)!.invoice} # $invoiceNo',
+                                size: 20,
+                                weight: FontWeight.w500,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SplitScreenWidget(
+                                child1: TextBox(
+                                  label: AppLocalizations.of(context)!.date,
+                                  initialValue: dateG,
+                                  isEnabled: false,
+                                  onChanged: (value) {
+                                    dateG = value;
+                                  },
+                                ),
+                                child2: TextBox(
+                                  label: AppLocalizations.of(context)!
+                                      .invoice_total,
+                                  isEnabled: false,
+                                  controller: subNetTotal,
+                                ),
+                              ),
+                              SplitScreenWidget(
+                                alignment: CrossAxisAlignment.start,
+                                child1: DropdownSearch(
+                                  items: clientVendorNamesList == []
+                                      ? []
+                                      : clientVendorNamesList,
+                                  initialValue: clientVendorNamesList == []
+                                      ? null
+                                      : clientVendorNamesList[
+                                          !clientVendorNumbers
+                                                  .contains(clientVendorNo)
+                                              ? 0
+                                              : clientVendorNumbers
+                                                  .indexOf(clientVendorNo)],
+                                  label: AppLocalizations.of(context)!.client,
+                                  onChanged: (value) {
+                                    clientVendorNo = clientVendorNumbers[
+                                        clientVendorNamesList.indexOf(value)];
+                                  },
+                                ),
+                                child2: TextBox(
+                                  label: AppLocalizations.of(context)!.discount,
+                                  isEnabled: false,
+                                  controller: subTotalDiscount,
+                                ),
+                              ),
+                              SplitScreenWidget(
+                                child1: TextBox(
+                                  label:
+                                      AppLocalizations.of(context)!.arabic_name,
+                                  controller: aName,
+                                ),
+                                child2: TextBox(
+                                  label: AppLocalizations.of(context)!.vat,
+                                  isEnabled: false,
+                                  controller: taxRate1_Total,
+                                ),
+                              ),
+                              SplitScreenWidget(
+                                child1: TextBox(
+                                  label:
+                                      AppLocalizations.of(context)!.telephone1,
+                                  controller: telephone,
+                                ),
+                                child2: TextBox(
+                                  controller: subNetTotalPlusTax,
+                                  label: AppLocalizations.of(context)!
+                                      .invoice_net_value,
+                                  isEnabled: false,
+                                ),
+                              ),
+                              DropDown(
+                                items: branchNames == [] ? [] : branchNames,
+                                initialValue: branchNames == []
+                                    ? null
+                                    : branchNames[!buildingNumbers
+                                            .contains(buildingNo)
                                         ? 0
                                         : buildingNumbers.indexOf(buildingNo)],
-                            label: AppLocalizations.of(context)!.branch,
-                            onChanged: (value) {
-                              buildingNo =
-                                  buildingNumbers[branchNames.indexOf(value)];
-                            },
-                          ),
-                          const Divider(),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: TextBox(
-                                  isNumberBox: true,
-                                  label: AppLocalizations.of(context)!.cash,
-                                  controller: cash,
-                                  onChanged: (v) => calculate(),
-                                ),
+                                label: AppLocalizations.of(context)!.branch,
+                                onChanged: (value) {
+                                  buildingNo = buildingNumbers[
+                                      branchNames.indexOf(value)];
+                                },
                               ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                flex: 1,
-                                child: TextBox(
-                                  isNumberBox: true,
-                                  label: AppLocalizations.of(context)!.span,
-                                  controller: span,
-                                  onChanged: (v) => calculate(),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                flex: 1,
-                                child: TextBox(
-                                  isNumberBox: true,
-                                  label: AppLocalizations.of(context)!.visa,
-                                  controller: visa,
-                                  onChanged: (v) => calculate(),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                          TextBox(
-                            isNumberBox: true,
-                            label: AppLocalizations.of(context)!.left_ammount,
-                            controller: amountLeft,
-                            isEnabled: false,
-                          ),
-                          const Divider(),
-                          CustomCard(
-                            color: AppColors.primaryColor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Label(
-                                      text:
-                                          AppLocalizations.of(context)!.product,
-                                      color: AppColors.onPrimary,
-                                      size: 18,
+                              const Divider(),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    flex: 1,
+                                    child: TextBox(
+                                      isNumberBox: true,
+                                      label: AppLocalizations.of(context)!.cash,
+                                      controller: cash,
+                                      onChanged: (v) => calculate(),
                                     ),
-                                    CustomIconButton(
-                                      icon: Icons.add,
-                                      onTap: () {
-                                        //TODO: Push add product
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    flex: 1,
+                                    child: TextBox(
+                                      isNumberBox: true,
+                                      label: AppLocalizations.of(context)!.span,
+                                      controller: span,
+                                      onChanged: (v) => calculate(),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    flex: 1,
+                                    child: TextBox(
+                                      isNumberBox: true,
+                                      label: AppLocalizations.of(context)!.visa,
+                                      controller: visa,
+                                      onChanged: (v) => calculate(),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                ],
+                              ),
+                              TextBox(
+                                isNumberBox: true,
+                                label:
+                                    AppLocalizations.of(context)!.left_ammount,
+                                controller: amountLeft,
+                                isEnabled: false,
+                              ),
+                              const Divider(),
+                              CustomCard(
+                                color: AppColors.primaryColor,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Label(
+                                          text: AppLocalizations.of(context)!
+                                              .product,
+                                          color: AppColors.onPrimary,
+                                          size: 18,
+                                        ),
+                                        CustomIconButton(
+                                          icon: Icons.add,
+                                          onTap: () {
+                                            //TODO: Push add product
+                                          },
+                                          size: 25,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextBox(
+                                      // isNumberBox: true,
+                                      label: AppLocalizations.of(context)!
+                                          .barcode_search,
+                                      overAllColor: AppColors.onPrimary,
+                                      controller: barCode,
+                                      onSubmitted: (value) async {
+                                        handleAddItem();
                                       },
-                                      size: 25,
+                                      textColor: Colors.black,
+                                      suffix: IconButton(
+                                        icon: const Icon(
+                                          Icons.search,
+                                          color: AppColors.primaryColor,
+                                        ),
+                                        onPressed: () async {
+                                          handleAddItem();
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 10),
-                                TextBox(
-                                  isNumberBox: true,
-                                  label: AppLocalizations.of(context)!
-                                      .barcode_search,
-                                  overAllColor: AppColors.onPrimary,
-                                  controller: barCode,
-                                  onSubmitted: (value) async {
-                                    InvoiceSellUnitEntity newItem =
-                                        await context
-                                            .read<InvoiceSellCubit>()
-                                            .searchItem(
-                                                barCode.text, invoiceNo);
-                                    if (addedItems.contains(newItem)) {
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: Label(
+                                        text: AppLocalizations.of(context)!
+                                            .barcode,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: Label(
+                                        text:
+                                            AppLocalizations.of(context)!.name,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: Label(
+                                        text: AppLocalizations.of(context)!
+                                            .quantity,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: Label(
+                                        text:
+                                            AppLocalizations.of(context)!.price,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              ...items.map((e) => SellItemCard(
+                                    data: e,
+                                    onQuantityChanged: (value) {
+                                      var updatedItem = e;
+                                      updatedItem.quantity = num.parse(value);
+                                      updatedItems.add(updatedItem);
+                                      calculate();
+                                    },
+                                    onDelete: () {
+                                      deletedItems.add(e);
+                                      items.removeWhere(
+                                          (element) => element == e);
+                                      if (updatedItems.indexWhere((element) =>
+                                              element.itemNo == e.itemNo) !=
+                                          -1) {
+                                        updatedItems.removeWhere((element) =>
+                                            element.itemNo == e.itemNo);
+                                      }
+                                      calculate();
+                                    },
+                                  )),
+                              ...addedItems.map((e) {
+                                bool isNew = false;
+                                if (addedItemsValues.indexWhere((element) =>
+                                        element['itemNo'] == e.itemNo) !=
+                                    -1) {
+                                } else {
+                                  isNew = true;
+                                  addedItemsValues.add({
+                                    'itemNo': e.itemNo,
+                                    'quantity': 1,
+                                    'onQuantityChange': (value) {
+                                      addedItemsValues.firstWhere((element) =>
+                                              element['itemNo'] ==
+                                              e.itemNo)['quantity'] =
+                                          int.parse(value);
+                                      calculate();
+                                    }
+                                  });
+                                }
+
+                                return SellItemCard(
+                                  onQuantityChanged:
                                       addedItemsValues.firstWhere((element) =>
                                           element['itemNo'] ==
-                                          newItem.itemNo)['quantity'] += 1;
-                                    } else {
-                                      addedItems.insert(0, newItem);
-                                    }
-                                    setState(() {});
+                                          e.itemNo)['onQuantityChange'],
+                                  data: e,
+                                  quantity: isNew
+                                      ? 1
+                                      : addedItemsValues[addedItemsValues
+                                          .indexWhere((element) =>
+                                              element['itemNo'] ==
+                                              e.itemNo)]['quantity'],
+                                  onDelete: () {
+                                    setState(() {
+                                      addedItems.removeWhere(
+                                          (element) => element == e);
+                                      addedItemsValues.removeWhere((element) =>
+                                          element['itemNo'] == e.itemNo);
+                                      calculate();
+                                    });
                                   },
-                                  textColor: Colors.black,
-                                  suffix: IconButton(
-                                    icon: const Icon(
-                                      Icons.search,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    onPressed: () async {
-                                      InvoiceSellUnitEntity newItem =
-                                          await context
-                                              .read<InvoiceSellCubit>()
-                                              .searchItem(
-                                                  barCode.text, invoiceNo);
-                                      if (addedItems.contains(newItem)) {
-                                        addedItemsValues.firstWhere((element) =>
-                                            element['itemNo'] ==
-                                            newItem.itemNo)['quantity'] += 1;
-                                      } else {
-                                        addedItems.insert(0, newItem);
-                                      }
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                                );
+                              }),
+                              const SizedBox(height: 20),
+                            ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Flexible(
-                                  flex: 1,
-                                  fit: FlexFit.tight,
-                                  child: Label(
-                                    text: AppLocalizations.of(context)!.barcode,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Flexible(
-                                  flex: 1,
-                                  fit: FlexFit.tight,
-                                  child: Label(
-                                    text: AppLocalizations.of(context)!.name,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Flexible(
-                                  flex: 1,
-                                  fit: FlexFit.tight,
-                                  child: Label(
-                                    text:
-                                        AppLocalizations.of(context)!.quantity,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Flexible(
-                                  flex: 1,
-                                  fit: FlexFit.tight,
-                                  child: Label(
-                                    text: AppLocalizations.of(context)!.price,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          ...addedItems.map((e) {
-                            // if (addedItemsValues.contains(
-                            //   addedItemsValues.firstWhere(
-                            //     (element) => element['itemNo'] == e.itemNo,
-                            //   ),
-                            // )) {
-                            //   print('MATCH FOUND');
-                            // } else {
-                            //   print('MATCH NOT FOUND');
-                            // }
-                            // addedItemsValues.add({
-                            //   'itemNo': e.itemNo,
-                            //   'quantity': e.quantity,
-                            //   'onQuantityChange': (value) {
-                            //     addedItemsValues.firstWhere((element) =>
-                            //         element['itemNo'] ==
-                            //         e.itemNo)['quantity'] = int.parse(value);
-                            //   }
-                            // });
-                            return SellItemCard(
-                              // onQuantityChanged: addedItemsValues.firstWhere(
-                              //     (element) =>
-                              //         element['itemNo'] ==
-                              //         e.itemNo)['onQuantityChange'],
-                              data: e,
-                              onDelete: () {
-                                setState(() {
-                                  addedItems
-                                      .removeWhere((element) => element == e);
-                                  addedItemsValues.removeWhere((element) =>
-                                      element['itemNo'] == e.itemNo);
-                                });
-                              },
-                            );
-                          }),
-                          ...items.map((e) => SellItemCard(
-                                data: e,
-                                onDelete: () {
-                                  setState(() {
-                                    items
-                                        .removeWhere((element) => element == e);
-                                  });
-                                },
-                              )),
-                          const SizedBox(height: 20),
-                        ],
+                        ),
                       ),
                       // Other Data
                       ListView(

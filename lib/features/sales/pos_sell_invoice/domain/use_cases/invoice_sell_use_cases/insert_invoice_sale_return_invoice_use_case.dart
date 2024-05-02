@@ -6,7 +6,7 @@ class InsertInvoiceSaleReturnUseCase {
 
   InsertInvoiceSaleReturnUseCase({required this.invoiceSellRepo});
 
-  Future<void> execute(InvoiceSellReturn invoiceSellReturnEntity) async {
-    await invoiceSellRepo.insert(invoiceSellReturnEntity);
+  Future<void> execute(InvoiceSellReturn invoiceSellReturn) async {
+    await invoiceSellRepo.insert(invoiceSellReturn);
   }
 }

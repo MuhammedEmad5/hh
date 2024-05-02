@@ -25,7 +25,7 @@ InvoiceSellUnitEntity _$InvoiceSellUnitEntityFromJson(
       taxRate1_Percentage: json['taxRate1_Percentage'] as num? ?? 0,
       taxRate1_Total: json['taxRate1_Total'] as num? ?? 0,
       totalPlusTax: json['totalPlusTax'] as num? ?? 0,
-      barcode: json['barcode'] as String? ?? '0',
+      barCode: json['barCode'] as String? ?? '0',
     );
 
 Map<String, dynamic> _$InvoiceSellUnitEntityToJson(
@@ -47,5 +47,5 @@ Map<String, dynamic> _$InvoiceSellUnitEntityToJson(
       'taxRate1_Total': instance.taxRate1_Total,
       'taxRate1_Percentage': instance.taxRate1_Percentage,
       'total': instance.total,
-      'barcode': instance.barcode,
+      'barCode': instance.barCode,
     };
