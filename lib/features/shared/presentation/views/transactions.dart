@@ -1,4 +1,9 @@
 import 'dart:io';
+import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/data/repositories/beginning_balance_repo.dart';
+import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/di/beginning_balance_service.dart';
+import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/manager/beginning_balance_cubit.dart';
+import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/pages/beginning_balance_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,16 +21,24 @@ class TransactionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     appLocalizations = AppLocalizations.of(context)!;
+    // Route _buildPageRoute({
+    //   required WidgetBuilder builder,
+    // }) {
+    //   return Platform.isIOS
+    //       ? CupertinoPageRoute(
+    //           builder: builder,
+    //         )
+    //       : MaterialPageRoute(
+    //           builder: builder,
+    //         );
+    // }
+
     Route _buildPageRoute({
       required WidgetBuilder builder,
     }) {
-      return Platform.isIOS
-          ? CupertinoPageRoute(
-              builder: builder,
-            )
-          : MaterialPageRoute(
-              builder: builder,
-            );
+      return MaterialPageRoute( // Always use MaterialPageRoute for web
+        builder: builder,
+      );
     }
 
     List<ScreenItem> transactionsScreens = [
@@ -33,7 +46,24 @@ class TransactionsView extends StatelessWidget {
       ScreenItem(
         appLocalizations.beginning_balance,
         'clientvendorbalance',
-        () {},
+        () {
+
+
+          BeginningBalanceService().initDi();
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return RepositoryProvider(
+                create: (context) => GetIt.I<BeginningBalanceRepo>(),
+                child: BlocProvider<BeginningBalanceCubit>.value(
+                  value: GetIt.I<BeginningBalanceCubit>()..getAllBeginningBalance(),
+                  child:  BeginningBalanceView(),
+                ),
+              );
+            },
+          ));
+
+
+        },
       ),
     ];
 

@@ -7,16 +7,17 @@ part of 'client_vendor_model.dart';
 // **************************************************************************
 
 ClientVendor _$ClientVendorFromJson(Map<String, dynamic> json) => ClientVendor(
-      VendorId: json['VendorId'] as int? ?? 0,
+      VendorId: (json['VendorId'] as num?)?.toInt() ?? 0,
       clientVendorNo: json['clientVendorNo'] as num,
       userNumber: json['userNumber'] as String,
       parentNo: json['parentNo'] as num?,
-      depthNum: json['depthNum'] as int? ?? 0,
+      depthNum: (json['depthNum'] as num?)?.toInt() ?? 0,
       aName: json['aName'] as String? ?? '',
       eName: json['eName'] as String? ?? '',
       aDescription: json['aDescription'] as String?,
       eDescription: json['eDescription'] as String?,
-      typeOfClientOrVendor: json['typeOfClientOrVendor'] as int? ?? 1,
+      typeOfClientOrVendor:
+          (json['typeOfClientOrVendor'] as num?)?.toInt() ?? 1,
       mainContact1: json['mainContact1'] as String?,
       mainContact2: json['mainContact2'] as String?,
       mainContact3: json['mainContact3'] as String?,
@@ -83,7 +84,7 @@ ClientVendor _$ClientVendorFromJson(Map<String, dynamic> json) => ClientVendor(
       country_Eng: json['country_Eng'] as String? ?? 'Saudia',
       POBox: json['POBox'] as String?,
       POBoxAdditionalNum: json['POBoxAdditionalNum'] as String?,
-      secondBusinessIDType: json['secondBusinessIDType'] as int?,
+      secondBusinessIDType: (json['secondBusinessIDType'] as num?)?.toInt(),
       secondBusinessID: json['secondBusinessID'] as String?,
       watch01_amount: json['watch01_amount'] as num? ?? 0.000000,
       watch02_amount: json['watch02_amount'] as num? ?? 0.000000,
@@ -93,7 +94,7 @@ ClientVendor _$ClientVendorFromJson(Map<String, dynamic> json) => ClientVendor(
           json['trainingHourseToBeGiven'] as num? ?? 0.000000,
       trainingHourseLeft: json['trainingHourseLeft'] as num? ?? 0.000000,
       cameFromIsPayedHisMoney: json['cameFromIsPayedHisMoney'] ?? 0,
-      uiSource: json['uiSource'] as int? ?? 0,
+      uiSource: (json['uiSource'] as num?)?.toInt() ?? 0,
       departmentJobNo: json['departmentJobNo'] as num? ?? 0,
     );
 

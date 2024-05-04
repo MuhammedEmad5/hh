@@ -7,23 +7,25 @@ class EmptyDropDown extends StatelessWidget {
   CustomDropdownController controller;
   String emptyText;
   String? dropDownTitle;
+  Color? titleColor;
   EmptyDropDown({super.key,
     required this.controller,
     required this.emptyText,
-    this.dropDownTitle
+    this.dropDownTitle,
+    this.titleColor
 
   });
 
   @override
   Widget build(BuildContext context) {
-    controller.value = "empty";
+    controller.value = null;
     return CustomDropdownWithController(
       title: dropDownTitle,
       controller: controller,
-      titleColor: Colors.white,
+      titleColor: titleColor ?? Colors.black87,
       items: [
         DropdownMenuItem(
-          value: "empty",
+          value: null,
           child: Text(emptyText),
         )
       ],

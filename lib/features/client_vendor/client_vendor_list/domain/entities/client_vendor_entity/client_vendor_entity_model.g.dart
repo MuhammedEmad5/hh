@@ -9,8 +9,9 @@ part of 'client_vendor_entity_model.dart';
 ClientVendorEntity _$ClientVendorEntityFromJson(Map<String, dynamic> json) =>
     ClientVendorEntity(
       clientVendorNo: json['clientVendorNo'] as num,
-      typeOfClientOrVendor: json['typeOfClientOrVendor'] as int? ?? 1,
-      VendorId: json['VendorId'] as int? ?? 0,
+      typeOfClientOrVendor:
+          (json['typeOfClientOrVendor'] as num?)?.toInt() ?? 1,
+      VendorId: (json['VendorId'] as num?)?.toInt() ?? 0,
       aName: json['aName'] as String?,
       eName: json['eName'] as String?,
       aDescription: json['aDescription'] as String?,
@@ -39,7 +40,7 @@ ClientVendorEntity _$ClientVendorEntityFromJson(Map<String, dynamic> json) =>
       country_Arb: json['country_Arb'] as String? ?? 'السعودية',
       country_Eng: json['country_Eng'] as String? ?? 'Saudia',
       secondBusinessID: json['secondBusinessID'] as String?,
-      secondBusinessIDType: json['secondBusinessIDType'] as int?,
+      secondBusinessIDType: (json['secondBusinessIDType'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ClientVendorEntityToJson(ClientVendorEntity instance) =>

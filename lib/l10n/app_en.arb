@@ -167,33 +167,11 @@
   "name": "Name",
   "barcode_search": "Barcode Search",
   "reference": "Reference",
-  "no_data": "No data available \n please click on add button",
   "success": "success",
-  "user_or_admin_required": "Select user or admin is required"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "user_or_admin_required": "Select user or admin is required",
+  "debit":"Debit",
+  "credit": "credit",
+  "transaction": "Transaction",
+  "no_client_vendor_inserted": "No client vendor inserted before",
+  "error_Fetch_date": "Error in fetching data"
 }

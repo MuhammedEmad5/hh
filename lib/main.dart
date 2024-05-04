@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:InvoiceF_ClientVendor/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:flutter/foundation.dart' show kIsWeb ;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
@@ -24,10 +25,11 @@ import 'features/shared/di/shared_service.dart';
 
 
 void main() async {
-  if (Platform.isWindows || Platform.isLinux) {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
+
   runApp(const MainApp());
 }
 
@@ -37,7 +39,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    SharedService().initDi(RemoteConnection());
+    SharedService().initDi(LocalConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -52,8 +54,8 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
-              LoggerSingleton.logger
-                  .t("${connectionTypeState.connection} in MAIIIIN");
+              // LoggerSingleton.logger
+              //     .t("${connectionTypeState.connection} in MAIIIIN");
 
               return FlutterBootstrap5(
                 builder: (ctx) => MaterialApp(

@@ -64,7 +64,7 @@ class _ClientVendorPageState extends State<ClientVendorPage> {
                                 newIndex: id.round(),
                                 isEdit: true,
                                 data: data.firstWhere((element) =>
-                                    element.clientVendorNo.round() == id),
+                                    element.clientVendorNumber.round() == id),
                               ),
                             );
                           },
@@ -73,7 +73,7 @@ class _ClientVendorPageState extends State<ClientVendorPage> {
                                 .read<ClientVendorCubit>()
                                 .deleteClientVendor(id: id);
                             data.removeWhere(
-                                (element) => element.clientVendorNo == id);
+                                (element) => element.clientVendorNumber == id);
                             showOKDialog(
                               context: context,
                               title: AppLocalizations.of(context)!.success,

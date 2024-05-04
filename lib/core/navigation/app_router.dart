@@ -42,15 +42,24 @@ class AppRouter {
     }
   }
 
+  // Route _buildPageRoute({
+  //   required WidgetBuilder builder,
+  // }) {
+  //   return Platform.isIOS
+  //       ? CupertinoPageRoute(
+  //     builder: builder,
+  //   )
+  //       : MaterialPageRoute(
+  //     builder: builder,
+  //   );
+  // }
+
   Route _buildPageRoute({
     required WidgetBuilder builder,
   }) {
-    return Platform.isIOS
-        ? CupertinoPageRoute(
-      builder: builder,
-    )
-        : MaterialPageRoute(
+    return MaterialPageRoute( // Always use MaterialPageRoute for web
       builder: builder,
     );
   }
+
 }
