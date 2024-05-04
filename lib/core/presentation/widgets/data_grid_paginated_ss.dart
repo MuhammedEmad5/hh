@@ -1,53 +1,41 @@
-import 'package:InvoiceF_Sales/core/blocs/connection_type_bloc/connection_bloc.dart';
 import 'package:InvoiceF_Sales/core/data/datasources/connection.dart';
 import 'package:InvoiceF_Sales/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import 'package:InvoiceF_Sales/core/data/datasources/remote_data_source/remote_connection.dart';
 import 'package:InvoiceF_Sales/core/navigation/navigation.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/loader_widget.dart';
 import 'package:InvoiceF_Sales/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
-import '../../enums/connection_enum.dart';
-
-late int _rowsPerPage;
-bool _isLoading = false;
-late Function(num, dynamic)? onEditPressed;
-late Function(num)? onDeletePressed;
-late String orderBy;
-late String tableName;
-late Function fromJson;
-late IConnection connection;
 
 class DataGridPaginatedSS extends StatefulWidget {
-  const DataGridPaginatedSS({
-    super.key,
-    required this.data,
-    this.allowFiltering = false,
-    this.allowSorting = false,
-    this.fill = false,
-    this.onEditPressed,
-    this.onDeletePressed,
-    this.dataCount,
-    this.tableName,
-    this.orderBy,
-    this.rowsPerPage = 15,
-    this.fromJson,
-  });
   final dynamic data;
+  final String tableName;
+  final String orderBy;
+  final Function fromJson;
   final int? dataCount;
+  final int rowsPerPage;
   final bool allowFiltering;
   final bool allowSorting;
   final bool fill;
   final Function(num, dynamic)? onEditPressed;
   final Function(num)? onDeletePressed;
-  final String? tableName;
-  final String? orderBy;
-  final int rowsPerPage;
-  final Function? fromJson;
+  const DataGridPaginatedSS({
+    super.key,
+    required this.data,
+    required this.tableName,
+    required this.orderBy,
+    required this.fromJson,
+    this.dataCount,
+    this.allowFiltering = false,
+    this.allowSorting = false,
+    this.fill = false,
+    this.onEditPressed,
+    this.onDeletePressed,
+    this.rowsPerPage = 15,
+  });
   @override
   State<DataGridPaginatedSS> createState() => _DataGridPaginatedSSState();
 }
@@ -56,33 +44,50 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
   late List<String> columns;
   late List<GridColumn> gridColumns;
   late CustomDataGridSource dataSource;
-  late List data;
   late int dataCount;
+  bool isLoading = false;
+
+  DataPagerController pagerController = DataPagerController();
+
+  startLoading() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  endLoading() {
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  bool getIsLoading() {
+    return isLoading;
+  }
+
   @override
   void initState() {
     super.initState();
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
-    data = widget.data;
-    columns = data[0].getColumnNames();
+    columns = widget.data[0].getColumnNames();
     gridColumns = getColumns(columns);
-    dataSource = CustomDataGridSource(data);
-    onEditPressed = widget.onEditPressed;
-    onDeletePressed = widget.onDeletePressed;
+    dataSource = CustomDataGridSource(
+      widget.data,
+      widget.tableName,
+      widget.orderBy,
+      widget.rowsPerPage,
+      widget.fromJson,
+      widget.onEditPressed,
+      widget.onDeletePressed,
+      getIsLoading,
+      startLoading,
+      endLoading,
+    );
     if (widget.dataCount == null) {
-      dataCount = data.length;
+      dataCount = widget.data.length;
     } else {
       dataCount = widget.dataCount!;
     }
-    orderBy = widget.orderBy ?? '';
-    tableName = widget.tableName ?? '';
-    _rowsPerPage = widget.rowsPerPage;
-    fromJson = widget.fromJson ?? () {};
   }
-
-  DataPagerController pagerController = DataPagerController();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +97,7 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
           height: 520,
           child: Stack(
             children: [
-              _isLoading
+              isLoading
                   ? Container(
                       color: Colors.black12,
                       child: Center(
@@ -102,6 +107,7 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
                   : const SizedBox(),
               SfDataGridTheme(
                 data: const SfDataGridThemeData(
+                  // CUSTOM FILTERING LOGIC
                   // sortIcon: SizedBox(),
                   // filterIcon: Material(
                   //   color: Colors.transparent,
@@ -144,25 +150,25 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
                         ? ColumnWidthMode.fill
                         : ColumnWidthMode.fitByColumnName,
                     onFilterChanged: (DataGridFilterChangeDetails details) {
-                      print(
-                          '-----------------------------------------------------');
-                      print('Column Name: ${details.column.columnName}');
-                      print(
-                          'Filter Type: ${details.filterConditions.last.type}');
-                      print(
-                          'Filter Value : ${details.filterConditions.last.value}');
+                      // print(
+                      //     '-----------------------------------------------------');
+                      // print('Column Name: ${details.column.columnName}');
+                      // print(
+                      //     'Filter Type: ${details.filterConditions.last.type}');
+                      // print(
+                      //     'Filter Value : ${details.filterConditions.last.value}');
                     },
                     onFilterChanging: (DataGridFilterChangeDetails details) {
-                      print(
-                          '-----------------------------------------------------');
-                      print('Column Name: ${details.column.columnName}');
-                      print(
-                          'Filter Type: ${details.filterConditions.last.type}');
-                      print(
-                          'Filter Value : ${details.filterConditions.last.value}');
-                      if (details.column.columnName == 'Arabic Name') {
-                        return false;
-                      }
+                      // print(
+                      //     '-----------------------------------------------------');
+                      // print('Column Name: ${details.column.columnName}');
+                      // print(
+                      //     'Filter Type: ${details.filterConditions.last.type}');
+                      // print(
+                      //     'Filter Value : ${details.filterConditions.last.value}');
+                      // if (details.column.columnName == 'Arabic Name') {
+                      //   return false;
+                      // }
                       return true;
                     },
                   ),
@@ -180,22 +186,12 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
             itemHeight: 51,
             itemWidth: 51,
             visibleItemsCount: 3,
-            pageCount: dataCount / _rowsPerPage < 1
+            pageCount: dataCount / widget.rowsPerPage < 1
                 ? 1
-                : dataCount % _rowsPerPage > 0
-                    ? dataCount / _rowsPerPage + 1
-                    : dataCount / _rowsPerPage,
+                : dataCount % widget.rowsPerPage > 0
+                    ? dataCount / widget.rowsPerPage + 1
+                    : dataCount / widget.rowsPerPage,
             delegate: dataSource,
-            onPageNavigationStart: (int pageIndex) {
-              setState(() {
-                _isLoading = true;
-              });
-            },
-            onPageNavigationEnd: (int pageIndex) async {
-              setState(() {
-                _isLoading = false;
-              });
-            },
           ),
         ),
       ],
@@ -248,15 +244,36 @@ class _DataGridPaginatedSSState extends State<DataGridPaginatedSS> {
 }
 
 class CustomDataGridSource extends DataGridSource {
-  CustomDataGridSource(this.dataList) {
+  CustomDataGridSource(
+    this.dataList,
+    this.tableName,
+    this.orderBy,
+    this.rowsPerPage,
+    this.fromJson,
+    this.onEditPressed,
+    this.onDeletePressed,
+    this.getIsLoading,
+    this.startLoading,
+    this.endLoading,
+  ) {
     dataGridRows = dataList
         .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
         .toList();
   }
 
+  Function getIsLoading;
+  Function startLoading;
+  Function endLoading;
   List paginatedData = [];
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
+  String tableName;
+  String orderBy;
+  Function(num, dynamic)? onEditPressed;
+  Function(num)? onDeletePressed;
+  IConnection connection = GetIt.I<IConnection>();
+  int rowsPerPage;
+  Function fromJson;
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
@@ -274,7 +291,7 @@ class CustomDataGridSource extends DataGridSource {
         cells: row.getCells().map<Widget>((dataGridCell) {
       return row.getCells().indexOf(dataGridCell) == 0 &&
               dataGridCell.value == -1
-          ? SizedBox()
+          ? const SizedBox()
           : dataGridCell.columnName ==
                   AppLocalizations.of(AppNavigation.context)!.edit
               ? Container(
@@ -283,11 +300,6 @@ class CustomDataGridSource extends DataGridSource {
                     child: IconButton(
                       onPressed: () {
                         if (onEditPressed != null) {
-                          // final Map<String, dynamic> data = {};
-                          // for (int i = 0; i < row.getCells().length; i++) {
-                          //   data[row.getCells()[i].columnName] =
-                          //       row.getCells()[i].value;
-                          // }
                           onEditPressed!(
                               row.getCells()[0].value, paginatedData[rowIndex]);
                         }
@@ -332,39 +344,35 @@ class CustomDataGridSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => dataGridRows;
 
+  String getQuery(newPageIndex) {
+    String localQuery =
+        'SELECT * FROM $tableName ORDER BY $orderBy LIMIT $rowsPerPage OFFSET ${rowsPerPage * newPageIndex}';
+    String remoteQuery =
+        'SELECT * FROM $tableName ORDER BY $orderBy OFFSET ${rowsPerPage * newPageIndex} ROWS FETCH NEXT $rowsPerPage ROWS ONLY;';
+    return connection is LocalConnection ? localQuery : remoteQuery;
+  }
+
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    try {
-      var response = await connection.readQuery(connection is LocalConnection
-          ? 'SELECT * FROM $tableName ORDER BY $orderBy LIMIT $_rowsPerPage OFFSET ${_rowsPerPage * newPageIndex}'
-          : 'SELECT * FROM $tableName ORDER BY $orderBy OFFSET ${_rowsPerPage * newPageIndex} ROWS FETCH NEXT $_rowsPerPage ROWS ONLY;');
-      paginatedData = [];
-      for (var element in response) {
-        paginatedData.add(fromJson(element));
+    if (!getIsLoading()) {
+      startLoading();
+      try {
+        var response = await connection.readQuery(getQuery(newPageIndex));
+        paginatedData = [];
+        for (var element in response) {
+          paginatedData.add(fromJson(element));
+        }
+      } catch (e) {
+        showToast(context: AppNavigation.context, message: e.toString());
       }
-    } catch (e) {
-      showToast(context: AppNavigation.context, message: e.toString());
-      print(e);
+
+      buildPaginatedDataGridRows();
+      notifyListeners();
+      endLoading();
+      return true;
+    } else {
+      return false;
     }
-
-    buildPaginatedDataGridRows();
-    notifyListeners();
-    // int startIndex = newPageIndex * _rowsPerPage;
-    // // int endIndex = startIndex + _rowsPerPage;
-    // // // if (startIndex < dataList.length && endIndex <= dataList.length) {
-    // // //   paginatedData =
-    // // //       dataList.getRange(startIndex, endIndex).toList(growable: false);
-    // // //   buildPaginatedDataGridRows();
-    // // //   notifyListeners();
-    // // // } else {
-    // // //   paginatedData = dataList
-    // // //       .getRange(startIndex, dataList.length)
-    // // //       .toList(growable: false);
-    // // //   buildPaginatedDataGridRows();
-    // // //   notifyListeners();
-    // // // }
-
-    return true;
   }
 
   void buildPaginatedDataGridRows() {
