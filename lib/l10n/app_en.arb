@@ -169,7 +169,9 @@
   "reference": "Reference",
   "no_data": "No data available \n please click on add button",
   "success": "success",
-  "user_or_admin_required": "Select user or admin is required"
+  "user_or_admin_required": "Select user or admin is required",
+  "start_page_theme": "Start Page Theme",
+  "start_List_theme": "Start List Theme"
 
 
 

@@ -1,3 +1,4 @@
+import 'package:InvoiceF_Configuration/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +137,14 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.user_options,
         'useroptions',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const UserOptionView();
+            },
+          ));
+
+        },
       ),
       ScreenItem(
         appLocalizations.accounting_options,
