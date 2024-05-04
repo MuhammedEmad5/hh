@@ -1,15 +1,17 @@
+import 'package:InvoiceF_Configuration/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_Configuration/core/presentation/widgets/custom_error_widget.dart';
+import 'package:InvoiceF_Configuration/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF_Configuration/core/presentation/widgets/form_navigation.dart';
+import 'package:InvoiceF_Configuration/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_Configuration/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF_Configuration/features/configuration/company_unit/domain/entities/company_unit_entity/company_unit_entity_model.dart';
+import 'package:InvoiceF_Configuration/features/configuration/company_unit/presentation/manager/company_unit_cubit.dart';
+import 'package:InvoiceF_Configuration/features/configuration/company_unit/presentation/widgets/company_unit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/custom_error_widget.dart';
-import '../../../../../core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import '../../../../../core/presentation/widgets/form_navigation.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../domain/entities/company_unit_entity/company_unit_entity_model.dart';
-import '../manager/company_unit_cubit.dart';
-import '../widgets/company_unit_card.dart';
 
 class CompanyUnitPage extends StatefulWidget {
   const CompanyUnitPage({super.key});
@@ -69,6 +71,7 @@ class _CompanyUnitPageState extends State<CompanyUnitPage> {
     if (addedIndexs.contains(cUnit.unitNo)) {
       addedIndexs.remove(cUnit.unitNo);
     }
+    showToast(context: context, message: AppLocalizations.of(context)!.success);
   }
 
   @override
@@ -91,7 +94,7 @@ class _CompanyUnitPageState extends State<CompanyUnitPage> {
           return state.when(initial: () {
             return const Text('Initial State');
           }, loading: () {
-            return  Center(child: Loader());
+            return Center(child: Loader());
           }, success: (data) {
             if (data.isEmpty) {
               if (cUnitsData.isEmpty) {
@@ -101,9 +104,9 @@ class _CompanyUnitPageState extends State<CompanyUnitPage> {
               }
             }
             cUnitsData = data.isEmpty ? cUnitsData : data;
-            lastIndex = cUnitsData.last.unitNo;
+            lastIndex = cUnitsData.isNotEmpty ? cUnitsData.last.unitNo : 0;
 
-            if (currentIndex == 1 && reference.text == '') {
+            if (currentIndex == 1 && cUnitsData.isNotEmpty) {
               updateTextFields(cUnitsData[0]);
             }
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:InvoiceF_Configuration/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
 import 'package:InvoiceF_Configuration/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF_Configuration/core/enums/connection_enum.dart';
 import 'package:InvoiceF_Configuration/core/extensions/getit_extension.dart';
 import 'package:InvoiceF_Configuration/features/shared/di/shared_service.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,10 @@ import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
 
-
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
-
 
 void main() async {
   if (Platform.isWindows || Platform.isLinux) {
@@ -37,7 +36,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     SharedService().initDi(LocalConnection());
 
     return MultiBlocProvider(
@@ -51,6 +49,12 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
+          if (context.read<ConnectionTypeBloc>().state.connection ==
+              ConnectionEnum.local) {
+            context
+                .read<ConnectionTypeBloc>()
+                .emit(ConnectionTypeState(ConnectionEnum.server));
+          }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               LoggerSingleton.logger
@@ -65,7 +69,7 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                  AppLocalizations.localizationsDelegates,
+                      AppLocalizations.localizationsDelegates,
                   locale: Locale(languageState.languageCode),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(
