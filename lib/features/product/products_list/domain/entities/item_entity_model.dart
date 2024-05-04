@@ -8,9 +8,6 @@ import '../../../../../core/navigation/navigation.dart';
 
 part 'item_entity_model.g.dart';
 
-AppLocalizations _appLocalizations =
-    AppLocalizations.of(AppNavigation.context)!;
-
 @JsonSerializable(explicitToJson: true)
 class ItemEntity implements BusinessModel {
   num itemNo;
@@ -62,26 +59,35 @@ class ItemEntity implements BusinessModel {
 
   @override
   List<String> getColumnNames() => [
-        _appLocalizations.number,
-        _appLocalizations.edit,
-        _appLocalizations.arabic_name,
-        _appLocalizations.english_name,
-        _appLocalizations.sell_price,
-        _appLocalizations.delete,
+        AppLocalizations.of(AppNavigation.context)!.number,
+        AppLocalizations.of(AppNavigation.context)!.edit,
+        AppLocalizations.of(AppNavigation.context)!.arabic_name,
+        AppLocalizations.of(AppNavigation.context)!.english_name,
+        AppLocalizations.of(AppNavigation.context)!.sell_price,
+        AppLocalizations.of(AppNavigation.context)!.delete,
       ];
 
   @override
   DataGridRow getDataGridRow() {
     return DataGridRow(cells: [
-      DataGridCell<num>(columnName: _appLocalizations.number, value: itemNo),
-      DataGridCell<Widget>(columnName: _appLocalizations.edit, value: null),
-      DataGridCell<String>(
-          columnName: _appLocalizations.arabic_name, value: aName),
-      DataGridCell<String>(
-          columnName: _appLocalizations.english_name, value: eName),
       DataGridCell<num>(
-          columnName: _appLocalizations.sell_price, value: sellPrice),
-      DataGridCell<Widget>(columnName: _appLocalizations.delete, value: null),
+          columnName: AppLocalizations.of(AppNavigation.context)!.number,
+          value: itemNo),
+      DataGridCell<Widget>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.edit,
+          value: null),
+      DataGridCell<String>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.arabic_name,
+          value: aName),
+      DataGridCell<String>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.english_name,
+          value: eName),
+      DataGridCell<num>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.sell_price,
+          value: sellPrice),
+      DataGridCell<Widget>(
+          columnName: AppLocalizations.of(AppNavigation.context)!.delete,
+          value: null),
     ]);
   }
 }

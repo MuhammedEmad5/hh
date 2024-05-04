@@ -3,23 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
 import '../../../../../core/navigation/navigation.dart';
 import '../../../../../core/presentation/widgets/app_bar.dart';
 import '../../../../../core/presentation/widgets/checkbox.dart';
-import '../../../../../core/presentation/widgets/data_grid_paginated_ss.dart';
 import '../../../../../core/presentation/widgets/dropdown.dart';
 import '../../../../../core/presentation/widgets/label.dart';
 import '../../../../../core/presentation/widgets/ok_alert.dart';
 import '../../../../../core/presentation/widgets/text_box.dart';
 import '../../data/repositories/product_repo_impl.dart';
 import '../../domain/entities/item_entity_model.dart';
-import '../../domain/use_cases/create_product_use_case.dart';
-import '../../domain/use_cases/update_product_use_case.dart';
 import '../manager/product_cubit.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -211,11 +204,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
     itemNo = '${widget.newIndex == -1 ? 1 : widget.newIndex}';
     itemNo = itemNo == '0' ? '1' : itemNo;
-
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
     aName.text = widget.data?.aName ?? 'منتج جديد';
     eName.text = widget.data?.eName ?? 'New Product';
     barcode.text = widget.data?.barCode ?? itemNo;
@@ -269,6 +257,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           }
           if (state is ProductIndexLoaded) {
             itemNo = state.data;
+            barcode.text = state.data;
           }
         }
         return Scaffold(
@@ -302,10 +291,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               );
 
               widget.isEdit
-                  ? UpdateProductUseCase(productRepo: ProductRepo(connection))
-                      .execute(item, id: item.itemNo)
-                  : CreateProductUseCase(productRepo: ProductRepo(connection))
-                      .execute(item);
+                  ? context.read<ProductCubit>().updateProduct(product: item)
+                  : context.read<ProductCubit>().insertProduct(item);
               showOKDialog(
                   context: context,
                   title: AppLocalizations.of(context)!.success,

@@ -1,24 +1,17 @@
 import 'dart:io';
+import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/data_grid_paginated_ss.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF_ClientVendor/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF_ClientVendor/core/utils/logger.dart';
+import 'package:InvoiceF_ClientVendor/features/product/products_list/domain/entities/item_entity_model.dart';
+import 'package:InvoiceF_ClientVendor/features/product/products_list/presentation/manager/product_cubit.dart';
 import 'package:InvoiceF_ClientVendor/features/product/products_list/presentation/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../core/blocs/connection_type_bloc/connection_bloc.dart';
-import '../../../../../core/data/datasources/connection.dart';
-import '../../../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../../../../core/data/datasources/remote_data_source/remote_connection.dart';
-import '../../../../../core/enums/connection_enum.dart';
-import '../../../../../core/navigation/navigation.dart';
-import '../../../../../core/presentation/widgets/app_bar.dart';
-import '../../../../../core/presentation/widgets/data_grid_paginated_ss.dart';
-import '../../../../../core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import '../../../../../core/presentation/widgets/loader_widget.dart';
-import '../../../../../core/presentation/widgets/ok_alert.dart';
-import '../../../../../core/utils/logger.dart';
-import '../../domain/entities/item_entity_model.dart';
-import '../manager/product_cubit.dart';
 
 class ProductSSPage extends StatefulWidget {
   const ProductSSPage({super.key});
@@ -28,7 +21,6 @@ class ProductSSPage extends StatefulWidget {
 }
 
 class _ProductSSPageState extends State<ProductSSPage> {
-  late IConnection connection;
   int dataCount = 0;
   bool isLoading = true;
 
@@ -42,15 +34,9 @@ class _ProductSSPageState extends State<ProductSSPage> {
   @override
   void initState() {
     super.initState();
-
-    connection = context.read<ConnectionTypeBloc>().state.connection ==
-            ConnectionEnum.local
-        ? LocalConnection()
-        : RemoteConnection();
     getDataCount();
   }
 
-  // final _dataGridState = GlobalKey<DataGridPaginatedSSState>();
   @override
   Widget build(BuildContext context) {
     if (context.read<ProductCubit>().isClosed) {
@@ -97,11 +83,7 @@ class _ProductSSPageState extends State<ProductSSPage> {
                     onEditPressed: (id, data) {
                       AppNavigation.push(
                         ProductDetailsPage(
-                          isEdit: true,
-                          newIndex: id.round(),
-                          data: data
-                              .firstWhere((element) => element.itemNo == id),
-                        ),
+                            isEdit: true, newIndex: id.round(), data: data),
                       );
                     },
                     onDeletePressed: (id) {
