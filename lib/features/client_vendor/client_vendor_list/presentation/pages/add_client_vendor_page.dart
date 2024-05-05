@@ -22,7 +22,7 @@ import '../../domain/use_cases/client_vendor_use_cases/create_client_vendor_use_
 import '../../domain/use_cases/client_vendor_use_cases/update_client_vendor_use_case.dart';
 import '../manager/client_vendor_cubit.dart';
 import 'client_vendor_page.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
 class AddClientVendorPage extends StatefulWidget {
   final int newIndex;

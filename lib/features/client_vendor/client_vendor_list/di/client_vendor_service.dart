@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/extensions/getit_extension.dart';
+import 'package:InvoiceF/core/extensions/getit_extension.dart';
 import 'package:get_it/get_it.dart';
 import '../data/repositories/client_vendor_repo.dart';
 import '../domain/use_cases/client_vendor_use_cases/create_client_vendor_use_case.dart';

@@ -1,16 +1,16 @@
 import 'dart:ffi';
 
-import 'package:InvoiceF_ClientVendor/core/constants/colors.dart';
-import 'package:InvoiceF_ClientVendor/core/extensions/context_extension.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/custom_error_widget.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/form_navigator_with_controller/form_navigator_controller.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/form_navigator_with_controller/form_navigator_with_controller.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
-import 'package:InvoiceF_ClientVendor/core/utils/logger.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/domain/entities/beginning_balance_entity.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/manager/beginning_balance_cubit.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/widgets/beginning_balance_form_container.dart';
+import 'package:InvoiceF/core/constants/colors.dart';
+import 'package:InvoiceF/core/extensions/context_extension.dart';
+import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/custom_error_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/form_navigator_with_controller/form_navigator_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/form_navigator_with_controller/form_navigator_with_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/utils/logger.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/domain/entities/beginning_balance_entity.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/presentation/manager/beginning_balance_cubit.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/presentation/widgets/beginning_balance_form_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

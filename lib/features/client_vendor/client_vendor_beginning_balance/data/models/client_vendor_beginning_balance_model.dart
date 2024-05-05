@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/model/json_model.dart';
+import 'package:InvoiceF/core/model/json_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'client_vendor_beginning_balance_model.g.dart';

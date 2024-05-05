@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/data/repositories/beginning_balance_repo.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/di/beginning_balance_service.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/manager/beginning_balance_cubit.dart';
-import 'package:InvoiceF_ClientVendor/features/client_vendor/client_vendor_beginning_balance/presentation/pages/beginning_balance_view.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/data/repositories/beginning_balance_repo.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/di/beginning_balance_service.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/presentation/manager/beginning_balance_cubit.dart';
+import 'package:InvoiceF/features/client_vendor/client_vendor_beginning_balance/presentation/pages/beginning_balance_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
