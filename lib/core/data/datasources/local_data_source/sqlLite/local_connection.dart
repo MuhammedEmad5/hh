@@ -1,6 +1,6 @@
-import 'package:InvoiceF_ClientVendor/core/data/datasources/local_data_source/sqlLite/sqlLite_manager.dart';
+import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/sqlLite_manager.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:sqflite/sqflite.dart';
 import '../../../../exceptions/sqlLite_Exception.dart';
 import '../../../../utils/logger.dart';
 import '../../connection.dart';

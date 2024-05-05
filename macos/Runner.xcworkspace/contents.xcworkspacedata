@@ -4,4 +4,13 @@
    <FileRef
       location = "group:Runner.xcodeproj">
    </FileRef>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+=======
+>>>>>>> InvoiceF-Sales/main
+>>>>>>> InvoiceF-Shared/main
 </Workspace>

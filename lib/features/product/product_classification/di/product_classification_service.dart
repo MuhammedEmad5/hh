@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/extensions/getit_extension.dart';
+import 'package:InvoiceF/core/extensions/getit_extension.dart';
 import 'package:get_it/get_it.dart';
 import '../../../../core/data/datasources/remote_data_source/remote_connection.dart';
 import '../data/repositories/product_classification_impl.dart';
