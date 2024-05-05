@@ -1,14 +1,9 @@
-import 'package:InvoiceF/core/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
-
-const int _rowsPerPage = 10;
-bool isLoading = false;
-late Function(dynamic)? onEditPressed;
-late Function(num)? onDeletePressed;
+import 'package:InvoiceF/core/navigation/navigation.dart';
 
 class DataGridPaginated extends StatefulWidget {
   const DataGridPaginated({
@@ -19,6 +14,7 @@ class DataGridPaginated extends StatefulWidget {
     this.fill = false,
     this.onEditPressed,
     this.onDeletePressed,
+    this.rowsPerPage = 15,
   });
   final dynamic data;
   final bool allowFiltering;
@@ -26,6 +22,7 @@ class DataGridPaginated extends StatefulWidget {
   final bool fill;
   final Function(dynamic)? onEditPressed;
   final Function(num)? onDeletePressed;
+  final int rowsPerPage;
   @override
   State<DataGridPaginated> createState() => _DataGridPaginatedState();
 }
@@ -34,16 +31,18 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
   late List<String> columns;
   late List<GridColumn> gridColumns;
   late CustomDataGridSource dataSource;
-  late List data;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
-    data = widget.data;
-    columns = data[0].getColumnNames();
+    columns = widget.data[0].getColumnNames();
     gridColumns = getColumns(columns);
-    dataSource = CustomDataGridSource(data);
-    onEditPressed = widget.onEditPressed;
-    onDeletePressed = widget.onDeletePressed;
+    dataSource = CustomDataGridSource(
+      widget.data,
+      widget.rowsPerPage,
+      widget.onEditPressed,
+      widget.onDeletePressed,
+    );
   }
 
   @override
@@ -97,23 +96,12 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
             selectedItemColor: AppColors.primaryColor,
           ),
           child: SfDataPager(
-            pageCount: widget.data.length / _rowsPerPage < 1
+            pageCount: widget.data.length / widget.rowsPerPage < 1
                 ? 1
-                : widget.data.length % _rowsPerPage > 0
-                    ? widget.data.length / _rowsPerPage + 1
-                    : widget.data.length / _rowsPerPage,
+                : widget.data.length % widget.rowsPerPage > 0
+                    ? widget.data.length / widget.rowsPerPage + 1
+                    : widget.data.length / widget.rowsPerPage,
             delegate: dataSource,
-            // onPageNavigationStart: (int pageIndex) {
-            //   setState(() {
-            //     isLoading = true;
-            //   });
-            // },
-            // onPageNavigationEnd: (int pageIndex) async {
-            //   await Future.delayed(const Duration(seconds: 2));
-            //   setState(() {
-            //     isLoading = false;
-            //   });
-            // },
           ),
         ),
       ],
@@ -169,7 +157,8 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
 List paginatedData = [];
 
 class CustomDataGridSource extends DataGridSource {
-  CustomDataGridSource(this.dataList) {
+  CustomDataGridSource(this.dataList, this.rowsPerPage, this.onEditPressed,
+      this.onDeletePressed) {
     dataGridRows = dataList
         .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
         .toList();
@@ -177,6 +166,10 @@ class CustomDataGridSource extends DataGridSource {
 
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
+
+  int rowsPerPage = 10;
+  Function(dynamic)? onEditPressed;
+  Function(num)? onDeletePressed;
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
@@ -245,8 +238,8 @@ class CustomDataGridSource extends DataGridSource {
 
   @override
   Future<bool> handlePageChange(int oldPageIndex, int newPageIndex) async {
-    int startIndex = newPageIndex * _rowsPerPage;
-    int endIndex = startIndex + _rowsPerPage;
+    int startIndex = newPageIndex * rowsPerPage;
+    int endIndex = startIndex + rowsPerPage;
     if (startIndex < dataList.length && endIndex <= dataList.length) {
       paginatedData =
           dataList.getRange(startIndex, endIndex).toList(growable: false);
