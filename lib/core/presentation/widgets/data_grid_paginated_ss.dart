@@ -1,8 +1,8 @@
-import 'package:InvoiceF_Configuration/core/data/datasources/connection.dart';
-import 'package:InvoiceF_Configuration/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import 'package:InvoiceF_Configuration/core/navigation/navigation.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/loader_widget.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

@@ -2,6 +2,8 @@ import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_
 import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/di/company_bill_type_service.dart';
 import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
 import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/views/company_bill_type_options_page.dart';
+import 'package:InvoiceF/features/configuration/banks/presentation/pages/banks_view.dart';
+import 'package:InvoiceF/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +155,13 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.user_options,
         'useroptions',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const UserOptionView();
+            },
+          ));
+        },
       ),
       ScreenItem(
         appLocalizations.accounting_options,
@@ -183,7 +191,13 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.banks,
         'bank',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const BanksView();
+            },
+          ));
+        },
       ),
     ];
 

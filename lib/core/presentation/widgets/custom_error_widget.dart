@@ -1,4 +1,4 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
