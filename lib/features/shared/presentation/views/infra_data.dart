@@ -1,3 +1,4 @@
+import 'package:InvoiceF_Configuration/features/configuration/banks/presentation/pages/banks_view.dart';
 import 'package:InvoiceF_Configuration/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -174,7 +175,15 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.banks,
         'bank',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const BanksView();
+            },
+          ));
+
+
+        },
       ),
     ];
 
