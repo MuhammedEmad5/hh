@@ -16,7 +16,6 @@ import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
 
-
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
 /// in main build  from LocalConnection() to RemoteConnection().
@@ -38,7 +37,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    SharedService().initDi(RemoteConnection());
+    // SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [

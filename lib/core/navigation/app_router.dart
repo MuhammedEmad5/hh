@@ -16,14 +16,7 @@ class AppRouter {
 
     switch (settings.name) {
       case '/':
-        return _buildPageRoute(
-            builder: (context) {
 
-              return  BottomNavigationTabs();
-            }
-
-
-        );
 
 
       default:
