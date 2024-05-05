@@ -1,14 +1,14 @@
-import 'package:InvoiceF_Configuration/core/navigation/navigation.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/app_bar.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/custom_error_widget.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/form_navigation.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/loader_widget.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/toast_notification.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/domain/entities/company_bill_type_entity/company_bill_type_entity_model.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/widgets/company_bill_type_card.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/custom_error_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/form_navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/domain/entities/company_bill_type_entity/company_bill_type_entity_model.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/widgets/company_bill_type_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

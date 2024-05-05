@@ -1,7 +1,7 @@
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/data/repositories/company_bill_type_repo.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/di/company_bill_type_service.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
-import 'package:InvoiceF_Configuration/features/configuration/company_bill_type_options/presentation/views/company_bill_type_options_page.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/data/repositories/company_bill_type_repo.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/di/company_bill_type_service.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/views/company_bill_type_options_page.dart';
 import 'package:InvoiceF/features/configuration/banks/presentation/pages/banks_view.dart';
 import 'package:InvoiceF/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';

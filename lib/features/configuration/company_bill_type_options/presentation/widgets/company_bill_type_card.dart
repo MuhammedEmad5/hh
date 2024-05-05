@@ -1,8 +1,8 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/constants/colors.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
 class CompanyBillTypeCard<T> extends StatefulWidget {
   final TextEditingController reference;
