@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/features/shared/presentation/views/transactions.dart';
+import 'package:InvoiceF_Bills/features/shared/presentation/views/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

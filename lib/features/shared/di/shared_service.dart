@@ -1,6 +1,5 @@
-import 'package:InvoiceF_ClientVendor/core/extensions/getit_extension.dart';
+import 'package:InvoiceF_Bills/core/extensions/getit_extension.dart';
 import 'package:get_it/get_it.dart';
-
 import '../../../core/blocs/connection_type_bloc/connection_bloc.dart';
 import '../../../core/data/datasources/connection.dart';
 import '../../../core/data/datasources/local_data_source/sqlLite/local_connection.dart';
