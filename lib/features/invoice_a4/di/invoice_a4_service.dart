@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/extensions/getit_extension.dart';
+import 'package:InvoiceF/core/extensions/getit_extension.dart';
 import 'package:get_it/get_it.dart';
 
 import '../data/repositories/invoice_a4_repo_impl.dart';

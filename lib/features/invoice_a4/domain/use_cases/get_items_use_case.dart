@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
+import 'package:InvoiceF/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
 
 import '../../data/repositories/invoice_a4_repo_impl.dart';
 

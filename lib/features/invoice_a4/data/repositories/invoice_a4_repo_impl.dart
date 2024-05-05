@@ -1,5 +1,5 @@
-import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
-import 'package:InvoiceF_ClientVendor/core/data/repos/base_repo_class.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/core/data/repos/base_repo_class.dart';
 
 import '../../domain/repositories/invoice_a4_repo.dart';
 import '../../queries/invoice_a4_queries.dart';

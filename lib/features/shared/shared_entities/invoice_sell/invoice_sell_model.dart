@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/model/json_model.dart';
+import 'package:InvoiceF/core/model/json_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'invoice_sell_model.g.dart';

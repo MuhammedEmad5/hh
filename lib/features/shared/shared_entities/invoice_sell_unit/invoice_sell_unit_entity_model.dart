@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/model/business_model.dart';
+import 'package:InvoiceF/core/model/business_model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/src/datagrid_widget/sfdatagrid.dart';
 import 'package:json_annotation/json_annotation.dart';

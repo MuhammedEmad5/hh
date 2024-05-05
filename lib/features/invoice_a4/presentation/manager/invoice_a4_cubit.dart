@@ -1,6 +1,6 @@
-import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/client_vendor_entity/client_vendor_entity_model.dart';
-import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
-import 'package:InvoiceF_ClientVendor/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
+import 'package:InvoiceF/features/shared/shared_entities/client_vendor_entity/client_vendor_entity_model.dart';
+import 'package:InvoiceF/features/shared/shared_entities/invoice_sell/invoice_sell_model.dart';
+import 'package:InvoiceF/features/shared/shared_entities/invoice_sell_unit/invoice_sell_unit_entity_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
