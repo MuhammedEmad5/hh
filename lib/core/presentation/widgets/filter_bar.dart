@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/text_icon_button.dart';
+import 'package:InvoiceF/core/presentation/widgets/text_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../constants/colors.dart';

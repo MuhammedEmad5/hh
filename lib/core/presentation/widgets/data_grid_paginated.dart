@@ -3,7 +3,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
-import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
 
 class DataGridPaginated extends StatefulWidget {
   const DataGridPaginated({
