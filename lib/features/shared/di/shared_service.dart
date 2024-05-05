@@ -1,4 +1,4 @@
-import 'package:InvoiceF_Bills/core/extensions/getit_extension.dart';
+import 'package:InvoiceF/core/extensions/getit_extension.dart';
 import 'package:get_it/get_it.dart';
 import '../../../core/blocs/connection_type_bloc/connection_bloc.dart';
 import '../../../core/data/datasources/connection.dart';

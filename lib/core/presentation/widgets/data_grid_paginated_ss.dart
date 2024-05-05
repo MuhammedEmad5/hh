@@ -1,15 +1,14 @@
-
-import 'package:InvoiceF_Bills/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
-import '../../data/datasources/connection.dart';
-import '../../data/datasources/local_data_source/sqlLite/local_connection.dart';
-import '../../navigation/navigation.dart';
-import 'loader_widget.dart';
 
 
 class DataGridPaginatedSS extends StatefulWidget {
