@@ -12,7 +12,7 @@ import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 import '../../domain/entities/item_entity_model.dart' as _i2;
 import '../models/item_model.dart' as _i3;
 
-/// {@template package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+/// {@template package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
 /// Available mappings:
 /// - `ItemEntity` → `Item`.
 /// - `Item` → `ItemEntity`.
@@ -25,7 +25,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   List<_i1.AutoMapprInterface> get _delegates => const [];
 
   /// {@macro AutoMapprInterface:canConvert}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
@@ -53,7 +53,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convert}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   TARGET convert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -69,7 +69,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:tryConvert}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   TARGET? tryConvert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -88,7 +88,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertIterable}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -107,7 +107,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
       Iterable<SOURCE?> model) {
@@ -124,7 +124,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertList}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -143,7 +143,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   List<TARGET?> tryConvertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -159,7 +159,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertSet}
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -178,7 +178,7 @@ class $ItemMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:appy_einvoice_flutter/features/product/products_list/data/mapper/item_mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/features/product/products_list/data/mapper/item_mapper.dart}
   @override
   Set<TARGET?> tryConvertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {

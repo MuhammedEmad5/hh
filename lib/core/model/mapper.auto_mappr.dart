@@ -11,7 +11,7 @@ import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
 import 'mapper.dart' as _i2;
 
-/// {@template package:InvoiceF_Configuration/core/model/mapper.dart}
+/// {@template package:InvoiceF_ClientVendor/core/model/mapper.dart}
 /// Available mappings:
 /// - `PartUser` → `WholeUser`.
 /// {@endtemplate}
@@ -23,7 +23,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   List<_i1.AutoMapprInterface> get _delegates => const [];
 
   /// {@macro AutoMapprInterface:canConvert}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
@@ -45,7 +45,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convert}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   TARGET convert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -61,7 +61,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:tryConvert}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   TARGET? tryConvert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -80,7 +80,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertIterable}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -99,7 +99,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
       Iterable<SOURCE?> model) {
@@ -116,7 +116,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertList}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -135,7 +135,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   List<TARGET?> tryConvertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -151,7 +151,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertSet}
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -170,7 +170,7 @@ class $Mappr implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/core/model/mapper.dart}
+  /// {@macro package:InvoiceF_ClientVendor/core/model/mapper.dart}
   @override
   Set<TARGET?> tryConvertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {

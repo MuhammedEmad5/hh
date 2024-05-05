@@ -9,11 +9,11 @@ part of 'item_classification_tree_model.dart';
 ItemClassificationTree _$ItemClassificationTreeFromJson(
         Map<String, dynamic> json) =>
     ItemClassificationTree(
-      VendorId: json['VendorId'] as int? ?? 0,
+      VendorId: (json['VendorId'] as num?)?.toInt() ?? 0,
       itemClassificationTreeNo: json['itemClassificationTreeNo'] as num,
       parentNo: json['parentNo'] as num?,
       userNumber: json['userNumber'] as String?,
-      depthNum: json['depthNum'] as int? ?? 0,
+      depthNum: (json['depthNum'] as num?)?.toInt() ?? 0,
       aName: json['aName'] as String?,
       eName: json['eName'] as String?,
       aDescription: json['aDescription'] as String?,
@@ -27,16 +27,16 @@ ItemClassificationTree _$ItemClassificationTreeFromJson(
       isCanDelete: json['isCanDelete'] ?? 0,
       isCanMove: json['isCanMove'] ?? 0,
       isCanAdd: json['isCanAdd'] ?? 0,
-      typeNo: json['typeNo'] as int?,
-      subTypeNo: json['subTypeNo'] as int?,
-      statusNo: json['statusNo'] as int?,
-      nature: json['nature'] as int?,
+      typeNo: (json['typeNo'] as num?)?.toInt(),
+      subTypeNo: (json['subTypeNo'] as num?)?.toInt(),
+      statusNo: (json['statusNo'] as num?)?.toInt(),
+      nature: (json['nature'] as num?)?.toInt(),
       note: json['note'] as String?,
       isPosted: json['isPosted'] ?? 0,
       isDeleted: json['isDeleted'] ?? 0,
       deletedDate: json['deletedDate'] as String?,
       disabledDate: json['disabledDate'] as String?,
-      appImageNo: json['appImageNo'] as int?,
+      appImageNo: (json['appImageNo'] as num?)?.toInt(),
       printerCodeName: json['printerCodeName'] as String?,
     );
 

@@ -12,7 +12,7 @@ ItemEntity _$ItemEntityFromJson(Map<String, dynamic> json) => ItemEntity(
       eName: json['eName'] as String? ?? "New Product",
       barCode: json['barCode'] as String,
       userNumber: json['userNumber'] as String,
-      unitNo_defaultSell: json['unitNo_defaultSell'] as int? ?? 1,
+      unitNo_defaultSell: (json['unitNo_defaultSell'] as num?)?.toInt() ?? 1,
       itemClassificationTreeNo: json['itemClassificationTreeNo'] as num? ?? 1,
       taxPurchasePercent: json['taxPurchasePercent'] as num? ?? 0,
       tax_isUseSeparateFieldsForTax: json['tax_isUseSeparateFieldsForTax'] ?? 0,
