@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../../../../../core/presentation/widgets/label.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
 
 class CompanyUnitCard extends StatefulWidget {

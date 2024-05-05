@@ -3,7 +3,7 @@ import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../../../../../core/presentation/widgets/label.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/text_box.dart';
+import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
 
 class UnitCard extends StatefulWidget {

@@ -1,6 +1,7 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/app_bar.dart';
-import 'package:InvoiceF_Configuration/features/configuration/banks/presentation/widgets/banks_form_container.dart';
-import 'package:InvoiceF_Configuration/features/configuration/user_options/presentation/widgets/user_options_container.dart';
+import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/form_navigator_with_controller/form_navigator_controller.dart';
+import 'package:InvoiceF/features/configuration/banks/presentation/widgets/banks_form_container.dart';
+import 'package:InvoiceF/features/configuration/user_options/presentation/widgets/user_options_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,6 +19,8 @@ class BanksView extends StatefulWidget {
 class _BanksViewState extends State<BanksView> {
   late TextEditingController arabicNameController;
   late TextEditingController englishNameController;
+
+  late FormNavigationController formNavigationController;
   late AppLocalizations appLocalizations;
 
   @override
@@ -25,6 +28,7 @@ class _BanksViewState extends State<BanksView> {
     super.initState();
     arabicNameController = TextEditingController();
     englishNameController = TextEditingController();
+    formNavigationController = FormNavigationController();
   }
 
   @override
@@ -38,6 +42,7 @@ class _BanksViewState extends State<BanksView> {
     super.dispose();
     arabicNameController.dispose();
     englishNameController.dispose();
+    formNavigationController.dispose();
   }
 
   @override
@@ -56,7 +61,10 @@ class _BanksViewState extends State<BanksView> {
               child: BanksFormContainer(
                   arabicNameController: arabicNameController,
                   englishNameController: englishNameController,
-                  appLocalizations: appLocalizations))
+                  formNavigationController: formNavigationController,
+                  appLocalizations: appLocalizations
+
+              ))
         ],
       ),
     );

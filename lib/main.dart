@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:InvoiceF_Configuration/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import 'package:InvoiceF_Configuration/core/data/datasources/remote_data_source/remote_connection.dart';
-import 'package:InvoiceF_Configuration/core/enums/connection_enum.dart';
-import 'package:InvoiceF_Configuration/core/extensions/getit_extension.dart';
-import 'package:InvoiceF_Configuration/features/shared/di/shared_service.dart';
+import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF/core/enums/connection_enum.dart';
+import 'package:InvoiceF/core/extensions/getit_extension.dart';
+import 'package:InvoiceF/features/shared/di/shared_service.dart';
+import 'package:flutter/foundation.dart' show kIsWeb ;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
@@ -14,6 +15,7 @@ import 'core/blocs/connection_type_bloc/connection_bloc.dart';
 import 'core/blocs/connection_type_bloc/connection_state.dart';
 import 'core/blocs/language_bloc/language_bloc.dart';
 import 'core/blocs/language_bloc/language_state.dart';
+import 'core/data/datasources/local_data_source/sqlLite/local_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
@@ -23,11 +25,13 @@ import 'core/utils/logger.dart';
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
 
+
 void main() async {
-  if (Platform.isWindows || Platform.isLinux) {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
+
   runApp(const MainApp());
 }
 
@@ -36,7 +40,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedService().initDi(LocalConnection());
+
+     SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -49,16 +54,10 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
-          if (context.read<ConnectionTypeBloc>().state.connection ==
-              ConnectionEnum.local) {
-            context
-                .read<ConnectionTypeBloc>()
-                .emit(ConnectionTypeState(ConnectionEnum.server));
-          }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
-              LoggerSingleton.logger
-                  .t("${connectionTypeState.connection} in MAIIIIN");
+              // LoggerSingleton.logger
+              //     .t("${connectionTypeState.connection} in MAIIIIN");
 
               return FlutterBootstrap5(
                 builder: (ctx) => MaterialApp(
@@ -69,7 +68,7 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
+                  AppLocalizations.localizationsDelegates,
                   locale: Locale(languageState.languageCode),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(

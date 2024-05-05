@@ -1,5 +1,5 @@
-import 'package:InvoiceF_Configuration/features/configuration/banks/presentation/pages/banks_view.dart';
-import 'package:InvoiceF_Configuration/features/configuration/user_options/presentation/pages/user_options_view.dart';
+import 'package:InvoiceF/features/configuration/banks/presentation/pages/banks_view.dart';
+import 'package:InvoiceF/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:InvoiceF_Configuration/core/extensions/context_extension.dart';
+import 'package:InvoiceF/core/extensions/context_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

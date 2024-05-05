@@ -1,5 +1,5 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown_with_controller/custom_dropdown_with_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_with_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

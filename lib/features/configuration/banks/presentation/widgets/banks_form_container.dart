@@ -1,18 +1,22 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/bootstrap/text_box_bootstrap.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
-import 'package:InvoiceF_Configuration/core/presentation/widgets/dropdown_with_controller/custom_dropdown_with_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/bootstrap/text_box_bootstrap.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_with_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/form_navigator_with_controller/form_navigator_with_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/presentation/widgets/form_navigation.dart';
+import '../../../../../core/presentation/widgets/form_navigator_with_controller/form_navigator_controller.dart';
 
 
 class BanksFormContainer extends StatelessWidget {
 
   final TextEditingController arabicNameController;
   final TextEditingController englishNameController;
+  final FormNavigationController formNavigationController;
+
 
   final AppLocalizations appLocalizations;
 
@@ -20,7 +24,8 @@ class BanksFormContainer extends StatelessWidget {
     super.key,
     required this.arabicNameController,
     required this.englishNameController,
-    required this.appLocalizations
+    required this.appLocalizations,
+    required this.formNavigationController
   });
 
   @override
@@ -65,11 +70,12 @@ class BanksFormContainer extends StatelessWidget {
         ),
         FB5Col(
           classNames: 'mb-5',
-          child: FormNavigationW(
-            length: productList.length,
+          child: FormNavigationWithController(
+
             onChanged: (index) {
-              updateTextFields(productList[index - 1]);
+
             },
+            controller: formNavigationController,
           ),
         ),
       ],

@@ -7,9 +7,9 @@ class Validator {
 
   Validator(this.context) : appLocalizations = AppLocalizations.of(context)!;
 
-  String? validate(String? filledValue,String filledName ) {
-    if (filledValue == null || filledValue.isEmpty) {
-      return  "$filledName ${appLocalizations.is_required}";
+  String? validate(String? filledValue, String filledName) {
+    if (filledValue == null || filledValue.isEmpty || filledValue == "null") {
+      return "$filledName ${appLocalizations.is_required}";
     }
     return null;
   }

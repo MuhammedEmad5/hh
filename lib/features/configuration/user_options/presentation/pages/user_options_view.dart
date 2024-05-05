@@ -1,5 +1,5 @@
-import 'package:InvoiceF_Configuration/core/presentation/widgets/app_bar.dart';
-import 'package:InvoiceF_Configuration/features/configuration/user_options/presentation/widgets/user_options_container.dart';
+import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/features/configuration/user_options/presentation/widgets/user_options_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
