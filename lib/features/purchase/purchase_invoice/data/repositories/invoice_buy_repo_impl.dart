@@ -1,6 +1,6 @@
-import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/repositories/invoice_buy_repo.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/queries/purchase_invoice_queries.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/domain/repositories/invoice_buy_repo.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/queries/purchase_invoice_queries.dart';
 
 import '../../../../../core/data/repos/base_repo_class.dart';
 

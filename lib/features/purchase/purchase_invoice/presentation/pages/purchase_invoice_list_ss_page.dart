@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
-import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/app_bar.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/data_grid_paginated_ss.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/ok_alert.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/manager/invoice_buy_cubit.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/presentation/pages/purchase_invoice_details_page.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/data_grid_paginated_ss.dart';
+import 'package:InvoiceF/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/ok_alert.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/presentation/manager/invoice_buy_cubit.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/presentation/pages/purchase_invoice_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -1,6 +1,6 @@
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/mapper/invoice_buy_mapper.auto_mappr.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/data/models/invoice_buy_model.dart';
-import 'package:InvoiceF_ClientVendor/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/data/mapper/invoice_buy_mapper.auto_mappr.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/data/models/invoice_buy_model.dart';
+import 'package:InvoiceF/features/purchase/purchase_invoice/domain/entities/invoice_buy_entity/invoice_buy_entity_model.dart';
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
 
 @AutoMappr([

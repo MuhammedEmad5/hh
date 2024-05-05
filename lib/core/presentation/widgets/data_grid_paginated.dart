@@ -1,4 +1,4 @@
-import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';

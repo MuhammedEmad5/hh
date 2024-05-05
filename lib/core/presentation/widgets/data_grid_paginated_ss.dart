@@ -1,10 +1,10 @@
-import 'package:InvoiceF_ClientVendor/core/blocs/connection_type_bloc/connection_bloc.dart';
-import 'package:InvoiceF_ClientVendor/core/data/datasources/connection.dart';
-import 'package:InvoiceF_ClientVendor/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import 'package:InvoiceF_ClientVendor/core/data/datasources/remote_data_source/remote_connection.dart';
-import 'package:InvoiceF_ClientVendor/core/navigation/navigation.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/loader_widget.dart';
-import 'package:InvoiceF_ClientVendor/core/presentation/widgets/toast_notification.dart';
+import 'package:InvoiceF/core/blocs/connection_type_bloc/connection_bloc.dart';
+import 'package:InvoiceF/core/data/datasources/connection.dart';
+import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
+import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
+import 'package:InvoiceF/core/presentation/widgets/toast_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:InvoiceF_ClientVendor/core/data/datasources/remote_data_source/remote_connection.dart';
-import 'package:InvoiceF_ClientVendor/core/enums/connection_enum.dart';
+import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connection.dart';
+import 'package:InvoiceF/core/enums/connection_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
