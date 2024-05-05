@@ -168,7 +168,25 @@
   "reference": "مرجع",
   "no_data": "لا توجد بيانات متاحة\n برجاء الضغط على اضافة",
   "success": "تم بنجاح",
-  "user_or_admin_required": "مطلوب اختيار المستخدم أو المسؤول"
+  "user_or_admin_required": "مطلوب اختيار المستخدم أو المسؤول",
+  "invoice_type": "نوع الفاتورة",
+  "printing_type_on_post": "نوع الطباعة عند النشر",
+  "default_report": "التقرير الافتراضى",
+  "vat_group": "رقم مجموعة الضريبة المدرجة",
+  "report_under_header_arabic_text": "تقرير: تحت العنوان النص العربى",
+  "report_under_header_english_text": "تقرير: تحت العنوان النص الانجليزى",
+  "report_under_data_statement": "تقرير: تحت البيان بالبيانات",
+  "print_main_report": "طباعة التقرير الرئيسي",
+  "preview_main_report": "معاينة التقرير الرئيسي",
+  "print_all_selected_reports": "طباعة كافة التقارير المحددة",
+  "preview_all_selected_reports": "معاينة كافة التقارير المحددة",
+  "show_report_selection_wifi": "Show Report Selection WIFI",
+  "do_nothing": "لا تفعل شيئ",
+  "tax_report": "تقرير الضريبة",
+  "standard_rated_sales": "مبيعات بمعدل قياسى",
+  "citizen_rate_healthcare": "رعاية صحية",
+  "sales_exports": "مبيعات صادرات",
+  "exempts_sales": "مبيعات مستثناه"
 
 
 

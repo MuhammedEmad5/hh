@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedService().initDi(LocalConnection());
+    SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -49,12 +49,6 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
-          if (context.read<ConnectionTypeBloc>().state.connection ==
-              ConnectionEnum.local) {
-            context
-                .read<ConnectionTypeBloc>()
-                .emit(ConnectionTypeState(ConnectionEnum.server));
-          }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               LoggerSingleton.logger

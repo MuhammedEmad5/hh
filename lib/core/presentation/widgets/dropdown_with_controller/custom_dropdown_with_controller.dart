@@ -10,21 +10,17 @@ class CustomDropdownWithController<T> extends StatelessWidget {
   final Color? overAllColor;
   final Color? titleColor;
 
-
-
-  const CustomDropdownWithController({
-    super.key,
-    required this.controller,
-    this.title,
-    this.items,
-    this.onChanged,
-    this.overAllColor, this.titleColor
-
-  });
+  const CustomDropdownWithController(
+      {super.key,
+      required this.controller,
+      this.title,
+      this.items,
+      this.onChanged,
+      this.overAllColor,
+      this.titleColor});
 
   @override
   Widget build(BuildContext context) {
-
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
 
     return Column(
@@ -34,8 +30,8 @@ class CustomDropdownWithController<T> extends StatelessWidget {
           Text(
             title!,
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: titleColor ?? Colors.black87,
-            ),
+                  color: titleColor ?? Colors.black87,
+                ),
           ),
         if (title != null) const SizedBox(height: 10),
         DropdownButtonFormField<T>(
@@ -47,29 +43,29 @@ class CustomDropdownWithController<T> extends StatelessWidget {
           items: items,
           onChanged: onChanged != null
               ? (value) {
-            controller!.setValue(value);
-            if (onChanged != null) onChanged!(value);
-          }
+                  controller!.setValue(value);
+                  if (onChanged != null) onChanged!(value);
+                }
               : null,
           decoration: InputDecoration(
             fillColor: Colors.white,
             filled: true,
             enabledBorder: overAllColor != null
                 ? OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: overAllColor!.withAlpha(150), width: 2),
-              borderRadius: BorderRadius.circular(12),
-            )
+                    borderSide: BorderSide(
+                        color: overAllColor!.withAlpha(150), width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                  )
                 : null,
             focusedBorder: overAllColor != null
                 ? OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: overAllColor!.withAlpha(150), width: 2),
-              borderRadius: BorderRadius.circular(12),
-            )
+                    borderSide: BorderSide(
+                        color: overAllColor!.withAlpha(150), width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                  )
                 : null,
             contentPadding:
-            const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),

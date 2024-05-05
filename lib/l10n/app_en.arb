@@ -169,7 +169,25 @@
   "reference": "Reference",
   "no_data": "No data available \n please click on add button",
   "success": "success",
-  "user_or_admin_required": "Select user or admin is required"
+  "user_or_admin_required": "Select user or admin is required",
+  "invoice_type": "Invoice Type",
+  "printing_type_on_post": "Printing Type On Post",
+  "default_report": "Default Report",
+  "vat_group": "VAT Group",
+  "report_under_header_arabic_text": "Report: Under Header Arabic Text",
+  "report_under_header_english_text": "Report: Under Header English Text",
+  "report_under_data_statement": "Report: Under Data Statement",
+  "print_main_report": "Print Main Report",
+  "preview_main_report": "Preview Main Report",
+  "print_all_selected_reports": "Print All Selected Reports",
+  "preview_all_selected_reports": "Preview All Selected Reports",
+  "show_report_selection_wifi": "Show Report Selection WIFI",
+  "do_nothing": "Do Nothing",
+  "tax_report": "Tax Report",
+  "standard_rated_sales": "Standart Rated Sales",
+  "citizen_rate_healthcare": "Citizen Rate Healthcare",
+  "sales_exports": "Sales: Exports",
+  "exempts_sales": "Exempts: Sales"
 
 
 
