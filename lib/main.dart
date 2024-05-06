@@ -15,6 +15,7 @@ import 'core/data/datasources/local_data_source/sqlLite/local_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
+import 'features/shared/di/shared_service.dart';
 
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
@@ -37,7 +38,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // SharedService().initDi(RemoteConnection());
+     SharedService().initDi(LocalConnection());
 
     return MultiBlocProvider(
       providers: [
