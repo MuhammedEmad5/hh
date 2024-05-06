@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # InvoiceF
 =======
 >>>>>>> InvoiceF-Product/main
@@ -20,3 +21,6 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+# InvoiceF-ClientVendor
+>>>>>>> InvoiceF-Auth/main

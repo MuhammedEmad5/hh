@@ -28,6 +28,7 @@
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -50,6 +51,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
@@ -118,6 +122,9 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+>>>>>>> InvoiceF-Auth/main
 		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
 		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -129,6 +136,7 @@
 		33E51913231747F40026EE4D /* DebugProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugProfile.entitlements; sourceTree = "<group>"; };
 		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -172,6 +180,10 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+>>>>>>> InvoiceF-Auth/main
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -207,6 +220,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -242,12 +258,15 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -289,6 +308,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 		331C80D6294CF71000263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +342,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
@@ -344,6 +366,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			);
 			sourceTree = "<group>";
 		};
@@ -399,6 +423,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
@@ -423,6 +448,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -434,6 +461,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 331C80DE294CF71000263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */;
 			buildPhases = (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -462,6 +490,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 				331C80D1294CF70F00263BE5 /* Sources */,
 				331C80D2294CF70F00263BE5 /* Frameworks */,
 				331C80D3294CF70F00263BE5 /* Resources */,
@@ -480,6 +510,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 33CC10FB2044A3C60003C045 /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -508,11 +539,14 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 				33CC10E92044A3C60003C045 /* Sources */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
 				33CC110E2044A8840003C045 /* Bundle Framework */,
 				3399D490228B24CF009A79C7 /* ShellScript */,
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -541,6 +575,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			);
 			buildRules = (
 			);
@@ -628,6 +664,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
@@ -695,6 +732,8 @@
 =======
 >>>>>>> InvoiceF-License/main
 >>>>>>> InvoiceF-Shared/main
+=======
+>>>>>>> InvoiceF-Auth/main
 		3399D490228B24CF009A79C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -733,6 +772,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$FLUTTER_ROOT\"/packages/flutter_tools/bin/macos_assemble.sh && touch Flutter/ephemeral/tripwire";
 		};
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -777,6 +817,8 @@
 >>>>>>> InvoiceF-TransReporting/main
 =======
 >>>>>>> InvoiceF-License/main
+=======
+>>>>>>> InvoiceF-Auth/main
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -829,12 +871,15 @@
 		331C80DB294CF71000263BE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 			baseConfigurationReference = 3DD2D3512888D03A978A3389 /* Pods-RunnerTests.debug.xcconfig */;
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
@@ -850,12 +895,15 @@
 		331C80DC294CF71000263BE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 			baseConfigurationReference = 94D9247ECF6FD2AE54F67ED3 /* Pods-RunnerTests.release.xcconfig */;
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
@@ -871,12 +919,15 @@
 		331C80DD294CF71000263BE5 /* Profile */ = {
 			isa = XCBuildConfiguration;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 			baseConfigurationReference = 94CCC219730061BCD7C310D8 /* Pods-RunnerTests.profile.xcconfig */;
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+=======
+>>>>>>> InvoiceF-Auth/main
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
