@@ -108,7 +108,7 @@ class InfraDataView extends StatelessWidget {
             builder: (context) {
               return RepositoryProvider(
                 create: (context) => GetIt.I<UnitRepo>(),
-                child: BlocProvider<UnitCubit>.value(
+                 child: BlocProvider<UnitCubit>.value(
                   value: GetIt.I<UnitCubit>()..getAllUnits(),
                   child: const UnitPage(),
                 ),
@@ -221,7 +221,10 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.backup_restore,
         'backup',
-        () {},
+        () {
+
+    }
+
       ),
       ScreenItem(
         appLocalizations.banks,
