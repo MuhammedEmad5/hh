@@ -31,19 +31,25 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 		4EC0F6F92E1445F583EE67A4 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA7A259B2A9B19658A0FD94 /* Pods_RunnerTests.framework */; };
 		A2A4E5A5A04BE25520EDAEDC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992D7986B3F46CDE498A3AE6 /* Pods_Runner.framework */; };
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,10 +91,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 =======
 <<<<<<< HEAD
@@ -99,6 +108,7 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 >>>>>>> InvoiceF-Bills/main
@@ -106,6 +116,8 @@
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
 		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -121,10 +133,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 =======
@@ -146,6 +161,7 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -154,6 +170,8 @@
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,10 +183,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				4EC0F6F92E1445F583EE67A4 /* Pods_RunnerTests.framework in Frameworks */,
@@ -177,12 +198,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,10 +218,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				A2A4E5A5A04BE25520EDAEDC /* Pods_Runner.framework in Frameworks */,
@@ -206,12 +233,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,10 +252,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 		141E8B2EF4F3521BC337A858 /* Pods */ = {
@@ -247,12 +280,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 		331C80D6294CF71000263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,10 +320,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				141E8B2EF4F3521BC337A858 /* Pods */,
@@ -296,12 +335,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 			);
 			sourceTree = "<group>";
 		};
@@ -356,10 +398,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				992D7986B3F46CDE498A3AE6 /* Pods_Runner.framework */,
@@ -369,12 +414,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -390,10 +438,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				2FCBCBCA63912E970F1597A2 /* [CP] Check Pods Manifest.lock */,
@@ -402,12 +453,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 				331C80D1294CF70F00263BE5 /* Sources */,
 				331C80D2294CF70F00263BE5 /* Frameworks */,
 				331C80D3294CF70F00263BE5 /* Resources */,
@@ -430,10 +484,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				2A868089C42FE13771C486AB /* [CP] Check Pods Manifest.lock */,
@@ -442,12 +499,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 				33CC10E92044A3C60003C045 /* Sources */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
@@ -457,10 +517,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 				4D4DA3E94CF5B100B174F167 /* [CP] Embed Pods Frameworks */,
@@ -469,12 +532,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 			);
 			buildRules = (
 			);
@@ -561,10 +627,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 		2A868089C42FE13771C486AB /* [CP] Check Pods Manifest.lock */ = {
@@ -615,6 +684,7 @@
 >>>>>>> InvoiceF-Sales/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> InvoiceF-Bills/main
@@ -622,6 +692,8 @@
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 >>>>>>> InvoiceF-Shared/main
 		3399D490228B24CF009A79C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -665,10 +737,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 =======
 <<<<<<< HEAD
 		4D4DA3E94CF5B100B174F167 /* [CP] Embed Pods Frameworks */ = {
@@ -693,12 +768,15 @@
 >>>>>>> InvoiceF-Shared/main
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
 =======
 >>>>>>> InvoiceF-Tax/main
 =======
 >>>>>>> InvoiceF-TransReporting/main
+=======
+>>>>>>> InvoiceF-License/main
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */

@@ -17,7 +17,6 @@ import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
 import 'features/shared/di/shared_service.dart';
 
-
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
 /// in main build  from LocalConnection() to RemoteConnection().
