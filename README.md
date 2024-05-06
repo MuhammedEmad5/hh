@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # InvoiceF
 =======
 >>>>>>> InvoiceF-Product/main
@@ -10,3 +11,5 @@
 =======
 # InvoiceF-Bills
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main

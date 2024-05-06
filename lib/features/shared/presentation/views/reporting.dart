@@ -40,6 +40,41 @@ class ReportsView extends StatelessWidget {
 
 
 
+      ScreenItem(
+        appLocalizations.vat_reports_tax_declaration,
+        'taxdeclaration',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.purchase_sales_with_vat_list,
+        'purchasesalesvat',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.purchase_sales_exempt_from_vat_exempts_list,
+        'purchasesalesvatexempts',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.purchase_sales_with_vat_exempts,
+        'purchasesaleswithvatexempts',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.exempts_list,
+        'purchasesalesexemptsfromvat',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.bills_deleted_numbers,
+        'billspostedbutdeleted',
+            () {},
+      ),
+      ScreenItem(
+        appLocalizations.bills_posted_but_was_detected_list,
+        'deletedbills',
+            () {},
+      ),
     ];
 
 

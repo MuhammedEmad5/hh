@@ -27,6 +27,17 @@
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		4EC0F6F92E1445F583EE67A4 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA7A259B2A9B19658A0FD94 /* Pods_RunnerTests.framework */; };
+		A2A4E5A5A04BE25520EDAEDC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992D7986B3F46CDE498A3AE6 /* Pods_Runner.framework */; };
+=======
+>>>>>>> InvoiceF-Sales/main
+>>>>>>> InvoiceF-Shared/main
+>>>>>>> InvoiceF-Tax/main
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +77,9 @@
 		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 =======
 <<<<<<< HEAD
@@ -74,9 +88,12 @@
 		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 		33CC10ED2044A3C60003C045 /* incoice_f_configuration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "incoice_f_configuration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
 		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -90,6 +107,9 @@
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 =======
@@ -109,10 +129,13 @@
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,14 +145,20 @@
 			files = (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				4EC0F6F92E1445F583EE67A4 /* Pods_RunnerTests.framework in Frameworks */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,14 +168,20 @@
 			files = (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				A2A4E5A5A04BE25520EDAEDC /* Pods_Runner.framework in Frameworks */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +190,9 @@
 /* Begin PBXGroup section */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 		141E8B2EF4F3521BC337A858 /* Pods */ = {
@@ -174,8 +212,11 @@
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 		331C80D6294CF71000263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,14 +246,20 @@
 				D73912EC22F37F3D000D13A0 /* Frameworks */,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				141E8B2EF4F3521BC337A858 /* Pods */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 			);
 			sourceTree = "<group>";
 		};
@@ -265,6 +312,9 @@
 			children = (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				992D7986B3F46CDE498A3AE6 /* Pods_Runner.framework */,
@@ -272,8 +322,11 @@
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -287,14 +340,20 @@
 			buildPhases = (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				2FCBCBCA63912E970F1597A2 /* [CP] Check Pods Manifest.lock */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 				331C80D1294CF70F00263BE5 /* Sources */,
 				331C80D2294CF70F00263BE5 /* Frameworks */,
 				331C80D3294CF70F00263BE5 /* Resources */,
@@ -315,14 +374,20 @@
 			buildPhases = (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				2A868089C42FE13771C486AB /* [CP] Check Pods Manifest.lock */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 				33CC10E92044A3C60003C045 /* Sources */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
@@ -330,14 +395,20 @@
 				3399D490228B24CF009A79C7 /* ShellScript */,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 				4D4DA3E94CF5B100B174F167 /* [CP] Embed Pods Frameworks */,
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 			);
 			buildRules = (
 			);
@@ -422,6 +493,9 @@
 /* Begin PBXShellScriptBuildPhase section */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 		2A868089C42FE13771C486AB /* [CP] Check Pods Manifest.lock */ = {
@@ -470,9 +544,12 @@
 		};
 =======
 >>>>>>> InvoiceF-Sales/main
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 >>>>>>> InvoiceF-Shared/main
 		3399D490228B24CF009A79C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -514,6 +591,9 @@
 		};
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> InvoiceF-Tax/main
 =======
 <<<<<<< HEAD
 		4D4DA3E94CF5B100B174F167 /* [CP] Embed Pods Frameworks */ = {
@@ -536,8 +616,11 @@
 =======
 >>>>>>> InvoiceF-Sales/main
 >>>>>>> InvoiceF-Shared/main
+<<<<<<< HEAD
 =======
 >>>>>>> InvoiceF-Bills/main
+=======
+>>>>>>> InvoiceF-Tax/main
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */

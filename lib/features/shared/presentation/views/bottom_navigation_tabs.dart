@@ -12,6 +12,9 @@ import '../../../sales/pos_sell_invoice/presentation/pages/sell_invoice_details_
 import 'infra_data.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/presentation/views/example_view.dart';
+import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/views/example_view.dart';
