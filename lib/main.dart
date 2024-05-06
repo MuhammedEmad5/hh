@@ -53,9 +53,6 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
-              LoggerSingleton.logger
-                  .t("${connectionTypeState.connection} in MAIIIIN");
-
               return FlutterBootstrap5(
                 builder: (ctx) => MaterialApp(
                   restorationScopeId: "test",

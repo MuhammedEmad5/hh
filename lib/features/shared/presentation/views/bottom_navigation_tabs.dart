@@ -7,7 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/views/example_view.dart';
+import '../../../sales/pos_sell_invoice/di/invoice_sell_service.dart';
+import '../../../sales/pos_sell_invoice/presentation/pages/sell_invoice_details_page.dart';
 import 'infra_data.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../core/presentation/views/example_view.dart';
 
 class BottomNavigationTabs extends StatefulWidget {
   const BottomNavigationTabs({super.key});
@@ -110,8 +114,10 @@ class _BottomNavigationTabsState extends State<BottomNavigationTabs> {
           activeColorPrimary: AppColors.primaryColor,
           inactiveColorPrimary: Colors.grey,
           onPressed: (a) {
-
-            AppNavigation.push(const ExampleView(
+            InvoiceSellService().initDi();
+            AppNavigation.push(const SellInvoiceDetailsPage(
+              newIndex: -1,
+              isHomeCalled: true,
             ));
           }),
       PersistentBottomNavBarItem(
