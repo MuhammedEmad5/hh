@@ -14,7 +14,7 @@ import '../../domain/entities/company_general_entity/company_entity.dart'
 import '../models/company_model.dart' as _i3;
 import 'company_mapper.dart' as _i4;
 
-/// {@template package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+/// {@template package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
 /// Available mappings:
 /// - `CompanyEntity` → `Company`.
 /// - `Company` → `CompanyEntity`.
@@ -27,7 +27,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   List<_i1.AutoMapprInterface> get _delegates => const [];
 
   /// {@macro AutoMapprInterface:canConvert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
@@ -55,7 +55,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   TARGET convert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -71,7 +71,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:tryConvert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   TARGET? tryConvert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -90,7 +90,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertIterable}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -109,7 +109,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
       Iterable<SOURCE?> model) {
@@ -126,7 +126,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertList}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -145,7 +145,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   List<TARGET?> tryConvertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -161,7 +161,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertSet}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -180,7 +180,7 @@ class $CompanyMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/company/data/mapper/company_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/company/data/mapper/company_mapper.dart}
   @override
   Set<TARGET?> tryConvertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {

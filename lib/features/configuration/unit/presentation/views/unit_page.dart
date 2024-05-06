@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/app_bar.dart';
 import '../../../../../core/presentation/widgets/custom_error_widget.dart';
@@ -58,6 +57,7 @@ class _UnitPageState extends State<UnitPage> {
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
               children: [
                 UnitCard(
+                  appLocalizations: appLocalizations,
                   reference: reference,
                   eName: eName,
                   aName: aName,
@@ -76,7 +76,7 @@ class _UnitPageState extends State<UnitPage> {
             return CustomErrorWidget(errorMessage: e);
           }, empty: () {
             return CustomEmptyWidget(
-              text: AppLocalizations.of(context)!.no_db_available,
+              text: AppLocalizations.of(context)!.no_data,
             );
           });
         },

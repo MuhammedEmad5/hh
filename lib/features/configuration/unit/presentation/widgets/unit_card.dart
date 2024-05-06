@@ -4,29 +4,22 @@ import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../../../../../core/presentation/widgets/label.dart';
 import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class UnitCard extends StatefulWidget {
+
+class UnitCard extends StatelessWidget {
   final TextEditingController reference;
   final TextEditingController aName;
   final TextEditingController eName;
+  final AppLocalizations appLocalizations;
   const UnitCard({
     super.key,
     required this.reference,
     required this.aName,
     required this.eName,
+    required this.appLocalizations,
   });
-
-  @override
-  State<UnitCard> createState() => _UnitCardState();
-}
-
-class _UnitCardState extends State<UnitCard> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +32,23 @@ class _UnitCardState extends State<UnitCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Label(
-                text: 'Reference',
+                text: appLocalizations.reference,
                 color: AppColors.primaryColor,
               ),
               TextBox(
                 labelWidth: width,
                 isEnabled: false,
-                controller: widget.reference,
+                controller: reference,
               )
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Label(text: 'Arabic Name', color: AppColors.primaryColor),
+               Label(text: appLocalizations.arabic_name, color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
-                controller: widget.aName,
+                controller: aName,
                 isEnabled: false,
               )
             ],
@@ -63,10 +56,10 @@ class _UnitCardState extends State<UnitCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Label(text: 'English Name', color: AppColors.primaryColor),
+              Label(text: appLocalizations.english_name, color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
-                controller: widget.eName,
+                controller: eName,
                 isEnabled: false,
               )
             ],

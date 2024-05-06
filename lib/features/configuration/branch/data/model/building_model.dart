@@ -9,7 +9,7 @@ part 'building_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Building implements JsonModel {
   num VendorId;
-  num buildingNo;
+  int buildingNo;
   num? parentNo;
   String? userNumber;
   int depthNum;

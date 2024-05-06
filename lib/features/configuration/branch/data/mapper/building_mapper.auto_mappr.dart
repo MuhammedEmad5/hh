@@ -13,7 +13,7 @@ import '../../domain/entities/branch_entity/branch_model.dart' as _i2;
 import '../model/building_model.dart' as _i3;
 import 'building_mapper.dart' as _i4;
 
-/// {@template package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+/// {@template package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
 /// Available mappings:
 /// - `Branch` → `Building`.
 /// - `Building` → `Branch`.
@@ -26,7 +26,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   List<_i1.AutoMapprInterface> get _delegates => const [];
 
   /// {@macro AutoMapprInterface:canConvert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
@@ -54,7 +54,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   TARGET convert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -70,7 +70,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:tryConvert}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   TARGET? tryConvert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -89,7 +89,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertIterable}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -108,7 +108,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
       Iterable<SOURCE?> model) {
@@ -125,7 +125,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertList}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -144,7 +144,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   List<TARGET?> tryConvertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -160,7 +160,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertSet}
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -179,7 +179,7 @@ class $BuildingMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:InvoiceF_Configuration/features/configuration/branch/data/mapper/building_mapper.dart}
+  /// {@macro package:InvoiceF/features/configuration/branch/data/mapper/building_mapper.dart}
   @override
   Set<TARGET?> tryConvertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
