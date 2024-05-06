@@ -8,7 +8,7 @@ part of 'building_model.dart';
 
 Building _$BuildingFromJson(Map<String, dynamic> json) => Building(
       VendorId: json['VendorId'] as num? ?? 0,
-      buildingNo: json['buildingNo'] as num,
+      buildingNo: (json['buildingNo'] as num).toInt(),
       parentNo: json['parentNo'] as num?,
       userNumber: json['userNumber'] as String?,
       depthNum: (json['depthNum'] as num?)?.toInt() ?? 0,

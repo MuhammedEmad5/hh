@@ -6,7 +6,7 @@ part 'branch_model.g.dart';
 
 @JsonSerializable()
 class Branch implements BusinessModel {
-  final num branchNumber;
+  final int branchNumber;
   final String? customerNumber;
 
   final String arabicName;

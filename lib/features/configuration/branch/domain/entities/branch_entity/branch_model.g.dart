@@ -7,7 +7,7 @@ part of 'branch_model.dart';
 // **************************************************************************
 
 Branch _$BranchFromJson(Map<String, dynamic> json) => Branch(
-      branchNumber: json['branchNumber'] as num,
+      branchNumber: (json['branchNumber'] as num).toInt(),
       customerNumber: json['customerNumber'] as String?,
       arabicName: json['arabicName'] as String,
       arabicDescription: json['arabicDescription'] as String?,
