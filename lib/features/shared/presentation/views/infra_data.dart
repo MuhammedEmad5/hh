@@ -1,5 +1,3 @@
-import 'package:InvoiceF/features/configuration/banks/presentation/pages/banks_view.dart';
-import 'package:InvoiceF/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/widgets/app_bar.dart';
+import '../../../configuration/banks/presentation/pages/banks_view.dart';
 import '../../../configuration/branch/data/repositories/branch_repo_impl.dart';
 import '../../../configuration/branch/di/branch_service.dart';
 import '../../../configuration/branch/presentation/manager/branch_cubit.dart';
@@ -26,6 +25,15 @@ import '../../../configuration/unit/data/repositories/unit_repo.dart';
 import '../../../configuration/unit/di/unit_service.dart';
 import '../../../configuration/unit/presentation/manager/unit_cubit.dart';
 import '../../../configuration/unit/presentation/views/unit_page.dart';
+import '../../../../core/navigation/navigation.dart';
+import '../../../../core/presentation/widgets/app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../client_vendor/client_vendor_list/data/repositories/client_vendor_repo.dart';
+import '../../../client_vendor/client_vendor_list/di/client_vendor_service.dart';
+import '../../../client_vendor/client_vendor_list/presentation/manager/client_vendor_cubit.dart';
+import '../../../client_vendor/client_vendor_list/presentation/pages/client_vendor_page.dart';
+import '../../../configuration/user_options/presentation/pages/user_options_view.dart';
 import '../../home_models/screen_item_model.dart';
 import '../widgets/screen_item_card.dart';
 
@@ -73,27 +81,41 @@ class InfraDataView extends StatelessWidget {
           ));
         },
       ),
-
       ScreenItem(
         appLocalizations.company_bill_type_Options,
         'companybill',
         () {},
       ),
+      ScreenItem(appLocalizations.unit, 'units', () {
+        UnitService().initDi();
+        AppNavigation.pushPageRoute(
+          _buildPageRoute(
+            builder: (context) {
+              return RepositoryProvider(
+                create: (context) => GetIt.I<UnitRepo>(),
+                child: BlocProvider<UnitCubit>.value(
+                  value: GetIt.I<UnitCubit>()..getAllUnits(),
+                  child: const UnitPage(),
+                ),
+              );
+            },
+          ),
+        );
+      }),
       ScreenItem(
-        appLocalizations.unit,
-        'units',
+        appLocalizations.client_vendor,
+        'clientvendor',
         () {
-          UnitService().initDi();
+          ClientVendorService().initDi();
           AppNavigation.pushPageRoute(
             _buildPageRoute(
               builder: (context) {
                 return RepositoryProvider(
-                  create: (context) => GetIt.I<UnitRepo>(),
-                  child: BlocProvider<UnitCubit>.value(
-                    value: GetIt.I<UnitCubit>()..getAllUnits(),
-                    child: const UnitPage(),
-                  ),
-                );
+                    create: (context) => GetIt.I<ClientVendorRepo>(),
+                    child: BlocProvider<ClientVendorCubit>.value(
+                      value: GetIt.I<ClientVendorCubit>()..getClientsVendors(),
+                      child: const ClientVendorPage(),
+                    ));
               },
             ),
           );
@@ -144,7 +166,6 @@ class InfraDataView extends StatelessWidget {
               return const UserOptionView();
             },
           ));
-
         },
       ),
       ScreenItem(
@@ -181,8 +202,6 @@ class InfraDataView extends StatelessWidget {
               return const BanksView();
             },
           ));
-
-
         },
       ),
     ];

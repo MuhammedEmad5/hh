@@ -1,8 +1,11 @@
+import 'package:InvoiceF/features/shared/presentation/views/reporting.dart';
+import 'package:InvoiceF/features/shared/presentation/views/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/views/example_view.dart';
 import 'infra_data.dart';
 
@@ -74,9 +77,9 @@ class _BottomNavigationTabsState extends State<BottomNavigationTabs> {
   List<Widget> _buildScreens() {
     return [
       ExampleView(),
-      ExampleView(),
+      TransactionsView(),
       const ExampleView(),
-      ExampleView(),
+      ReportsView(),
       InfraDataView(),
     ];
   }
@@ -107,11 +110,9 @@ class _BottomNavigationTabsState extends State<BottomNavigationTabs> {
           activeColorPrimary: AppColors.primaryColor,
           inactiveColorPrimary: Colors.grey,
           onPressed: (a) {
-            // InvoiceSellService().initDi();
-            // AppNavigation.push(const SellInvoiceDetailsPage(
-            //   newIndex: -1,
-            //   isHomeCalled: true,
-            // ));
+
+            AppNavigation.push(const ExampleView(
+            ));
           }),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.bar_chart),

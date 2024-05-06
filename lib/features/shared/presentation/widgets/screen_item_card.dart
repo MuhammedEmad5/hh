@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/constants/colors.dart';
 import '../../../../core/presentation/widgets/card.dart';
 import '../../home_models/screen_item_model.dart';
