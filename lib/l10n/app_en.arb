@@ -171,12 +171,12 @@
   "success": "success",
   "start_page_theme": "Start Page Theme",
   "start_List_theme": "Start List Theme",
+  "user_or_admin_required": "Select user or admin is required",
   "debit":"Debit",
   "credit": "credit",
   "transaction": "Transaction",
   "no_client_vendor_inserted": "No client vendor inserted before",
   "error_Fetch_date": "Error in fetching data",
-  "user_or_admin_required": "Select user or admin is required",
   "failed_a4": "Failed to find invoice with this building and invoice number",
   "item_already_added": "Product already added before, please update it's quantity instead",
   "item_not_found": "Couldn't find a product with this barcode"

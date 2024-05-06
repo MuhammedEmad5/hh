@@ -1,9 +1,4 @@
 import 'dart:io';
-import 'package:InvoiceF/core/data/datasources/local_data_source/sqlLite/local_connection.dart';
-import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connection.dart';
-import 'package:InvoiceF/core/enums/connection_enum.dart';
-import 'package:InvoiceF/core/extensions/getit_extension.dart';
-import 'package:InvoiceF/features/shared/di/shared_service.dart';
 import 'package:flutter/foundation.dart' show kIsWeb ;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +11,7 @@ import 'core/blocs/connection_type_bloc/connection_state.dart';
 import 'core/blocs/language_bloc/language_bloc.dart';
 import 'core/blocs/language_bloc/language_state.dart';
 import 'core/data/datasources/local_data_source/sqlLite/local_connection.dart';
+import 'core/data/datasources/remote_data_source/remote_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
@@ -57,8 +53,8 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
-              // LoggerSingleton.logger
-              //     .t("${connectionTypeState.connection} in MAIIIIN");
+              LoggerSingleton.logger
+                  .t("${connectionTypeState.connection} in MAIIIIN");
 
               return FlutterBootstrap5(
                 builder: (ctx) => MaterialApp(

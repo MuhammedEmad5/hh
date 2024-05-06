@@ -20,6 +20,7 @@
   "instance_name": "اسم ال Instance",
   "retrieve_database": "جلب قواعد البيانات",
   "database_name": "اسم قاعدة البيانات",
+  "no_data": "لا توجد بيانات",
   "save_settings": "حفظ الاعدادات",
   "productList": "قائمة المنتجات",
   "nameOrBarcode": "اسم المنتج او الباركود",

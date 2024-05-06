@@ -15,6 +15,7 @@ class SharedService {
   Future<void> initDi(IConnection iConnection) async {
 
     GetIt.instance.registerLazySingletonSafely(() => ConnectionTypeBloc());
+
     if (sl.isRegistered<IConnection>()) {
       sl.unregister<IConnection>();
     }

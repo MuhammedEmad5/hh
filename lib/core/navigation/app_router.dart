@@ -2,13 +2,7 @@ import 'dart:io';
 import 'package:InvoiceF/features/shared/presentation/views/bottom_navigation_tabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
-
-import '../../features/shared/presentation/views/bottom_navigation_tabs.dart';
-import '../constants/sf_keys.dart';
-import '../data/datasources/local_data_source/shared_prefrence/sf_manager.dart';
 
 class AppRouter {
   AppRouter();

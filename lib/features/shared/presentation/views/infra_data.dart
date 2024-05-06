@@ -8,6 +8,11 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/widgets/app_bar.dart';
+
+import '../../../client_vendor/client_vendor_list/data/repositories/client_vendor_repo.dart';
+import '../../../client_vendor/client_vendor_list/di/client_vendor_service.dart';
+import '../../../client_vendor/client_vendor_list/presentation/manager/client_vendor_cubit.dart';
+import '../../../client_vendor/client_vendor_list/presentation/pages/client_vendor_page.dart';
 import '../../../configuration/banks/presentation/pages/banks_view.dart';
 import '../../../configuration/branch/data/repositories/branch_repo_impl.dart';
 import '../../../configuration/branch/di/branch_service.dart';
@@ -25,15 +30,15 @@ import '../../../configuration/unit/data/repositories/unit_repo.dart';
 import '../../../configuration/unit/di/unit_service.dart';
 import '../../../configuration/unit/presentation/manager/unit_cubit.dart';
 import '../../../configuration/unit/presentation/views/unit_page.dart';
-import '../../../../core/navigation/navigation.dart';
-import '../../../../core/presentation/widgets/app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../client_vendor/client_vendor_list/data/repositories/client_vendor_repo.dart';
-import '../../../client_vendor/client_vendor_list/di/client_vendor_service.dart';
-import '../../../client_vendor/client_vendor_list/presentation/manager/client_vendor_cubit.dart';
-import '../../../client_vendor/client_vendor_list/presentation/pages/client_vendor_page.dart';
 import '../../../configuration/user_options/presentation/pages/user_options_view.dart';
+import '../../../product/product_classification/data/repositories/product_classification_impl.dart';
+import '../../../product/product_classification/di/product_classification_service.dart';
+import '../../../product/product_classification/presentation/manager/product_classification_cubit.dart';
+import '../../../product/product_classification/presentation/pages/product_classification_view.dart';
+import '../../../product/products_list/data/repositories/product_repo_impl.dart';
+import '../../../product/products_list/di/product_service.dart';
+import '../../../product/products_list/presentation/manager/product_cubit.dart';
+import '../../../product/products_list/presentation/pages/product_ss_page.dart';
 import '../../home_models/screen_item_model.dart';
 import '../widgets/screen_item_card.dart';
 
@@ -63,18 +68,28 @@ class InfraDataView extends StatelessWidget {
     }
 
     List<ScreenItem> infraDataScreens = [
+      ScreenItem(appLocalizations.branch_store_cashier, 'branch', () {
+        BranchService().initDi();
+        AppNavigation.pushPageRoute(_buildPageRoute(builder: (context) {
+          return RepositoryProvider(
+              create: (context) => GetIt.I<BranchRepo>(),
+              child: BlocProvider<BranchCubit>.value(
+                  value: GetIt.I<BranchCubit>()..getAllBranches(),
+                  child: const BranchesView()));
+        }));
+      }),
       ScreenItem(
-        appLocalizations.branch_store_cashier,
-        'branch',
+        appLocalizations.product,
+        'products',
         () {
-          BranchService().initDi();
+          ProductService().initDi();
           AppNavigation.pushPageRoute(_buildPageRoute(
             builder: (context) {
               return RepositoryProvider(
-                create: (context) => GetIt.I<BranchRepo>(),
-                child: BlocProvider<BranchCubit>.value(
-                  value: GetIt.I<BranchCubit>()..getAllBranches(),
-                  child: const BranchesView(),
+                create: (context) => GetIt.I<ProductRepo>(),
+                child: BlocProvider<ProductCubit>.value(
+                  value: GetIt.I<ProductCubit>(),
+                  child: const ProductSSPage(),
                 ),
               );
             },
@@ -102,20 +117,35 @@ class InfraDataView extends StatelessWidget {
           ),
         );
       }),
+      ScreenItem(appLocalizations.client_vendor, 'clientvendor', () {
+        ClientVendorService().initDi();
+        AppNavigation.pushPageRoute(_buildPageRoute(
+          builder: (context) {
+            return RepositoryProvider(
+                create: (context) => GetIt.I<ClientVendorRepo>(),
+                child: BlocProvider<ClientVendorCubit>.value(
+                  value: GetIt.I<ClientVendorCubit>()..getClientsVendors(),
+                  child: const ClientVendorPage(),
+                ));
+          },
+        ));
+      }),
       ScreenItem(
-        appLocalizations.client_vendor,
-        'clientvendor',
+        appLocalizations.products_classification,
+        'productsclassification',
         () {
-          ClientVendorService().initDi();
+          ProductClassificationService().initDi();
           AppNavigation.pushPageRoute(
             _buildPageRoute(
               builder: (context) {
                 return RepositoryProvider(
-                    create: (context) => GetIt.I<ClientVendorRepo>(),
-                    child: BlocProvider<ClientVendorCubit>.value(
-                      value: GetIt.I<ClientVendorCubit>()..getClientsVendors(),
-                      child: const ClientVendorPage(),
-                    ));
+                  create: (context) => GetIt.I<ProductClassificationRepo>(),
+                  child: BlocProvider<ProductClassificationCubit>.value(
+                    value: GetIt.I<ProductClassificationCubit>()
+                      ..getAllProduct(),
+                    child: const ProductClassificationView(),
+                  ),
+                );
               },
             ),
           );
