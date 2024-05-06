@@ -28,6 +28,8 @@ import '../../../purchase/purchase_invoice/presentation/pages/purchase_invoice_l
 import '../../../purchase/purchase_return_invoice/di/purchase_return_invoice_service.dart';
 import '../../../purchase/purchase_return_invoice/presentation/manager/purchase_return_invoice_cubit.dart';
 import '../../../purchase/purchase_return_invoice/presentation/pages/purchase_return_invoice_list.dart';
+
+import '../../../../core/presentation/widgets/app_bar.dart';
 import '../../home_models/screen_item_model.dart';
 import '../widgets/screen_item_card.dart';
 
@@ -132,7 +134,19 @@ class TransactionsView extends StatelessWidget {
                 ..getAllPurchaseReturnInvoice(),
               child: const PurchaseReturnInvoiceListPage(),
             ));
-      })
+      }),
+
+      ScreenItem(
+        appLocalizations.receive_bill,
+        'receivebill',
+        () {},
+      ),
+      ScreenItem(
+        appLocalizations.payment_bill,
+        'paymentbill',
+        () {},
+      ),
+
     ];
 
     return Scaffold(

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:InvoiceF/core/presentation/views/example_view.dart';
 import '../../constants/colors.dart';
 import '../../navigation/navigation.dart';
+import '../views/example_view.dart';
 import 'label.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

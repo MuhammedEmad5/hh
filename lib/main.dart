@@ -17,6 +17,7 @@ import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
 import 'features/shared/di/shared_service.dart';
 
+
 ///******* Important Notes*************
 /// To Change the connection type from remote to local by change the object that pass to Shared Service
 /// in main build  from LocalConnection() to RemoteConnection().
@@ -37,6 +38,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
@@ -52,6 +54,9 @@ class MainApp extends StatelessWidget {
         builder: (context, languageState) {
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
+              LoggerSingleton.logger
+                  .t("${connectionTypeState.connection} in MAIIIIN");
+
               return FlutterBootstrap5(
                 builder: (ctx) => MaterialApp(
                   restorationScopeId: "test",
