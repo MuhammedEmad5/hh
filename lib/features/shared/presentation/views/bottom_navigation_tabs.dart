@@ -12,6 +12,9 @@ import '../../../sales/pos_sell_invoice/presentation/pages/sell_invoice_details_
 import 'infra_data.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/presentation/views/example_view.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../core/navigation/navigation.dart';
+import '../../../../core/presentation/views/example_view.dart';
 
 class BottomNavigationTabs extends StatefulWidget {
   const BottomNavigationTabs({super.key});
