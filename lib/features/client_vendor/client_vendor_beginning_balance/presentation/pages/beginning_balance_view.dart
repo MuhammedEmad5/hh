@@ -89,14 +89,14 @@ class _BeginningBalanceViewState extends State<BeginningBalanceView> {
         note: "",
         date: context.formatDateString(DateTime.now().toString()));
     mainBalanceEntityList.add(newBalance);
-    updateTextFilled(newBalance);
+    updateTextFields(newBalance);
     formNavigationController.updateIndex(mainBalanceEntityList.length);
     formNavigationController.setLength(mainBalanceEntityList.length);
 
   }
 
   void handleSuccess(List<BeginningBalanceEntity> balanceList) {
-    updateTextFilled(balanceList[0]);
+    updateTextFields(balanceList[0]);
     formNavigationController.setLength(balanceList.length);
   }
 
@@ -117,7 +117,7 @@ class _BeginningBalanceViewState extends State<BeginningBalanceView> {
 
     );
     mainBalanceEntityList.add(newBalance);
-    updateTextFilled(newBalance);
+    updateTextFields(newBalance);
     formNavigationController.updateIndex(1);
     formNavigationController.setLength(mainBalanceEntityList.length);
   }
@@ -236,12 +236,14 @@ class _BeginningBalanceViewState extends State<BeginningBalanceView> {
     return debit - credit;
   }
 
-  void updateTextFilled(BeginningBalanceEntity balanceEntity) {
-    transactionTextController.text = balanceEntity.transactionNumber.toString();
-    balanceEntity.clientVendorNumber == 0
+  void handleClientVendor(BeginningBalanceEntity balanceEntity){
+    balanceEntity.clientVendorNumber == 0|| clientVendorDropdownController.value == null
         ? clientVendorDropdownController.setValue(null)
-        : clientVendorDropdownController
-            .setValue(balanceEntity.clientVendorNumber);
+        : clientVendorDropdownController.setValue(balanceEntity.clientVendorNumber);
+  }
+  void updateTextFields(BeginningBalanceEntity balanceEntity) {
+    transactionTextController.text = balanceEntity.transactionNumber.toString();
+    handleClientVendor(balanceEntity);
     nameArabicTextController.text = balanceEntity.arabicName;
     nameEnglishTextController.text = balanceEntity.englishName ?? "";
     datePickerController.value =
@@ -289,7 +291,7 @@ class _BeginningBalanceViewState extends State<BeginningBalanceView> {
                   vatIdTextController: vatIdTextController,
                   branchDropdownController: branchDropdownController,
                   formNavigationController: formNavigationController,
-                  onNavigatorChanged: (index ) => updateTextFilled(mainBalanceEntityList[index - 1]),
+                  onNavigatorChanged: (index ) => updateTextFields(mainBalanceEntityList[index - 1]),
                 );
               },
               empty: () {
@@ -309,7 +311,7 @@ class _BeginningBalanceViewState extends State<BeginningBalanceView> {
                   vatIdTextController: vatIdTextController,
                   branchDropdownController: branchDropdownController,
                   formNavigationController: formNavigationController,
-                  onNavigatorChanged: (index ) => updateTextFilled(mainBalanceEntityList[index - 1]),
+                  onNavigatorChanged: (index ) => updateTextFields(mainBalanceEntityList[index - 1]),
                 );
 
 
