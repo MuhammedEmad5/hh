@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connection.dart';
-import 'package:flutter/foundation.dart' show kIsWeb ;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
@@ -22,7 +22,6 @@ import 'features/shared/di/shared_service.dart';
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
 
-
 void main() async {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     sqfliteFfiInit();
@@ -37,8 +36,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-     SharedService().initDi(LocalConnection());
+    SharedService().initDi(LocalConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -65,8 +63,8 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                  AppLocalizations.localizationsDelegates,
-                  locale: Locale(languageState.languageCode),
+                      AppLocalizations.localizationsDelegates,
+                  locale: Locale('en'),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(
                       seedColor: Colors.blueAccent,

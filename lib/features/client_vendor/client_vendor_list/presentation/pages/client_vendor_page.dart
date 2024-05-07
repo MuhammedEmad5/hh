@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:InvoiceF/core/presentation/widgets/data_grid/data_grid_paginated/data_grid_paginated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/navigation/navigation.dart';
 import '../../../../../core/presentation/widgets/app_bar.dart';
 import '../../../../../core/presentation/widgets/custom_error_widget.dart';
-import '../../../../../core/presentation/widgets/data_grid_paginated.dart';
 import '../../../../../core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
 import '../../../../../core/presentation/widgets/loader_widget.dart';
 import '../../../../../core/presentation/widgets/ok_alert.dart';
@@ -58,14 +58,12 @@ class _ClientVendorPageState extends State<ClientVendorPage> {
                     : SizedBox(
                         height: MediaQuery.of(context).size.height - 100,
                         child: DataGridPaginated(
-                          onEditPressed: (id) {
+                          onEditPressed: (data) {
                             AppNavigation.push(
                               AddClientVendorPage(
-                                newIndex: id.round(),
-                                isEdit: true,
-                                data: data.firstWhere((element) =>
-                                    element.clientVendorNumber.round() == id),
-                              ),
+                                  newIndex: data.clientVendorNo.round(),
+                                  isEdit: true,
+                                  data: data),
                             );
                           },
                           onDeletePressed: (id) {
@@ -73,12 +71,15 @@ class _ClientVendorPageState extends State<ClientVendorPage> {
                                 .read<ClientVendorCubit>()
                                 .deleteClientVendor(id: id);
                             data.removeWhere(
-                                (element) => element.clientVendorNumber == id);
+                                (element) => element.clientVendorNo == id);
                             showOKDialog(
                               context: context,
                               title: AppLocalizations.of(context)!.success,
                               message: '',
                             );
+                            newIndex = data == []
+                                ? 1
+                                : data.last.clientVendorNo.round() + 1;
                           },
                           data: data,
                           allowFiltering: true,

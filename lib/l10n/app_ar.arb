@@ -175,7 +175,12 @@
   "error_Fetch_date": "خطأ في جلب البيانات",
   "failed_a4": "لم نجد فاتورة برقم الفاتورة و رقم المبنى المطلوب",
   "item_already_added": "تم اضافة المنتج سابقا\nبرجاء تعديل الكمية بدلا من اعادة الاضافة",
-  "item_not_found": "لم نجد منتج بهذا الباركود"
+  "item_not_found": "لم نجد منتج بهذا الباركود",
+  "client_vendor_validation": "برجاء ادخال نوع العميل/المورد و الاسم بالعربى",
+  "re_calc_transaction_balances": "إعادة احتساب جميع معاملات الارصدة",
+  "re_calc_all_transaction_balances_this_client": "إعادة احتساب جميع معاملات ارصدة هذا العميل",
+  "re_calc_balances": "إعادة احتساب الرصيد",
+  "account_statement": "كشف حساب"
 
 
 
