@@ -63,7 +63,7 @@ class MainApp extends StatelessWidget {
                   ],
                   localizationsDelegates:
                       AppLocalizations.localizationsDelegates,
-                  locale: Locale(languageState.languageCode),
+                  locale: Locale('ar'),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(
                       seedColor: Colors.blueAccent,

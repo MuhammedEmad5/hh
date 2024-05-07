@@ -42,9 +42,34 @@ class _ExampleViewState extends State<ExampleView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               const SizedBox(
                 height: 10,
+              ),
+              TextBox(
+                initialValue: 'Initial Value', // Optional
+                label: 'English', // Optional
+                textDirection: TextDirection.ltr,
+                hint: 'Text box hint', // Optional
+                keyboardType: TextInputType.text, // Optional
+                maxLength: 25, // Optional
+                maxLines: 1, // Optional (To make it multi line)
+                onChanged: (value) {
+                  print(value);
+                }, // Optional
+                // controller: , //Optional
+              ),
+              TextBox(
+                initialValue: 'عربى', // Optional
+                label: 'Arabic', // Optional
+                textDirection: TextDirection.rtl,
+                hint: 'عربى', // Optional
+                keyboardType: TextInputType.text, // Optional
+                maxLength: 25, // Optional
+                maxLines: 1, // Optional (To make it multi line)
+                onChanged: (value) {
+                  print(value);
+                }, // Optional
+                // controller: , //Optional
               ),
               TextBox(
                 initialValue: 'Initial Value', // Optional
