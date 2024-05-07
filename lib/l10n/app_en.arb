@@ -177,9 +177,18 @@
   "user_or_admin_required": "Select user or admin is required",
   "failed_a4": "Failed to find invoice with this building and invoice number",
   "item_already_added": "Product already added before, please update it's quantity instead",
-  "item_not_found": "Couldn't find a product with this barcode"
-
-
+  "item_not_found": "Couldn't find a product with this barcode",
+  "show": "Show",
+  "date_from": "Date From",
+  "date_to": "Date To",
+  "purchase_amount": "Purchase Amount",
+  "purchase_tax_total": "Purchase Tax Total",
+  "sales_amount": "Sales Amount",
+  "sales_tax_total": "Sales Tax Total",
+  "no_of_bills": "No of Bills",
+  "no_data_found": "No data found",
+  "export_as_pdf": "Export as PDF",
+  "export_as_excel": "Export as Excel"
 
 
 

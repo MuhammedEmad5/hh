@@ -15,7 +15,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^25.1.35
   syncfusion_flutter_pdf: ^25.1.39
   syncfusion_flutter_pdfviewer: ^25.1.39
-  open_file: ^3.3.2
+  open_file_plus: ^3.4.1+1
 
   flutter_localizations:
     sdk: flutter
@@ -35,7 +35,7 @@ dependencies:
   get_it: ^7.6.8
   shared_preferences: ^2.2.3
   url_launcher: ^6.2.6
-
+  syncfusion_flutter_datagrid_export: ^25.1.42
 
 dev_dependencies:
   flutter_test:
@@ -51,7 +51,6 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/icon.png"
-
 
 flutter:
   uses-material-design: true

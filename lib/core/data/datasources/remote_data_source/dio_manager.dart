@@ -36,7 +36,6 @@ class DioManager {
         //   error: true,
         //   maxWidth: 60,
         // ),
-
       ]);
     }
 

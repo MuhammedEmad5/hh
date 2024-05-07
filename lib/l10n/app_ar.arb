@@ -175,7 +175,18 @@
   "error_Fetch_date": "خطأ في جلب البيانات",
   "failed_a4": "لم نجد فاتورة برقم الفاتورة و رقم المبنى المطلوب",
   "item_already_added": "تم اضافة المنتج سابقا\nبرجاء تعديل الكمية بدلا من اعادة الاضافة",
-  "item_not_found": "لم نجد منتج بهذا الباركود"
+  "item_not_found": "لم نجد منتج بهذا الباركود",
+  "show": "عرض",
+  "date_from": "تاريخ من",
+  "date_to": "تاريخ الى",
+  "purchase_amount": "المشتريات",
+  "purchase_tax_total": "اجمالى ضريبة المشتريات",
+  "sales_amount": "المبيعات",
+  "sales_tax_total": "اجمالى ضريبة المبيعات",
+  "no_of_bills": "عدد الفواتير",
+  "no_data_found": "لم نجد بيانات",
+  "export_as_pdf": "تصدير ك PDF",
+  "export_as_excel": "تصدير ك Excel"
 
 
 

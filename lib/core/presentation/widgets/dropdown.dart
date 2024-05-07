@@ -2,21 +2,34 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import 'label.dart';
 
-class DropDown extends StatefulWidget {
+class DropDownController<T> extends ValueNotifier<T?> {
+  DropDownController([T? value]) : super(value);
+
+  void setValue(T? newValue) {
+    value = newValue;
+    notifyListeners();
+  }
+}
+
+class DropDown<T> extends StatefulWidget {
   final List<String> items;
   final double? width;
   final Function(dynamic)? onChanged;
   final String? initialValue;
   final String? label;
+  final Color? labelColor;
   final Color? overAllColor;
+  final DropDownController<T>? controller;
   const DropDown({
     super.key,
     this.width,
     this.label,
     required this.items,
-    required this.onChanged,
+    this.onChanged,
+    this.controller,
     this.initialValue,
     this.overAllColor,
+    this.labelColor,
   });
 
   @override
@@ -46,7 +59,7 @@ class _DropDownState extends State<DropDown> {
             ? SizedBox()
             : Label(
                 text: widget.label ?? '',
-                color: widget.overAllColor,
+                color: widget.labelColor ?? widget.overAllColor,
               ),
         SizedBox(
           height: widget.label != null ? 10 : 0,
@@ -62,7 +75,7 @@ class _DropDownState extends State<DropDown> {
                 ? TextStyle(
                     color: widget.overAllColor, overflow: TextOverflow.ellipsis)
                 : null,
-            value: widget.initialValue,
+            value: widget.initialValue ?? widget.controller?.value,
             decoration: InputDecoration(
               enabledBorder: widget.overAllColor != null
                   ? OutlineInputBorder(
@@ -85,7 +98,12 @@ class _DropDownState extends State<DropDown> {
               ),
             ),
             items: items,
-            onChanged: widget.onChanged,
+            onChanged: widget.onChanged ??
+                (value) {
+                  if (widget.controller != null) {
+                    widget.controller?.setValue(value);
+                  }
+                },
           ),
         )
       ]),
