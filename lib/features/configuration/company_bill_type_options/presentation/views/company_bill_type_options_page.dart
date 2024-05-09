@@ -2,6 +2,7 @@ import 'package:InvoiceF/core/navigation/navigation.dart';
 import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
 import 'package:InvoiceF/core/presentation/widgets/custom_error_widget.dart';
 import 'package:InvoiceF/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
 import 'package:InvoiceF/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
 import 'package:InvoiceF/core/presentation/widgets/form_navigation.dart';
 import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
@@ -31,48 +32,82 @@ class _CompanyBillTypeOptionsPageState
   List<int> addedIndexs = [];
   int currentIndex = 1;
 
-  List<String> defaultReportList = ['A4', '80mm'];
-  List<String> printingTypeOnPostList = [
-    AppLocalizations.of(AppNavigation.context)!.print_main_report,
-    AppLocalizations.of(AppNavigation.context)!.preview_main_report,
-    AppLocalizations.of(AppNavigation.context)!.print_all_selected_reports,
-    AppLocalizations.of(AppNavigation.context)!.preview_all_selected_reports,
-    AppLocalizations.of(AppNavigation.context)!.show_report_selection_wifi,
-    AppLocalizations.of(AppNavigation.context)!.do_nothing,
+  List<DropdownMenuItem> defaultReportList = [
+    const DropdownMenuItem(value: 0, child: Text('A4')),
+    const DropdownMenuItem(value: 1, child: Text('80mm')),
   ];
-  List<String> vatTypeList = [
-    AppLocalizations.of(AppNavigation.context)!.tax_report,
-    AppLocalizations.of(AppNavigation.context)!.standard_rated_sales,
-    AppLocalizations.of(AppNavigation.context)!.citizen_rate_healthcare,
-    // AppLocalizations.of(AppNavigation.context)!.tax_report,
+  List<DropdownMenuItem> printingTypeOnPostList = [
+    DropdownMenuItem(
+        value: 0,
+        child: Text(
+            AppLocalizations.of(AppNavigation.context)!.print_main_report)),
+    DropdownMenuItem(
+        value: 1,
+        child: Text(
+            AppLocalizations.of(AppNavigation.context)!.preview_main_report)),
+    DropdownMenuItem(
+        value: 2,
+        child: Text(AppLocalizations.of(AppNavigation.context)!
+            .print_all_selected_reports)),
+    DropdownMenuItem(
+        value: 3,
+        child: Text(AppLocalizations.of(AppNavigation.context)!
+            .preview_all_selected_reports)),
+    DropdownMenuItem(
+        value: 4,
+        child: Text(AppLocalizations.of(AppNavigation.context)!
+            .show_report_selection_wifi)),
+    DropdownMenuItem(
+        value: 5,
+        child: Text(AppLocalizations.of(AppNavigation.context)!.do_nothing)),
   ];
-  List<String> vatGroupList = [
-    AppLocalizations.of(AppNavigation.context)!.tax_report,
-    AppLocalizations.of(AppNavigation.context)!.standard_rated_sales,
-    AppLocalizations.of(AppNavigation.context)!.sales_exports,
-    AppLocalizations.of(AppNavigation.context)!.exempts_sales,
+  List<DropdownMenuItem> vatTypeList = [
+    DropdownMenuItem(
+        value: 0,
+        child: Text(AppLocalizations.of(AppNavigation.context)!.tax_report)),
+    DropdownMenuItem(
+        value: 1,
+        child: Text(
+            AppLocalizations.of(AppNavigation.context)!.standard_rated_sales)),
+    DropdownMenuItem(
+        value: 2,
+        child: Text(AppLocalizations.of(AppNavigation.context)!
+            .citizen_rate_healthcare)),
+  ];
+
+  List<DropdownMenuItem> vatGroupList = [
+    DropdownMenuItem(
+        value: 0,
+        child: Text(AppLocalizations.of(AppNavigation.context)!.tax_report)),
+    DropdownMenuItem(
+        value: 1,
+        child: Text(
+            AppLocalizations.of(AppNavigation.context)!.standard_rated_sales)),
+    DropdownMenuItem(
+        value: 2,
+        child: Text(AppLocalizations.of(AppNavigation.context)!.sales_exports)),
+    DropdownMenuItem(
+        value: 3,
+        child: Text(
+          AppLocalizations.of(AppNavigation.context)!.exempts_sales,
+        ))
   ];
 
   TextEditingController reference = TextEditingController();
-  DropDownController printingTypeC = DropDownController();
-  DropDownController defaultReportC = DropDownController();
-  DropDownController vatTypeC = DropDownController();
-  DropDownController vatGroupC = DropDownController();
+  CustomDropdownController printingTypeC = CustomDropdownController();
+  CustomDropdownController defaultReportC = CustomDropdownController();
+  CustomDropdownController vatTypeC = CustomDropdownController();
+  CustomDropdownController vatGroupC = CustomDropdownController();
   TextEditingController reportUHAC = TextEditingController();
   TextEditingController reportUHEC = TextEditingController();
   TextEditingController reportUDSC = TextEditingController();
 
   void updateTextFields(CompanyBillTypeEntity cBillType) {
     reference.text = '${cBillType.billTypeNo}';
-    printingTypeC.setValue(cBillType.report_OnPostTypeNo != null
-        ? printingTypeOnPostList[cBillType.report_OnPostTypeNo!]
-        : null);
+    printingTypeC.setValue(cBillType.report_OnPostTypeNo);
     // defaultReportC.setValue(defaultReportList[cBillType.])
-    vatTypeC.setValue(
-        cBillType.VATTypeNo != null ? vatTypeList[cBillType.VATTypeNo!] : null);
-    vatGroupC.setValue(cBillType.VATTypeNo != null
-        ? vatGroupList[cBillType.VATGroupNo!]
-        : null);
+    vatTypeC.setValue(cBillType.VATTypeNo);
+    vatGroupC.setValue(cBillType.VATGroupNo);
     reportUHAC.text = '${cBillType.reportUnderHeader}';
     reportUHEC.text = '${cBillType.reportUnderHeader_En}';
     reportUDSC.text = '${cBillType.reportUnderDataStatement}';
@@ -86,12 +121,12 @@ class _CompanyBillTypeOptionsPageState
   handleSave() {
     CompanyBillTypeEntity cBillType = CompanyBillTypeEntity(
       billTypeNo: cBillTypesData[currentIndex - 1].billTypeNo,
-      VATGroupNo: vatGroupList.indexOf(vatGroupC.value),
-      VATTypeNo: vatTypeList.indexOf(vatTypeC.value),
+      VATGroupNo: vatGroupC.value,
+      VATTypeNo: vatTypeC.value,
       reportUnderDataStatement: reportUDSC.text,
       reportUnderHeader: reportUHAC.text,
       reportUnderHeader_En: reportUHEC.text,
-      report_OnPostTypeNo: printingTypeOnPostList.indexOf(printingTypeC.value),
+      report_OnPostTypeNo: printingTypeC.value,
     );
     cBillTypesData[currentIndex - 1] = cBillType;
     context
@@ -121,7 +156,9 @@ class _CompanyBillTypeOptionsPageState
             return Center(child: Loader());
           }, success: (data) {
             if (data.isEmpty) {
-              //TODO: Handle empty
+              return CustomEmptyWidget(
+                text: AppLocalizations.of(context)!.no_db_available,
+              );
             }
             cBillTypesData = data.isEmpty ? cBillTypesData : data;
             lastIndex =

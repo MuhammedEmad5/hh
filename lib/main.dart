@@ -52,6 +52,9 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
+          // if (languageState.languageCode == 'en') {
+          //   context.read<LanguageBloc>().emit(LanguageState('ar'));
+          // }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               // LoggerSingleton.logger

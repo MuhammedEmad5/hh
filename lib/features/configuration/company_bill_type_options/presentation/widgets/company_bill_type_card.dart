@@ -1,4 +1,6 @@
 import 'package:InvoiceF/core/presentation/widgets/dropdown.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_controller.dart';
+import 'package:InvoiceF/core/presentation/widgets/dropdown_with_controller/custom_dropdown_with_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/constants/colors.dart';
@@ -6,14 +8,14 @@ import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
 class CompanyBillTypeCard<T> extends StatefulWidget {
   final TextEditingController reference;
-  final DropDownController<T> printingTypeC;
-  final List<String> defaultReportList;
-  final List<String> printingTypeOnPostList;
-  final List<String> vatTypeList;
-  final List<String> vatGroupList;
-  final DropDownController defaultReportC;
-  final DropDownController vatTypeC;
-  final DropDownController vatGroupC;
+  final CustomDropdownController<T> printingTypeC;
+  final List<DropdownMenuItem> defaultReportList;
+  final List<DropdownMenuItem> printingTypeOnPostList;
+  final List<DropdownMenuItem> vatTypeList;
+  final List<DropdownMenuItem> vatGroupList;
+  final CustomDropdownController defaultReportC;
+  final CustomDropdownController vatTypeC;
+  final CustomDropdownController vatGroupC;
   final TextEditingController reportUHAC;
   final TextEditingController reportUHEC;
   final TextEditingController reportUDSC;
@@ -55,40 +57,53 @@ class _CompanyBillTypeCardState extends State<CompanyBillTypeCard> {
           isEnabled: false,
           controller: widget.reference,
         ),
-        DropDown(
-          items: widget.printingTypeOnPostList,
-          label: AppLocalizations.of(context)!.printing_type_on_post,
+        // CustomDropdownWithController(
+        //   items: widget.printingTypeOnPostList,
+        //   label: AppLocalizations.of(context)!.printing_type_on_post,
+        //   controller: widget.printingTypeC,
+        //   labelColor: AppColors.primaryColor,
+        // ),
+        CustomDropdownWithController(
           controller: widget.printingTypeC,
-          labelColor: AppColors.primaryColor,
+          items: widget.printingTypeOnPostList,
+          title: AppLocalizations.of(context)!.printing_type_on_post,
+          titleColor: AppColors.primaryColor,
+          onChanged: (v) {},
         ),
-        DropDown(
+        CustomDropdownWithController(
           items: widget.defaultReportList,
-          label: AppLocalizations.of(context)!.default_report,
+          title: AppLocalizations.of(context)!.default_report,
           controller: widget.defaultReportC,
-          labelColor: AppColors.primaryColor,
+          titleColor: AppColors.primaryColor,
+          onChanged: (v) {},
         ),
-        DropDown(
+        CustomDropdownWithController(
           items: widget.vatTypeList,
-          label: AppLocalizations.of(context)!.vat_type,
+          title: AppLocalizations.of(context)!.vat_type,
           controller: widget.vatTypeC,
-          labelColor: AppColors.primaryColor,
+          titleColor: AppColors.primaryColor,
+          onChanged: (v) {},
         ),
-        DropDown(
+        CustomDropdownWithController(
           items: widget.vatGroupList,
-          label: AppLocalizations.of(context)!.vat_group,
+          title: AppLocalizations.of(context)!.vat_group,
           controller: widget.vatGroupC,
-          labelColor: AppColors.primaryColor,
+          titleColor: AppColors.primaryColor,
+          onChanged: (v) {},
         ),
+        SizedBox(height: 10),
         TextBox(
           label: AppLocalizations.of(context)!.report_under_header_arabic_text,
           labelColor: AppColors.primaryColor,
           controller: widget.reportUHAC,
+          textDirection: TextDirection.rtl,
           maxLines: 5,
         ),
         TextBox(
           label: AppLocalizations.of(context)!.report_under_header_english_text,
           labelColor: AppColors.primaryColor,
           controller: widget.reportUHEC,
+          textDirection: TextDirection.ltr,
           maxLines: 5,
         ),
         TextBox(

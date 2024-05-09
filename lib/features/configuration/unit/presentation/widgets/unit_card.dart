@@ -4,7 +4,7 @@ import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../../../../../core/presentation/widgets/label.dart';
 import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UnitCard extends StatefulWidget {
   final TextEditingController reference;
@@ -39,7 +39,7 @@ class _UnitCardState extends State<UnitCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Label(
-                text: 'Reference',
+                text: AppLocalizations.of(context)!.reference,
                 color: AppColors.primaryColor,
               ),
               TextBox(
@@ -52,22 +52,28 @@ class _UnitCardState extends State<UnitCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Label(text: 'Arabic Name', color: AppColors.primaryColor),
+              Label(
+                  text: AppLocalizations.of(context)!.arabic_name,
+                  color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
                 controller: widget.aName,
                 isEnabled: false,
+                textDirection: TextDirection.rtl,
               )
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Label(text: 'English Name', color: AppColors.primaryColor),
+              Label(
+                  text: AppLocalizations.of(context)!.english_name,
+                  color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
                 controller: widget.eName,
                 isEnabled: false,
+                textDirection: TextDirection.ltr,
               )
             ],
           ),

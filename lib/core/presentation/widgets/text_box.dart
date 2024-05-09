@@ -22,29 +22,32 @@ class TextBox extends StatefulWidget {
   final Widget? suffix;
   final Function(String)? onSubmitted;
   final bool isNumberBox;
+  final TextDirection? textDirection;
 
   final bool readOnly;
-  const TextBox(
-      {super.key,
-      this.controller,
-      this.hint,
-      this.label,
-      this.labelColor,
-      this.borderColor,
-      this.textColor,
-      this.overAllColor,
-      this.keyboardType,
-      this.maxLength,
-      this.maxLines = 1,
-      this.textFiledWidth,
-      this.onChanged,
-      this.initialValue,
-      this.isEnabled = true,
-      this.suffix,
-      this.onSubmitted,
-      this.isNumberBox = false,
-      this.readOnly = false,
-      this.labelWidth});
+  const TextBox({
+    super.key,
+    this.controller,
+    this.hint,
+    this.label,
+    this.labelColor,
+    this.borderColor,
+    this.textColor,
+    this.overAllColor,
+    this.keyboardType,
+    this.maxLength,
+    this.maxLines = 1,
+    this.textFiledWidth,
+    this.onChanged,
+    this.initialValue,
+    this.isEnabled = true,
+    this.suffix,
+    this.onSubmitted,
+    this.isNumberBox = false,
+    this.readOnly = false,
+    this.labelWidth,
+    this.textDirection,
+  });
 
   @override
   State<TextBox> createState() => _TextBoxState();
@@ -92,6 +95,7 @@ class _TextBoxState extends State<TextBox> {
             height: widget.label != null ? 10 : 0,
           ),
           TextField(
+            textDirection: widget.textDirection,
             maxLines: widget.maxLines,
             maxLength: widget.maxLength,
             controller: controller,
