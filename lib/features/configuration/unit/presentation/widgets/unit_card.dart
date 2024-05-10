@@ -7,7 +7,6 @@ import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-
 class UnitCard extends StatelessWidget {
   final TextEditingController reference;
   final TextEditingController aName;
@@ -50,6 +49,7 @@ class UnitCard extends StatelessWidget {
                 labelWidth: width,
                 controller: aName,
                 isEnabled: false,
+                textDirection: TextDirection.rtl,
               )
             ],
           ),
@@ -61,6 +61,7 @@ class UnitCard extends StatelessWidget {
                 labelWidth: width,
                 controller: eName,
                 isEnabled: false,
+                textDirection: TextDirection.ltr,
               )
             ],
           ),

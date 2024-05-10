@@ -1,3 +1,7 @@
+import 'package:InvoiceF/features/configuration/company_bill_type_options/data/repositories/company_bill_type_repo.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/di/company_bill_type_service.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
+import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/views/company_bill_type_options_page.dart';
 import 'package:InvoiceF/features/configuration/banks/presentation/pages/banks_view.dart';
 import 'package:InvoiceF/features/configuration/user_options/presentation/pages/user_options_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,11 +77,24 @@ class InfraDataView extends StatelessWidget {
           ));
         },
       ),
-
       ScreenItem(
         appLocalizations.company_bill_type_Options,
         'companybill',
-        () {},
+        () {
+          CompanyBillTypeService().initDi();
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return RepositoryProvider(
+                create: (context) => GetIt.I<CompanyBillTypeRepo>(),
+                child: BlocProvider<CompanyBillTypeCubit>.value(
+                  value: GetIt.I<CompanyBillTypeCubit>()
+                    ..getAllCompanyBillTypes(),
+                  child: const CompanyBillTypeOptionsPage(),
+                ),
+              );
+            },
+          ));
+        },
       ),
       ScreenItem(
         appLocalizations.unit,
@@ -144,7 +161,6 @@ class InfraDataView extends StatelessWidget {
               return const UserOptionView();
             },
           ));
-
         },
       ),
       ScreenItem(
@@ -181,8 +197,6 @@ class InfraDataView extends StatelessWidget {
               return const BanksView();
             },
           ));
-
-
         },
       ),
     ];

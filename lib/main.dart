@@ -4,7 +4,7 @@ import 'package:InvoiceF/core/data/datasources/remote_data_source/remote_connect
 import 'package:InvoiceF/core/enums/connection_enum.dart';
 import 'package:InvoiceF/core/extensions/getit_extension.dart';
 import 'package:InvoiceF/features/shared/di/shared_service.dart';
-import 'package:flutter/foundation.dart' show kIsWeb ;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
@@ -25,7 +25,6 @@ import 'core/utils/logger.dart';
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
 
-
 void main() async {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     sqfliteFfiInit();
@@ -40,8 +39,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-     SharedService().initDi(RemoteConnection());
+    SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -54,6 +52,9 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
+          // if (languageState.languageCode == 'en') {
+          //   context.read<LanguageBloc>().emit(LanguageState('ar'));
+          // }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               // LoggerSingleton.logger
@@ -68,7 +69,7 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                  AppLocalizations.localizationsDelegates,
+                      AppLocalizations.localizationsDelegates,
                   locale: Locale(languageState.languageCode),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(

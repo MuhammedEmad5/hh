@@ -6,7 +6,6 @@ import '../../../../../core/presentation/widgets/card.dart';
 import '../../../../../core/presentation/widgets/label.dart';
 import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 
-
 class CompanyUnitCard extends StatefulWidget {
   final TextEditingController reference;
   final TextEditingController aName;
@@ -59,6 +58,7 @@ class _CompanyUnitCardState extends State<CompanyUnitCard> {
               TextBox(
                 labelWidth: width,
                 controller: widget.aName,
+                textDirection: TextDirection.rtl,
               )
             ],
           ),
@@ -71,6 +71,7 @@ class _CompanyUnitCardState extends State<CompanyUnitCard> {
               TextBox(
                 labelWidth: width,
                 controller: widget.eName,
+                textDirection: TextDirection.ltr,
               )
             ],
           ),
