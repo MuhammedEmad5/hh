@@ -178,8 +178,25 @@
   "no_client_vendor_inserted": "لم يتم إدراج أي بائع عميل من قبل",
   "error_Fetch_date": "خطأ في جلب البيانات",
   "item_already_added": "تم اضافة المنتج سابقا\nبرجاء تعديل الكمية بدلا من اعادة الاضافة",
-  "item_not_found": "لم نجد منتج بهذا الباركود"
-
+  "item_not_found": "لم نجد منتج بهذا الباركود",
+  "invoice_type": "نوع الفاتورة",
+  "printing_type_on_post": "نوع الطباعة عند النشر",
+  "default_report": "التقرير الافتراضى",
+  "vat_group": "رقم مجموعة الضريبة المدرجة",
+  "report_under_header_arabic_text": "تقرير: تحت العنوان النص العربى",
+  "report_under_header_english_text": "تقرير: تحت العنوان النص الانجليزى",
+  "report_under_data_statement": "تقرير: تحت البيان بالبيانات",
+  "print_main_report": "طباعة التقرير الرئيسي",
+  "preview_main_report": "معاينة التقرير الرئيسي",
+  "print_all_selected_reports": "طباعة كافة التقارير المحددة",
+  "preview_all_selected_reports": "معاينة كافة التقارير المحددة",
+  "show_report_selection_wifi": "Show Report Selection WIFI",
+  "do_nothing": "لا تفعل شيئ",
+  "tax_report": "تقرير الضريبة",
+  "standard_rated_sales": "مبيعات بمعدل قياسى",
+  "citizen_rate_healthcare": "رعاية صحية",
+  "sales_exports": "مبيعات صادرات",
+  "exempts_sales": "مبيعات مستثناه"
 
 
 

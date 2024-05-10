@@ -178,7 +178,25 @@
   "error_Fetch_date": "Error in fetching data",
   "failed_a4": "Failed to find invoice with this building and invoice number",
   "item_already_added": "Product already added before, please update it's quantity instead",
-  "item_not_found": "Couldn't find a product with this barcode"
+  "item_not_found": "Couldn't find a product with this barcode",
+  "invoice_type": "Invoice Type",
+  "printing_type_on_post": "Printing Type On Post",
+  "default_report": "Default Report",
+  "vat_group": "VAT Group",
+  "report_under_header_arabic_text": "Report: Under Header Arabic Text",
+  "report_under_header_english_text": "Report: Under Header English Text",
+  "report_under_data_statement": "Report: Under Data Statement",
+  "print_main_report": "Print Main Report",
+  "preview_main_report": "Preview Main Report",
+  "print_all_selected_reports": "Print All Selected Reports",
+  "preview_all_selected_reports": "Preview All Selected Reports",
+  "show_report_selection_wifi": "Show Report Selection WIFI",
+  "do_nothing": "Do Nothing",
+  "tax_report": "Tax Report",
+  "standard_rated_sales": "Standard Rated Sales",
+  "citizen_rate_healthcare": "Citizen Rate Healthcare",
+  "sales_exports": "Sales: Exports",
+  "exempts_sales": "Exempts: Sales"
 
 
 

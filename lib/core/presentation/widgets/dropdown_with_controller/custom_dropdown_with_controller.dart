@@ -22,10 +22,12 @@ class CustomDropdownWithController<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomDropdownWithControllerState<T> createState() => _CustomDropdownWithControllerState<T>();
+  _CustomDropdownWithControllerState<T> createState() =>
+      _CustomDropdownWithControllerState<T>();
 }
 
-class _CustomDropdownWithControllerState<T> extends State<CustomDropdownWithController<T>> {
+class _CustomDropdownWithControllerState<T>
+    extends State<CustomDropdownWithController<T>> {
   late CustomDropdownController<T>? _controller;
 
   @override
@@ -55,11 +57,11 @@ class _CustomDropdownWithControllerState<T> extends State<CustomDropdownWithCont
           classNames: 'col-xs-12 col-sm-6   py-1 ',
           child: widget.title != null
               ? Text(
-            widget.title!,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: widget.titleColor ?? Colors.black87,
-            ),
-          )
+                  widget.title!,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: widget.titleColor ?? Colors.black87,
+                      ),
+                )
               : const SizedBox(),
         ),
         FB5Col(
@@ -73,29 +75,29 @@ class _CustomDropdownWithControllerState<T> extends State<CustomDropdownWithCont
             items: widget.items,
             onChanged: widget.onChanged != null
                 ? (value) {
-              _controller!.setValue(value);
-              if (widget.onChanged != null) widget.onChanged!(value);
-            }
+                    _controller!.setValue(value);
+                    if (widget.onChanged != null) widget.onChanged!(value);
+                  }
                 : null,
             decoration: InputDecoration(
               fillColor: Colors.white,
               filled: true,
               enabledBorder: widget.overAllColor != null
                   ? OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: widget.overAllColor!.withAlpha(150), width: 2),
-                borderRadius: BorderRadius.circular(12),
-              )
+                      borderSide: BorderSide(
+                          color: widget.overAllColor!.withAlpha(150), width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    )
                   : null,
               focusedBorder: widget.overAllColor != null
                   ? OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: widget.overAllColor!.withAlpha(150), width: 2),
-                borderRadius: BorderRadius.circular(12),
-              )
+                      borderSide: BorderSide(
+                          color: widget.overAllColor!.withAlpha(150), width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    )
                   : null,
               contentPadding:
-              const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

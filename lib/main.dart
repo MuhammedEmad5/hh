@@ -22,7 +22,6 @@ import 'core/utils/logger.dart';
 /// in main build  from LocalConnection() to RemoteConnection().
 /// To Change Language go to Language bloc and change the default that pass to it in the constructor
 
-
 void main() async {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     sqfliteFfiInit();
@@ -51,6 +50,9 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
+          // if (languageState.languageCode == 'en') {
+          //   context.read<LanguageBloc>().emit(LanguageState('ar'));
+          // }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               LoggerSingleton.logger
@@ -65,7 +67,7 @@ class MainApp extends StatelessWidget {
                     Locale('ar'),
                   ],
                   localizationsDelegates:
-                  AppLocalizations.localizationsDelegates,
+                      AppLocalizations.localizationsDelegates,
                   locale: Locale(languageState.languageCode),
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(
