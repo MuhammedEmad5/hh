@@ -23,6 +23,8 @@ class TextBoxBootstrap extends StatefulWidget {
   final Function(String)? onSubmitted;
   final bool isNumberBox;
   final bool isSecure;
+  final bool isArabic;
+
 
   final bool readOnly;
   const TextBoxBootstrap({
@@ -42,6 +44,7 @@ class TextBoxBootstrap extends StatefulWidget {
     this.initialValue,
     this.isEnabled = true,
     this.suffix,
+    this.isArabic = false,
     this.onSubmitted,
     this.isNumberBox = false,
     this.readOnly = false, this.labelWidth,
@@ -93,6 +96,9 @@ class _TextBoxBootstrapState extends State<TextBoxBootstrap> {
         FB5Col(
           classNames: 'col-xs-12 col-sm-6 py-1 ',
           child:TextField(
+            textAlign: widget.isArabic
+                ? TextAlign.right
+                : TextAlign.left  ,
             obscureText: widget.isSecure,
             maxLines: widget.maxLines,
             maxLength: widget.maxLength,

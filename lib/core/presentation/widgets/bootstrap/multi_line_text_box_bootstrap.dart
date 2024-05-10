@@ -16,6 +16,8 @@ class MultiLineTextBoxBootStrap extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool readOnly;
   final double height;
+  final bool isArabic;
+
 
   const MultiLineTextBoxBootStrap({
     super.key,
@@ -27,7 +29,9 @@ class MultiLineTextBoxBootStrap extends StatefulWidget {
     this.label,
     this.keyboardType,
     this.readOnly = false,
-    this.height = 150
+    this.height = 150,
+    this.isArabic = false,
+
   });
 
   @override
@@ -65,6 +69,9 @@ class _MultiLineTextBoxBootStrapState extends State<MultiLineTextBoxBootStrap> {
 
             height: widget.height,
             child: TextField(
+              textAlign: widget.isArabic
+                  ? TextAlign.right
+                  : TextAlign.left  ,
               controller: widget.controller,
               cursorColor: AppColors.primaryColor,
               maxLength: widget.maxLength,

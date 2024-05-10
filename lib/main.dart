@@ -15,7 +15,6 @@ import 'core/data/datasources/remote_data_source/remote_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
-import 'features/shared/di/shared_service.dart';
 
 
 ///******* Important Notes*************
