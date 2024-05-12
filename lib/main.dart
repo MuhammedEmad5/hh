@@ -15,6 +15,7 @@ import 'core/data/datasources/remote_data_source/remote_connection.dart';
 import 'core/navigation/app_router.dart';
 import 'core/navigation/navigation.dart';
 import 'core/utils/logger.dart';
+import 'features/shared/di/shared_service.dart';
 
 
 ///******* Important Notes*************
@@ -37,7 +38,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   // SharedService().initDi(RemoteConnection());
+    SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [
@@ -50,9 +51,6 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
-          // if (languageState.languageCode == 'en') {
-          //   context.read<LanguageBloc>().emit(LanguageState('ar'));
-          // }
           return BlocBuilder<ConnectionTypeBloc, ConnectionTypeState>(
             builder: (context, connectionTypeState) {
               LoggerSingleton.logger
