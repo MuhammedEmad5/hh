@@ -2,10 +2,10 @@ part of 'data_grid_paginated.dart';
 
 class CustomDataGridSource extends DataGridSource {
   CustomDataGridSource(this.dataList, this.columns, this.rowsPerPage,
-      this.onEditPressed, this.onDeletePressed) {
-    buildDataGridRows();
+      this.onEditPressed, this.onDeletePressed, this.isAllowedDraging) {
+    isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
   }
-
+  bool isAllowedDraging;
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
   List paginatedData = [];
@@ -87,23 +87,23 @@ class CustomDataGridSource extends DataGridSource {
     if (startIndex < dataList.length && endIndex <= dataList.length) {
       paginatedData =
           dataList.getRange(startIndex, endIndex).toList(growable: false);
-      buildDataGridRows();
+      isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
       notifyListeners();
     } else {
       paginatedData = dataList
           .getRange(startIndex, dataList.length)
           .toList(growable: false);
-      buildDataGridRows();
+      isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
       notifyListeners();
     }
     return true;
   }
 
-  // void buildPaginatedDataGridRows() {
-  //   dataGridRows = paginatedData
-  //       .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
-  //       .toList();
-  // }
+  void buildPaginatedDataGridRows() {
+    dataGridRows = paginatedData
+        .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
+        .toList();
+  }
 
   void buildDataGridRows() {
     dataGridRows = paginatedData.map<DataGridRow>((rowData) {

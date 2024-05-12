@@ -54,6 +54,7 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
       widget.rowsPerPage,
       widget.onEditPressed,
       widget.onDeletePressed,
+      widget.allowDraging,
     );
   }
 
