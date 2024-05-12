@@ -201,7 +201,20 @@
   "re_calc_transaction_balances": "إعادة احتساب جميع معاملات الارصدة",
   "re_calc_all_transaction_balances_this_client": "إعادة احتساب جميع معاملات ارصدة هذا العميل",
   "re_calc_balances": "إعادة احتساب الرصيد",
-  "account_statement": "كشف حساب"
+  "account_statement": "كشف حساب",
+  "show": "عرض",
+  "date_from": "تاريخ من",
+  "date_to": "تاريخ الى",
+  "purchase_amount": "المشتريات",
+  "purchase_tax_total": "اجمالى ضريبة المشتريات",
+  "sales_amount": "المبيعات",
+  "sales_tax_total": "اجمالى ضريبة المبيعات",
+  "no_of_bills": "عدد الفواتير",
+  "no_data_found": "لم نجد بيانات",
+  "export": "تصدير",
+  "export_as_pdf": "تصدير ك PDF",
+  "export_as_excel": "تصدير ك Excel",
+  "columns": "عواميد"
 
 
 

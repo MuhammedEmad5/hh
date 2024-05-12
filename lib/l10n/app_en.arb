@@ -201,9 +201,22 @@
   "re_calc_transaction_balances": "Re Calc Transaction Balances",
   "re_calc_all_transaction_balances_this_client": "Re Calc All Transaction Balances (This Client)",
   "re_calc_balances": "Re Calc Balances",
-  "account_statement": "Account Statement"
+  "account_statement": "Account Statement",
 
 
+  "show": "Show",
+  "date_from": "Date From",
+  "date_to": "Date To",
+  "purchase_amount": "Purchase Amount",
+  "purchase_tax_total": "Purchase Tax Total",
+  "sales_amount": "Sales Amount",
+  "sales_tax_total": "Sales Tax Total",
+  "no_of_bills": "No of Bills",
+  "no_data_found": "No data found",
+  "export": "Export",
+  "export_as_pdf": "Export as PDF",
+  "export_as_excel": "Export as Excel",
+  "columns": "Columns"
 
 
 

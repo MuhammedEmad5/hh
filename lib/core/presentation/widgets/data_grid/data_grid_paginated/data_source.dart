@@ -1,16 +1,15 @@
 part of 'data_grid_paginated.dart';
 
 class CustomDataGridSource extends DataGridSource {
-  CustomDataGridSource(this.dataList, this.rowsPerPage, this.onEditPressed,
-      this.onDeletePressed) {
-    dataGridRows = dataList
-        .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
-        .toList();
+  CustomDataGridSource(this.dataList, this.columns, this.rowsPerPage,
+      this.onEditPressed, this.onDeletePressed, this.isAllowedDraging) {
+    isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
   }
-
+  bool isAllowedDraging;
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
   List paginatedData = [];
+  List<GridColumn> columns;
 
   int rowsPerPage = 10;
   Function(dynamic)? onEditPressed;
@@ -30,62 +29,51 @@ class CustomDataGridSource extends DataGridSource {
     final int rowIndex = effectiveRows.indexOf(row);
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-      return row.getCells().indexOf(dataGridCell) == 0 &&
-              dataGridCell.value == -1
-          ? const SizedBox()
-          : dataGridCell.value == null &&
-                  dataGridCell.columnName !=
-                      AppLocalizations.of(AppNavigation.context)!.edit &&
-                  dataGridCell.columnName !=
-                      AppLocalizations.of(AppNavigation.context)!.delete
+      return dataGridCell.columnName ==
+              AppLocalizations.of(AppNavigation.context)!.edit
+          ? Container(
+              color: getRowBackgroundColor(),
+              child: Center(
+                child: IconButton(
+                  onPressed: () {
+                    if (onEditPressed != null) {
+                      onEditPressed!(paginatedData[rowIndex]);
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
+            )
+          : dataGridCell.columnName ==
+                  AppLocalizations.of(AppNavigation.context)!.delete
               ? Container(
                   color: getRowBackgroundColor(),
-                )
-              : dataGridCell.columnName ==
-                      AppLocalizations.of(AppNavigation.context)!.edit
-                  ? Container(
-                      color: getRowBackgroundColor(),
-                      child: Center(
-                        child: IconButton(
-                          onPressed: () {
-                            if (onEditPressed != null) {
-                              onEditPressed!(paginatedData[rowIndex]);
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.edit,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        if (onDeletePressed != null) {
+                          onDeletePressed!(row.getCells()[0].value);
+                          dataGridRows.remove(row);
+                          notifyListeners();
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: AppColors.redColor,
                       ),
-                    )
-                  : dataGridCell.columnName ==
-                          AppLocalizations.of(AppNavigation.context)!.delete
-                      ? Container(
-                          color: getRowBackgroundColor(),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                if (onDeletePressed != null) {
-                                  onDeletePressed!(row.getCells()[0].value);
-                                  dataGridRows.remove(row);
-                                  notifyListeners();
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.redColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(
-                          color: getRowBackgroundColor(),
-                          padding: const EdgeInsets.all(8),
-                          alignment: Alignment.center,
-                          child: Text(
-                            dataGridCell.value.toString(),
-                          ));
+                    ),
+                  ),
+                )
+              : Container(
+                  color: getRowBackgroundColor(),
+                  padding: const EdgeInsets.all(8),
+                  alignment: Alignment.center,
+                  child: Text(
+                    dataGridCell.value.toString(),
+                  ));
     }).toList());
   }
 
@@ -99,16 +87,15 @@ class CustomDataGridSource extends DataGridSource {
     if (startIndex < dataList.length && endIndex <= dataList.length) {
       paginatedData =
           dataList.getRange(startIndex, endIndex).toList(growable: false);
-      buildPaginatedDataGridRows();
+      isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
       notifyListeners();
     } else {
       paginatedData = dataList
           .getRange(startIndex, dataList.length)
           .toList(growable: false);
-      buildPaginatedDataGridRows();
+      isAllowedDraging ? buildDataGridRows() : buildPaginatedDataGridRows();
       notifyListeners();
     }
-
     return true;
   }
 
@@ -116,5 +103,22 @@ class CustomDataGridSource extends DataGridSource {
     dataGridRows = paginatedData
         .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
         .toList();
+  }
+
+  void buildDataGridRows() {
+    dataGridRows = paginatedData.map<DataGridRow>((rowData) {
+      return DataGridRow(
+          cells: columns.map<DataGridCell>((column) {
+        int columnNumber = rowData.getColumnNumber(column.columnName);
+        return DataGridCell(
+          columnName: column.columnName,
+          value: rowData.getDataGridRow().getCells()[columnNumber].value,
+        );
+      }).toList());
+    }).toList();
+  }
+
+  refreshDataGrid() {
+    notifyListeners();
   }
 }
