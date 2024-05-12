@@ -85,11 +85,15 @@ class BranchFormContainer extends StatelessWidget {
                       TextBoxBootstrap(
                         label:appLocalizations.arabic_name,
                         controller: nameArabicTextController,
+                        isArabic: true,
+
                       ),
 
                       TextBoxBootstrap(
                         label: appLocalizations.arabic_description,
                         controller: descriptionArabicTextController,
+                        isArabic: true,
+
                       ),
 
                       TextBoxBootstrap(

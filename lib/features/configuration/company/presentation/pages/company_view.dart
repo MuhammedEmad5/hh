@@ -156,7 +156,7 @@ class _CompanyViewState extends State<CompanyView>
     companyNoController.text = company.companyNo.toString();
     arabicNameController.text = company.arabicName;
     englishNameController.text = company.englishName;
-    establishDateController.value = DateTime.tryParse(company.dateOfEstablishment ?? "");
+    establishDateController.value = DateTime.parse(company.dateOfEstablishment?? "");
     telephone1Controller.text = company.telephone1 ?? "";
     addressController.text = company.address ?? "";
     telephone2Controller.text = company.telephone2 ?? "";

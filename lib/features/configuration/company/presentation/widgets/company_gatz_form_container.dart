@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import '../../../../../core/presentation/widgets/bootstrap/text_box_bootstrap.dart';
 import '../../../../../core/presentation/widgets/check_box_with_controller/check_box_controller.dart';
@@ -60,63 +61,123 @@ class CompanyGAZTFormContainer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextBoxBootstrap(
-                  hint: "",
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        hint: "",
+                      
+                        label: appLocalizations.building_number,
+                      
+                        textFiledWidth: 200,
+                        controller: buildingNoController,
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        hint: "",
+                        keyboardType: TextInputType.number,
+                        label: appLocalizations.additional_number,
+                      
+                        textFiledWidth: 100,
+                         controller: additionalNoController,
+                      ),
+                    ),
+                    SizedBox(width: 5,),
 
-                  label: appLocalizations.building_number,
 
-                  textFiledWidth: 200,
-                  controller: buildingNoController,
-                ),
-
-                TextBoxBootstrap(
-                  hint: "",
-                  keyboardType: TextInputType.number,
-                  label: appLocalizations.additional_number,
-
-                  textFiledWidth: 100,
-                   controller: additionalNoController,
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.postal_code,
+                        controller: postalController,
+                      ),
+                    ),
+                  ],
                 ),
 
-                TextBoxBootstrap(
-                  label: appLocalizations.postal_code,
-                  controller: postalController,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.street_Eng,
+                         controller: streetNameEnglishController,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.street_Arb,
+                         controller: streetNameArabicController,
+                        isArabic: true,
+
+                      ),
+                    ),
+                  ],
                 ),
 
-                TextBoxBootstrap(
-                  label: appLocalizations.street_Eng,
-                   controller: streetNameEnglishController,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.district_Eng,
+                         controller: districtEnglishController,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.district_Arb,
+                           controller: districtArabicController,
+                        isArabic: true,
+
+                      ),
+                    ),
+                  ],
                 ),
 
-                TextBoxBootstrap(
-                  label: appLocalizations.street_Arb,
-                   controller: streetNameArabicController,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.city_Arb,
+                        controller: cityArabicController,
+                        isArabic: true,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.city_Eng,
+                        controller: cityEnglishController,
+                      ),
+                    ),
+                  ],
                 ),
 
-                TextBoxBootstrap(
-                  label: appLocalizations.district_Eng,
-                   controller: districtEnglishController,
+
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.country_Eng,
+                           controller: countryEnglishController,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.country_Arb,
+                           controller: countryArabicController,
+                        isArabic: true,
+
+                      ),
+                    ),
+                  ],
                 ),
-                TextBoxBootstrap(
-                  label: appLocalizations.district_Arb,
-                     controller: districtArabicController,
-                ),
-                TextBoxBootstrap(
-                  label: appLocalizations.city_Arb,
-                     controller: cityArabicController,
-                ),
-                TextBoxBootstrap(
-                  label: appLocalizations.city_Eng,
-                     controller: cityEnglishController,
-                ),
-                TextBoxBootstrap(
-                  label: appLocalizations.country_Eng,
-                     controller: countryEnglishController,
-                ),
-                TextBoxBootstrap(
-                  label: appLocalizations.country_Arb,
-                     controller: countryArabicController,
-                ),
+
                 TextBoxBootstrap(
                   label: appLocalizations.second_business_id,
                      controller: secondBusinessIdController,

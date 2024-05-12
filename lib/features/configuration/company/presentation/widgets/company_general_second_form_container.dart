@@ -52,9 +52,9 @@ class CompanyGeneralSecondFormContainer extends StatelessWidget {
                   hint: "",
 
                   label: appLocalizations.telephone2,
-                  readOnly: true,
                   textFiledWidth: 200,
                   controller: telephone2Controller,
+                  isNumberBox: true,
                 ),
 
 
@@ -62,6 +62,7 @@ class CompanyGeneralSecondFormContainer extends StatelessWidget {
                 TextBoxBootstrap(
                   label: appLocalizations.official_arabic_name,
                    controller: officialArabicNameController,
+                  isArabic: true,
                 ),
 
                 TextBoxBootstrap(

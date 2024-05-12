@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 
 import '../../../../../core/presentation/widgets/bootstrap/text_box_bootstrap.dart';
@@ -51,6 +52,7 @@ class CompanyGeneralFormContainer extends StatelessWidget {
                   textFiledWidth: 200,
                   controller: businessNoController,
                 ),
+
                 TextBoxBootstrap(
                   hint: "",
                   initialValue: companyNoController.text,
@@ -60,29 +62,45 @@ class CompanyGeneralFormContainer extends StatelessWidget {
                   textFiledWidth: 100,
                   controller: companyNoController,
                 ),
-                TextBoxBootstrap(
-                  label: appLocalizations.arabic_name,
-                  controller: arabicNameController,
-                ),
+
                 TextBoxBootstrap(
                   label: appLocalizations.english_name,
                   controller: englishNameController,
                 ),
-                DatePickerWithController(
-                  label: appLocalizations.date_establishment,
-                  onChanged: (date ) {
 
-                  },
-                  controller: establishDatePickerController,
+                TextBoxBootstrap(
+                  label: appLocalizations.arabic_name,
+                  controller: arabicNameController,
+                  isArabic: true,
+                ),
 
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: DatePickerWithController(
+                        label: appLocalizations.date_establishment,
+                        onChanged: (date ) {
+
+                        },
+                        controller: establishDatePickerController,
+
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextBoxBootstrap(
+                        label: appLocalizations.telephone1,
+                        controller: telephone1Controller,
+                        keyboardType: TextInputType.number,
+                        isNumberBox: true,
+                      ),
+                    ),
+                  ],
                 )
                 ,
 
-                TextBoxBootstrap(
-                  label: appLocalizations.telephone1,
-                  controller: telephone1Controller,
-                  keyboardType: TextInputType.number,
-                ),
+
                 TextBoxBootstrap(
                   label: appLocalizations.address,
                   controller: addressController,
