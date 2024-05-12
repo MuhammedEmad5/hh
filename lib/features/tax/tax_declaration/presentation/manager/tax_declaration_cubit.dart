@@ -20,6 +20,13 @@ class TaxDeclarationCubit extends Cubit<TaxDeclarationState> {
     emit(TaxDeclarationState.initial());
   }
 
+  rebuildGrid(data) {
+    emit(TaxDeclarationState.loading());
+    Future.delayed(Duration(milliseconds: 50), () {
+      emit(TaxDeclarationState.success(data));
+    });
+  }
+
   Future<List> getBranches() async {
     List branches = await getBranchesTaxDeclarationUseCase.execute();
     return branches;

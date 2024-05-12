@@ -51,6 +51,10 @@ class TaxDeclaration implements BusinessModel {
         AppLocalizations.of(AppNavigation.context)!.no_of_bills,
       ];
 
+  int getColumnNumber(String columnName) {
+    return getColumnNames().indexOf(columnName);
+  }
+
   @override
   DataGridRow getDataGridRow() {
     return DataGridRow(cells: [

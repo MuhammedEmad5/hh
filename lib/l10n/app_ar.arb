@@ -185,8 +185,10 @@
   "sales_tax_total": "اجمالى ضريبة المبيعات",
   "no_of_bills": "عدد الفواتير",
   "no_data_found": "لم نجد بيانات",
+  "export": "تصدير",
   "export_as_pdf": "تصدير ك PDF",
-  "export_as_excel": "تصدير ك Excel"
+  "export_as_excel": "تصدير ك Excel",
+  "columns": "عواميد"
 
 
 

@@ -3,14 +3,15 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:InvoiceF/core/constants/colors.dart';
+import 'package:InvoiceF/core/navigation/navigation.dart';
 import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/checkbox.dart';
 import 'package:InvoiceF/core/presentation/widgets/custom_button.dart';
 import 'package:InvoiceF/core/presentation/widgets/custom_error_widget.dart';
 import 'package:InvoiceF/core/presentation/widgets/data_grid/data_grid_paginated/data_grid_paginated.dart';
 import 'package:InvoiceF/core/presentation/widgets/date_picker.dart';
 import 'package:InvoiceF/core/presentation/widgets/dropdown.dart';
 import 'package:InvoiceF/core/presentation/widgets/empty_widgets/custom_empty_widget.dart';
-import 'package:InvoiceF/core/presentation/widgets/icon_button.dart';
 import 'package:InvoiceF/core/presentation/widgets/label.dart';
 import 'package:InvoiceF/core/presentation/widgets/loader_widget.dart';
 import 'package:InvoiceF/core/presentation/widgets/text_icon_button.dart';
@@ -27,7 +28,8 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as excel;
-import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+enum exportType { excel, pdf }
 
 class TaxDeclarationPage extends StatefulWidget {
   const TaxDeclarationPage({super.key});
@@ -43,7 +45,8 @@ class _TaxDeclarationPageState extends State<TaxDeclarationPage> {
   String dateTo = '';
   String dateFrom = '';
   bool isLoading = true;
-  final GlobalKey<SfDataGridState> _key = GlobalKey<SfDataGridState>();
+  List<String> hiddenColumns = [];
+  GlobalKey<SfDataGridState> _key = GlobalKey<SfDataGridState>();
   void getBranches() async {
     var res = await context.read<TaxDeclarationCubit>().getBranches();
     setState(() {
@@ -129,6 +132,7 @@ class _TaxDeclarationPageState extends State<TaxDeclarationPage> {
     OpenFile.open('${pdfPath.path}\\DataGrid.pdf');
   }
 
+  exportType? selectedItem;
   @override
   Widget build(BuildContext context) {
     if (context.read<TaxDeclarationCubit>().isClosed) {
@@ -141,6 +145,12 @@ class _TaxDeclarationPageState extends State<TaxDeclarationPage> {
       ),
       body: BlocBuilder<TaxDeclarationCubit, TaxDeclarationState>(
         builder: (context, state) {
+          rebuildGrid() {
+            if (state is Success) {
+              context.read<TaxDeclarationCubit>().rebuildGrid(state.data);
+            }
+          }
+
           return state.when(
             initial: () {
               return isLoading
@@ -205,27 +215,119 @@ class _TaxDeclarationPageState extends State<TaxDeclarationPage> {
                             ? MainAxisAlignment.start
                             : MainAxisAlignment.spaceAround,
                         children: [
-                          TextIconButton(
-                            title: AppLocalizations.of(context)!.export_as_pdf,
-                            onTap: () {
-                              exportDataGridToPdf();
-                            },
-                            icon: Icons.picture_as_pdf,
+                          PopupMenuButton<exportType>(
                             iconColor: AppColors.onPrimary,
-                            textColor: AppColors.onPrimary,
-                            iconSize: 20,
-                            fontSize: 14,
-                          ),
-                          const SizedBox(
-                            width: 20,
+                            initialValue: selectedItem,
+                            onSelected: (exportType item) {
+                              setState(() {
+                                selectedItem = item;
+                              });
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<exportType>>[
+                              PopupMenuItem<exportType>(
+                                value: exportType.pdf,
+                                child: Text(AppLocalizations.of(context)!
+                                    .export_as_pdf),
+                                onTap: () {
+                                  exportDataGridToPdf();
+                                },
+                              ),
+                              PopupMenuItem<exportType>(
+                                value: exportType.excel,
+                                child: Text(AppLocalizations.of(context)!
+                                    .export_as_excel),
+                                onTap: () {
+                                  exportDataGridToExcel();
+                                },
+                              ),
+                            ],
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.outbox,
+                                  color: AppColors.onPrimary,
+                                ),
+                                const SizedBox(width: 10),
+                                Label(
+                                  text: AppLocalizations.of(context)!.export,
+                                  color: AppColors.onPrimary,
+                                ),
+                              ],
+                            ),
                           ),
                           TextIconButton(
-                            title:
-                                AppLocalizations.of(context)!.export_as_excel,
+                            title: AppLocalizations.of(context)!.columns,
                             onTap: () {
-                              exportDataGridToExcel();
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  List<String> newHiddenColumns = [
+                                    ...hiddenColumns
+                                  ];
+                                  return AlertDialog(
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          ...data[0].getColumnNames().map((e) {
+                                            bool itemValue =
+                                                !newHiddenColumns.contains(e);
+                                            return ListTile(
+                                              title: Label(text: e),
+                                              leading: CustomCheckbox(
+                                                initialValue: itemValue,
+                                                label: '',
+                                                onChanged: (bool? value) {
+                                                  if (value == true) {
+                                                    if (newHiddenColumns
+                                                        .contains(e)) {
+                                                      newHiddenColumns
+                                                          .remove(e);
+                                                      setState(() {
+                                                        itemValue = false;
+                                                      });
+                                                    }
+                                                  } else {
+                                                    if (!newHiddenColumns
+                                                        .contains(e)) {
+                                                      newHiddenColumns.add(e);
+                                                      setState(() {
+                                                        itemValue = true;
+                                                      });
+                                                    }
+                                                  }
+                                                },
+                                              ),
+                                            );
+                                          })
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          AppNavigation.pop();
+                                          hiddenColumns = newHiddenColumns;
+                                          rebuildGrid();
+                                        },
+                                        child: Text(
+                                            AppLocalizations.of(context)!.save),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          AppNavigation.pop();
+                                        },
+                                        child: Text(
+                                            AppLocalizations.of(context)!
+                                                .cancel),
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
                             },
-                            icon: Icons.table_view,
+                            icon: Icons.table_chart,
                             iconColor: AppColors.onPrimary,
                             textColor: AppColors.onPrimary,
                             iconSize: 20,
@@ -236,10 +338,12 @@ class _TaxDeclarationPageState extends State<TaxDeclarationPage> {
                     ),
                   ),
                   DataGridPaginated(
+                    hiddenColumns: hiddenColumns,
                     noBorder: true,
                     gridKey: _key,
                     data: data,
                     allowSorting: true,
+                    allowDraging: true,
                   ),
                 ],
               );

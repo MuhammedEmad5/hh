@@ -20,6 +20,8 @@ class DataGridPaginated extends StatefulWidget {
     this.onDeletePressed,
     this.rowsPerPage = 15,
     this.noBorder = false,
+    this.hiddenColumns,
+    this.allowDraging = false,
   });
   final GlobalKey<SfDataGridState>? gridKey;
   final dynamic data;
@@ -30,6 +32,8 @@ class DataGridPaginated extends StatefulWidget {
   final Function(num)? onDeletePressed;
   final int rowsPerPage;
   final bool noBorder;
+  final List<String>? hiddenColumns;
+  final bool allowDraging;
   @override
   State<DataGridPaginated> createState() => _DataGridPaginatedState();
 }
@@ -43,9 +47,10 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
   void initState() {
     super.initState();
     columns = widget.data[0].getColumnNames();
-    gridColumns = getColumns(columns);
+    gridColumns = getColumns(columns, widget.hiddenColumns ?? []);
     dataSource = CustomDataGridSource(
       widget.data,
+      gridColumns,
       widget.rowsPerPage,
       widget.onEditPressed,
       widget.onDeletePressed,
@@ -89,6 +94,20 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
                   child: ClipRect(
                     clipper: CustomLeftClipper(),
                     child: SfDataGrid(
+                      allowColumnsDragging: widget.allowDraging,
+                      onColumnDragging: (DataGridColumnDragDetails details) {
+                        if (details.action ==
+                                DataGridColumnDragAction.dropped &&
+                            details.to != null) {
+                          final GridColumn rearrangeColumn =
+                              gridColumns[details.from];
+                          gridColumns.removeAt(details.from);
+                          gridColumns.insert(details.to!, rearrangeColumn);
+                          dataSource.buildDataGridRows();
+                          dataSource.refreshDataGrid();
+                        }
+                        return true;
+                      },
                       key: widget.gridKey,
                       shrinkWrapRows: true,
                       onQueryRowHeight: (details) {
@@ -128,10 +147,12 @@ class _DataGridPaginatedState extends State<DataGridPaginated> {
   }
 
   // Columns
-  List<GridColumn> getColumns(List<String> columnNames) {
+  List<GridColumn> getColumns(
+      List<String> columnNames, List<String> hiddenColumns) {
     return <GridColumn>[
       ...columnNames.map(
         (e) => GridColumn(
+          visible: !hiddenColumns.contains(e),
           filterPopupMenuOptions: const FilterPopupMenuOptions(
               filterMode: FilterMode.advancedFilter,
               canShowSortingOptions: false),

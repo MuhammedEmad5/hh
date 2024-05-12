@@ -1,16 +1,15 @@
 part of 'data_grid_paginated.dart';
 
 class CustomDataGridSource extends DataGridSource {
-  CustomDataGridSource(this.dataList, this.rowsPerPage, this.onEditPressed,
-      this.onDeletePressed) {
-    dataGridRows = dataList
-        .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
-        .toList();
+  CustomDataGridSource(this.dataList, this.columns, this.rowsPerPage,
+      this.onEditPressed, this.onDeletePressed) {
+    buildDataGridRows();
   }
 
   List<DataGridRow> dataGridRows = [];
   List<dynamic> dataList = [];
   List paginatedData = [];
+  List<GridColumn> columns;
 
   int rowsPerPage = 10;
   Function(dynamic)? onEditPressed;
@@ -88,22 +87,38 @@ class CustomDataGridSource extends DataGridSource {
     if (startIndex < dataList.length && endIndex <= dataList.length) {
       paginatedData =
           dataList.getRange(startIndex, endIndex).toList(growable: false);
-      buildPaginatedDataGridRows();
+      buildDataGridRows();
       notifyListeners();
     } else {
       paginatedData = dataList
           .getRange(startIndex, dataList.length)
           .toList(growable: false);
-      buildPaginatedDataGridRows();
+      buildDataGridRows();
       notifyListeners();
     }
-
     return true;
   }
 
-  void buildPaginatedDataGridRows() {
-    dataGridRows = paginatedData
-        .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
-        .toList();
+  // void buildPaginatedDataGridRows() {
+  //   dataGridRows = paginatedData
+  //       .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
+  //       .toList();
+  // }
+
+  void buildDataGridRows() {
+    dataGridRows = paginatedData.map<DataGridRow>((rowData) {
+      return DataGridRow(
+          cells: columns.map<DataGridCell>((column) {
+        int columnNumber = rowData.getColumnNumber(column.columnName);
+        return DataGridCell(
+          columnName: column.columnName,
+          value: rowData.getDataGridRow().getCells()[columnNumber].value,
+        );
+      }).toList());
+    }).toList();
+  }
+
+  refreshDataGrid() {
+    notifyListeners();
   }
 }

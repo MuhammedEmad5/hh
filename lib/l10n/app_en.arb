@@ -187,8 +187,10 @@
   "sales_tax_total": "Sales Tax Total",
   "no_of_bills": "No of Bills",
   "no_data_found": "No data found",
+  "export": "Export",
   "export_as_pdf": "Export as PDF",
-  "export_as_excel": "Export as Excel"
+  "export_as_excel": "Export as Excel",
+  "columns": "Columns"
 
 
 
