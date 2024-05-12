@@ -1,0 +1,106 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'bank_account.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
+      VendorId: (json['VendorId'] as num?)?.toInt() ?? 0,
+      bankAccountNo: (json['bankAccountNo'] as num).toInt(),
+      parentNo: (json['parentNo'] as num?)?.toInt(),
+      userNumber: json['userNumber'] as String,
+      depthNum: (json['depthNum'] as num?)?.toInt(),
+      aName: json['aName'] as String,
+      eName: json['eName'] as String?,
+      aDescription: json['aDescription'] as String?,
+      eDescription: json['eDescription'] as String?,
+      accountNo: (json['accountNo'] as num?)?.toInt(),
+      maxBalanceAllowed: (json['maxBalanceAllowed'] as num?)?.toInt(),
+      minBalanceAllowed: (json['minBalanceAllowed'] as num?)?.toInt(),
+      warnMinBalance: (json['warnMinBalance'] as num?)?.toInt(),
+      warnMaxBalance: (json['warnMaxBalance'] as num?)?.toInt(),
+      isLeaf: json['isLeaf'],
+      isDisabled: json['isDisabled'],
+      isCanDelete: json['isCanDelete'],
+      isCanMove: json['isCanMove'],
+      isCanAdd: json['isCanAdd'],
+      isDeleted: json['isDeleted'],
+      typeNo: (json['typeNo'] as num?)?.toInt(),
+      subTypeNo: (json['subTypeNo'] as num?)?.toInt(),
+      statusNo: (json['statusNo'] as num?)?.toInt(),
+      nature: (json['nature'] as num?)?.toInt(),
+      note: json['note'],
+      credit: (json['credit'] as num?)?.toDouble(),
+      debit: (json['debit'] as num?)?.toInt(),
+      creditDebitDateTime: json['creditDebitDateTime'] as String?,
+      openDate: json['openDate'],
+      ownerType: (json['ownerType'] as num?)?.toInt(),
+      ownerReferenceNo: json['ownerReferenceNo'] as String?,
+      deletedDate: json['deletedDate'],
+      disabledDate: json['disabledDate'],
+      fileNo: (json['fileNo'] as num?)?.toInt(),
+      horizontalTreeNo: (json['horizontalTreeNo'] as num?)?.toInt(),
+      barCode: json['barCode'],
+      openBalanceDate: json['openBalanceDate'] == null
+          ? null
+          : DateTime.parse(json['openBalanceDate'] as String),
+      dateG: json['dateG'] == null
+          ? null
+          : DateTime.parse(json['dateG'] as String),
+      currentBalanceDateG: json['currentBalanceDateG'] == null
+          ? null
+          : DateTime.parse(json['currentBalanceDateG'] as String),
+      currentBalance: (json['currentBalance'] as num?)?.toInt(),
+      manPostedOpenBalance: (json['manPostedOpenBalance'] as num?)?.toInt(),
+      openBalance: (json['openBalance'] as num?)?.toInt(),
+      manPostedLastBalance: (json['manPostedLastBalance'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$BankAccountToJson(BankAccount instance) =>
+    <String, dynamic>{
+      'VendorId': instance.VendorId,
+      'bankAccountNo': instance.bankAccountNo,
+      'parentNo': instance.parentNo,
+      'userNumber': instance.userNumber,
+      'depthNum': instance.depthNum,
+      'aName': instance.aName,
+      'eName': instance.eName,
+      'aDescription': instance.aDescription,
+      'eDescription': instance.eDescription,
+      'accountNo': instance.accountNo,
+      'maxBalanceAllowed': instance.maxBalanceAllowed,
+      'minBalanceAllowed': instance.minBalanceAllowed,
+      'warnMinBalance': instance.warnMinBalance,
+      'warnMaxBalance': instance.warnMaxBalance,
+      'isLeaf': instance.isLeaf,
+      'isDisabled': instance.isDisabled,
+      'isCanDelete': instance.isCanDelete,
+      'isCanMove': instance.isCanMove,
+      'isCanAdd': instance.isCanAdd,
+      'isDeleted': instance.isDeleted,
+      'typeNo': instance.typeNo,
+      'subTypeNo': instance.subTypeNo,
+      'statusNo': instance.statusNo,
+      'nature': instance.nature,
+      'note': instance.note,
+      'credit': instance.credit,
+      'debit': instance.debit,
+      'creditDebitDateTime': instance.creditDebitDateTime,
+      'openDate': instance.openDate,
+      'ownerType': instance.ownerType,
+      'ownerReferenceNo': instance.ownerReferenceNo,
+      'deletedDate': instance.deletedDate,
+      'disabledDate': instance.disabledDate,
+      'fileNo': instance.fileNo,
+      'horizontalTreeNo': instance.horizontalTreeNo,
+      'barCode': instance.barCode,
+      'openBalanceDate': instance.openBalanceDate?.toIso8601String(),
+      'dateG': instance.dateG?.toIso8601String(),
+      'currentBalanceDateG': instance.currentBalanceDateG?.toIso8601String(),
+      'currentBalance': instance.currentBalance,
+      'manPostedOpenBalance': instance.manPostedOpenBalance,
+      'openBalance': instance.openBalance,
+      'manPostedLastBalance': instance.manPostedLastBalance,
+    };
