@@ -196,7 +196,12 @@
   "standard_rated_sales": "Standard Rated Sales",
   "citizen_rate_healthcare": "Citizen Rate Healthcare",
   "sales_exports": "Sales: Exports",
-  "exempts_sales": "Exempts: Sales"
+  "exempts_sales": "Exempts: Sales",
+  "client_vendor_validation": "Please enter Client/Vendor type and Arabic name",
+  "re_calc_transaction_balances": "Re Calc Transaction Balances",
+  "re_calc_all_transaction_balances_this_client": "Re Calc All Transaction Balances (This Client)",
+  "re_calc_balances": "Re Calc Balances",
+  "account_statement": "Account Statement"
 
 
 

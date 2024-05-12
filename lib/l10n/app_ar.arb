@@ -196,7 +196,13 @@
   "standard_rated_sales": "مبيعات بمعدل قياسى",
   "citizen_rate_healthcare": "رعاية صحية",
   "sales_exports": "مبيعات صادرات",
-  "exempts_sales": "مبيعات مستثناه"
+  "exempts_sales": "مبيعات مستثناه",
+  "client_vendor_validation": "برجاء ادخال نوع العميل/المورد و الاسم بالعربى",
+  "re_calc_transaction_balances": "إعادة احتساب جميع معاملات الارصدة",
+  "re_calc_all_transaction_balances_this_client": "إعادة احتساب جميع معاملات ارصدة هذا العميل",
+  "re_calc_balances": "إعادة احتساب الرصيد",
+  "account_statement": "كشف حساب"
+
 
 
 
