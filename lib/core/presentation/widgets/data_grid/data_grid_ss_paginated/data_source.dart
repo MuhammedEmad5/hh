@@ -49,60 +49,52 @@ class CustomDataGridSource extends DataGridSource {
       return row.getCells().indexOf(dataGridCell) == 0 &&
               dataGridCell.value == -1
           ? const SizedBox()
-          : dataGridCell.value == null &&
-                  dataGridCell.columnName !=
-                      AppLocalizations.of(AppNavigation.context)!.edit &&
-                  dataGridCell.columnName !=
-                      AppLocalizations.of(AppNavigation.context)!.delete
+          : dataGridCell.columnName ==
+                  AppLocalizations.of(AppNavigation.context)!.edit
               ? Container(
                   color: getRowBackgroundColor(),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        if (onEditPressed != null) {
+                          onEditPressed!(
+                              row.getCells()[0].value, paginatedData[rowIndex]);
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.edit,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
                 )
               : dataGridCell.columnName ==
-                      AppLocalizations.of(AppNavigation.context)!.edit
+                      AppLocalizations.of(AppNavigation.context)!.delete
                   ? Container(
                       color: getRowBackgroundColor(),
                       child: Center(
                         child: IconButton(
                           onPressed: () {
-                            if (onEditPressed != null) {
-                              onEditPressed!(row.getCells()[0].value,
-                                  paginatedData[rowIndex]);
+                            if (onDeletePressed != null) {
+                              onDeletePressed!(row.getCells()[0].value);
+                              dataGridRows.remove(row);
+                              notifyListeners();
                             }
                           },
                           icon: const Icon(
-                            Icons.edit,
-                            color: AppColors.primaryColor,
+                            Icons.delete,
+                            color: AppColors.redColor,
                           ),
                         ),
                       ),
                     )
-                  : dataGridCell.columnName ==
-                          AppLocalizations.of(AppNavigation.context)!.delete
-                      ? Container(
-                          color: getRowBackgroundColor(),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                if (onDeletePressed != null) {
-                                  onDeletePressed!(row.getCells()[0].value);
-                                  dataGridRows.remove(row);
-                                  notifyListeners();
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.redColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(
-                          color: getRowBackgroundColor(),
-                          padding: const EdgeInsets.all(8),
-                          alignment: Alignment.center,
-                          child: Text(
-                            dataGridCell.value.toString(),
-                          ));
+                  : Container(
+                      color: getRowBackgroundColor(),
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.center,
+                      child: Text(
+                        dataGridCell.value.toString(),
+                      ));
     }).toList());
   }
 

@@ -5,7 +5,6 @@ import '../widgets/alert_dialog.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/cancel_button.dart';
 import '../widgets/checkbox.dart';
-import '../widgets/data_grid.dart';
 import '../widgets/date_picker.dart';
 import '../widgets/dropdown.dart';
 import '../widgets/dropdown_search.dart';
@@ -42,9 +41,34 @@ class _ExampleViewState extends State<ExampleView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               const SizedBox(
                 height: 10,
+              ),
+              TextBox(
+                initialValue: 'Initial Value', // Optional
+                label: 'English', // Optional
+                textDirection: TextDirection.ltr,
+                hint: 'Text box hint', // Optional
+                keyboardType: TextInputType.text, // Optional
+                maxLength: 25, // Optional
+                maxLines: 1, // Optional (To make it multi line)
+                onChanged: (value) {
+                  print(value);
+                }, // Optional
+                // controller: , //Optional
+              ),
+              TextBox(
+                initialValue: 'عربى', // Optional
+                label: 'Arabic', // Optional
+                textDirection: TextDirection.rtl,
+                hint: 'عربى', // Optional
+                keyboardType: TextInputType.text, // Optional
+                maxLength: 25, // Optional
+                maxLines: 1, // Optional (To make it multi line)
+                onChanged: (value) {
+                  print(value);
+                }, // Optional
+                // controller: , //Optional
               ),
               TextBox(
                 initialValue: 'Initial Value', // Optional
@@ -219,11 +243,11 @@ class _ExampleViewState extends State<ExampleView> {
                 width: null, // Optional
               ),
               const SizedBox(height: 20),
-              DataGrid(
-                data: data,
-                allowFiltering: false, // Optional (Default false)
-                fill: true, // Optional (Default false)
-              ),
+              // DataGrid(
+              //   data: data,
+              //   allowFiltering: false, // Optional (Default false)
+              //   fill: true, // Optional (Default false)
+              // ),
             ],
           ),
         ),

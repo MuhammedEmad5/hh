@@ -28,7 +28,6 @@ class SqlLiteManager {
     LoggerSingleton.logger.i(path);
     dynamic bytes;
 
-
     bool exists;
     if (Platform.isWindows) {
       sqfliteFfiInit();
@@ -39,7 +38,6 @@ class SqlLiteManager {
     } else {
       exists = await databaseExists(path);
     }
-
 
     if (!exists) {
       if (Platform.isWindows) {
@@ -63,5 +61,4 @@ class SqlLiteManager {
 
     return openDatabase(path);
   }
-
 }
