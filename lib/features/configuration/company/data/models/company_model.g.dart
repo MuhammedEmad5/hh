@@ -27,7 +27,7 @@ Company _$CompanyFromJson(Map<String, dynamic> json) => Company(
       fileNo: json['fileNo'] as num?,
       buildingNo_Second: json['buildingNo_Second'] as num?,
       insuranceNum: json['insuranceNum'] as String?,
-      companyNoOneInvoice: json['companyNoOneInvoice'] as num? ?? 0.000000,
+      companyNoOneInvoice: json['companyNoOneInvoice'] as num? ?? 0.0,
       telephone1: json['telephone1'] as String?,
       telephone2: json['telephone2'] as String?,
       aLocation: json['aLocation'] as String?,

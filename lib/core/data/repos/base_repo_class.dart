@@ -37,17 +37,14 @@ class BaseRepoClass {
     }
   }
 
-  Future<bool> update<T extends JsonModel>(T data, {required num id}) async {
+  Future<bool> update<T extends JsonModel>(T data,
+      {required num id, skipNo = 4}) async {
     final String tableName = T.toString().toLowerCase();
     Map<String, dynamic> jsonData = data.toJson();
     if (jsonData.isEmpty) {
       throw SQLiteException(null, "Empty data");
     }
     List<String> updateValues = [];
-    int skipNo = 4;
-    if (tableName == 'companyunit') {
-      skipNo = 2;
-    }
     jsonData.entries.skip(skipNo).forEach((entry) {
       String key = entry.key;
       dynamic value = entry.value;
