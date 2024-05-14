@@ -1,3 +1,5 @@
+import 'package:InvoiceF/features/configuration/banks/data/repositories/banks_repo.dart';
+import 'package:InvoiceF/features/configuration/banks/presentation/manager/bank_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/navigation/navigation.dart';
 import '../../../../core/presentation/widgets/app_bar.dart';
+import '../../../configuration/banks/di/bank_service.dart';
 import '../../../configuration/banks/presentation/pages/banks_view.dart';
 import '../../../configuration/branch/data/repositories/branch_repo_impl.dart';
 import '../../../configuration/branch/di/branch_service.dart';
@@ -78,7 +81,7 @@ class InfraDataView extends StatelessWidget {
             builder: (context) {
               return RepositoryProvider(
                 create: (context) => GetIt.I<UnitRepo>(),
-                 child: BlocProvider<UnitCubit>.value(
+                child: BlocProvider<UnitCubit>.value(
                   value: GetIt.I<UnitCubit>()..getAllUnits(),
                   child: const UnitPage(),
                 ),
@@ -87,7 +90,6 @@ class InfraDataView extends StatelessWidget {
           ),
         );
       }),
-
       ScreenItem(
         appLocalizations.company,
         'company',
@@ -155,21 +157,22 @@ class InfraDataView extends StatelessWidget {
         'domain',
         () {},
       ),
-      ScreenItem(
-        appLocalizations.backup_restore,
-        'backup',
-        () {
+      ScreenItem(appLocalizations.backup_restore, 'backup', () {}),
 
-    }
-
-      ),
       ScreenItem(
         appLocalizations.banks,
         'bank',
         () {
           AppNavigation.pushPageRoute(_buildPageRoute(
             builder: (context) {
-              return const BanksView();
+              BankService().initDi();
+              return RepositoryProvider<BanksRepo>(
+                create: (context) => GetIt.I<BanksRepo>(),
+                child: BlocProvider<BankCubit>.value(
+                  value:  GetIt.I<BankCubit>()..getAllBanks(),
+                  child: const BanksView(),
+                ),
+              );
             },
           ));
         },

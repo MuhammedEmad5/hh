@@ -8,7 +8,7 @@ part of 'bank_entity.dart';
 
 BankEntity _$BankEntityFromJson(Map<String, dynamic> json) => BankEntity(
       bankAccountNumber: (json['bankAccountNumber'] as num).toInt(),
-      userNumber: json['userNumber'] as String,
+      userNumber: json['userNumber'] as String?,
       arabicName: json['arabicName'] as String,
       englishName: json['englishName'] as String?,
     );

@@ -1,5 +1,3 @@
-
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../core/model/json_model.dart';
@@ -49,16 +47,16 @@ class BankAccount extends JsonModel {
   DateTime? dateG;
   DateTime? currentBalanceDateG;
   int? currentBalance;
-  int? manPostedOpenBalance;
+  int? manPosted_openBalance;
   int? openBalance;
-  int? manPostedLastBalance;
+  int? manPosted_LastBalance;
 
   BankAccount({
     this.VendorId = 0,
    required this.bankAccountNo,
     this.parentNo,
     required this.userNumber,
-    this.depthNum,
+    this.depthNum = 0,
     required this.aName,
      this.eName,
     this.aDescription,
@@ -68,7 +66,7 @@ class BankAccount extends JsonModel {
     this.minBalanceAllowed,
     this.warnMinBalance,
     this.warnMaxBalance,
-    this.isLeaf,
+    this.isLeaf = 0,
     this.isDisabled,
     this.isCanDelete,
     this.isCanMove,
@@ -94,9 +92,9 @@ class BankAccount extends JsonModel {
     this.dateG,
     this.currentBalanceDateG,
     this.currentBalance,
-    this.manPostedOpenBalance,
+    this.manPosted_openBalance,
     this.openBalance,
-    this.manPostedLastBalance,
+    this.manPosted_LastBalance,
   });
 
   @override

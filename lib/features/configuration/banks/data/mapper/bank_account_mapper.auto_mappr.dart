@@ -251,7 +251,7 @@ class $BankAccountMapper implements _i1.AutoMapprInterface {
       bankAccountNumber: model.bankAccountNo,
       userNumber: model.userNumber,
       arabicName: model.aName,
-      englishName: r'eName',
+      englishName: model.eName,
     );
   }
 }

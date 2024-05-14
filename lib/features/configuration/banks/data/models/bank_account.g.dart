@@ -21,7 +21,7 @@ BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
       minBalanceAllowed: (json['minBalanceAllowed'] as num?)?.toInt(),
       warnMinBalance: (json['warnMinBalance'] as num?)?.toInt(),
       warnMaxBalance: (json['warnMaxBalance'] as num?)?.toInt(),
-      isLeaf: json['isLeaf'],
+      isLeaf: json['isLeaf'] ?? 0,
       isDisabled: json['isDisabled'],
       isCanDelete: json['isCanDelete'],
       isCanMove: json['isCanMove'],
@@ -53,9 +53,9 @@ BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
           ? null
           : DateTime.parse(json['currentBalanceDateG'] as String),
       currentBalance: (json['currentBalance'] as num?)?.toInt(),
-      manPostedOpenBalance: (json['manPostedOpenBalance'] as num?)?.toInt(),
+      manPosted_openBalance: (json['manPosted_openBalance'] as num?)?.toInt(),
       openBalance: (json['openBalance'] as num?)?.toInt(),
-      manPostedLastBalance: (json['manPostedLastBalance'] as num?)?.toInt(),
+      manPosted_LastBalance: (json['manPosted_LastBalance'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$BankAccountToJson(BankAccount instance) =>
@@ -100,7 +100,7 @@ Map<String, dynamic> _$BankAccountToJson(BankAccount instance) =>
       'dateG': instance.dateG?.toIso8601String(),
       'currentBalanceDateG': instance.currentBalanceDateG?.toIso8601String(),
       'currentBalance': instance.currentBalance,
-      'manPostedOpenBalance': instance.manPostedOpenBalance,
+      'manPosted_openBalance': instance.manPosted_openBalance,
       'openBalance': instance.openBalance,
-      'manPostedLastBalance': instance.manPostedLastBalance,
+      'manPosted_LastBalance': instance.manPosted_LastBalance,
     };

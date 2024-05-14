@@ -14,7 +14,7 @@ import 'bank_account_mapper.auto_mappr.dart';
   MapType<BankAccount, BankEntity>(fields: [
     Field('bankAccountNumber', from: 'bankAccountNo'),
     Field('arabicName', from: 'aName'),
-    Field('englishName', custom: 'eName'),
+    Field('englishName', from: 'eName'),
   ])
 ])
 class BankAccountMapper extends $BankAccountMapper {

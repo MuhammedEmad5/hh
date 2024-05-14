@@ -6,13 +6,13 @@ part 'bank_entity.g.dart';
 @JsonSerializable()
 class BankEntity {
   int bankAccountNumber;
-  String userNumber;
+  String? userNumber;
   String arabicName;
   String? englishName;
 
   BankEntity({
     required this.bankAccountNumber,
-    required this.userNumber,
+     this.userNumber,
     required this.arabicName,
     this.englishName,
   });
