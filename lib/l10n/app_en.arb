@@ -216,7 +216,22 @@
   "export": "Export",
   "export_as_pdf": "Export as PDF",
   "export_as_excel": "Export as Excel",
-  "columns": "Columns"
+  "columns": "Columns",
+
+  "main_options": "Main Options",
+  "main_currency_type": "Main Currency Type",
+  "main_currency_type_arabic": "Arabic Main Currency Type",
+  "main_currency_type_english": "English Main Currency Type",
+  "qr_size": "QR Size",
+  "a4_apply_options": "A4 Apply Options",
+  "a4_height": "A4 Height",
+  "a4_width": "A4 Width",
+  "mm80_apply_options": "80mm Apply Options",
+  "mm80_height": "80mm Height",
+  "mm80_width": "80mm Width",
+  "url_link_apply_options": "URL Link Apply Options",
+  "url_link_height": "URL Link Height",
+  "url_link_width": "URL Link Width"
 
 
 

@@ -1,3 +1,4 @@
+import 'package:InvoiceF/features/configuration/accounting_options/presentation/pages/accounting_options_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class InfraDataView extends StatelessWidget {
             builder: (context) {
               return RepositoryProvider(
                 create: (context) => GetIt.I<UnitRepo>(),
-                 child: BlocProvider<UnitCubit>.value(
+                child: BlocProvider<UnitCubit>.value(
                   value: GetIt.I<UnitCubit>()..getAllUnits(),
                   child: const UnitPage(),
                 ),
@@ -87,7 +88,6 @@ class InfraDataView extends StatelessWidget {
           ),
         );
       }),
-
       ScreenItem(
         appLocalizations.company,
         'company',
@@ -138,7 +138,13 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.accounting_options,
         'acc',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const AccountingOptionsPage();
+            },
+          ));
+        },
       ),
       ScreenItem(
         appLocalizations.device_options,
@@ -155,14 +161,7 @@ class InfraDataView extends StatelessWidget {
         'domain',
         () {},
       ),
-      ScreenItem(
-        appLocalizations.backup_restore,
-        'backup',
-        () {
-
-    }
-
-      ),
+      ScreenItem(appLocalizations.backup_restore, 'backup', () {}),
       ScreenItem(
         appLocalizations.banks,
         'bank',
