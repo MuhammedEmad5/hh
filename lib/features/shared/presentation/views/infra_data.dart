@@ -1,5 +1,8 @@
 import 'package:InvoiceF/features/configuration/banks/data/repositories/banks_repo.dart';
 import 'package:InvoiceF/features/configuration/banks/presentation/manager/bank_cubit.dart';
+import 'package:InvoiceF/features/configuration/user_options/data/repositories/user_options_repo.dart';
+import 'package:InvoiceF/features/configuration/user_options/di/user_options_service.dart';
+import 'package:InvoiceF/features/configuration/user_options/presentation/manager/user_options_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +135,15 @@ class InfraDataView extends StatelessWidget {
         () {
           AppNavigation.pushPageRoute(_buildPageRoute(
             builder: (context) {
-              return const UserOptionView();
+              UserOptionsService().initDi();
+
+              return RepositoryProvider<UserOptionsRepo>(
+                create: (context) => GetIt.I<UserOptionsRepo>(),
+                child: BlocProvider<UserOptionsCubit>.value(
+ value:  GetIt.I<UserOptionsCubit>()..getAllThemes(),
+  child: UserOptionView(),
+),
+              );
             },
           ));
         },
@@ -158,7 +169,6 @@ class InfraDataView extends StatelessWidget {
         () {},
       ),
       ScreenItem(appLocalizations.backup_restore, 'backup', () {}),
-
       ScreenItem(
         appLocalizations.banks,
         'bank',
@@ -169,7 +179,7 @@ class InfraDataView extends StatelessWidget {
               return RepositoryProvider<BanksRepo>(
                 create: (context) => GetIt.I<BanksRepo>(),
                 child: BlocProvider<BankCubit>.value(
-                  value:  GetIt.I<BankCubit>()..getAllBanks(),
+                  value: GetIt.I<BankCubit>()..getAllBanks(),
                   child: const BanksView(),
                 ),
               );

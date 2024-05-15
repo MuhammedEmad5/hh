@@ -1,0 +1,71 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'met_theme.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Met_Theme _$Met_ThemeFromJson(Map<String, dynamic> json) => Met_Theme(
+      themeNo: (json['themeNo'] as num).toInt(),
+      parentNo: (json['parentNo'] as num?)?.toInt(),
+      userNumber: json['userNumber'] as String?,
+      codeName: json['codeName'] as String,
+      aName: json['aName'] as String?,
+      eName: json['eName'] as String?,
+      aDescription: json['aDescription'],
+      eDescription: json['eDescription'],
+      accountNo: (json['accountNo'] as num?)?.toInt(),
+      maxBalanceAllowed: (json['maxBalanceAllowed'] as num?)?.toInt(),
+      minBalanceAllowed: (json['minBalanceAllowed'] as num?)?.toInt(),
+      warnMinBalance: (json['warnMinBalance'] as num?)?.toInt(),
+      warnMaxBalance: (json['warnMaxBalance'] as num?)?.toInt(),
+      isLeaf: json['isLeaf'],
+      isDisabled: json['isDisabled'],
+      isCanDelete: json['isCanDelete'],
+      isCanMove: json['isCanMove'],
+      isCanAdd: json['isCanAdd'],
+      isDeleted: json['isDeleted'],
+      depthNum: (json['depthNum'] as num?)?.toInt(),
+      typeNo: (json['typeNo'] as num?)?.toInt(),
+      subTypeNo: (json['subTypeNo'] as num?)?.toInt(),
+      statusNo: (json['statusNo'] as num?)?.toInt(),
+      nature: (json['nature'] as num?)?.toInt(),
+      note: json['note'],
+      horizontalTreeNo: (json['horizontalTreeNo'] as num?)?.toInt(),
+      isVisible: json['isVisible'],
+      isVisibleAtUsersView: json['isVisibleAtUsersView'],
+      isLanguageApplied: json['isLanguageApplied'],
+    );
+
+Map<String, dynamic> _$Met_ThemeToJson(Met_Theme instance) => <String, dynamic>{
+      'themeNo': instance.themeNo,
+      'parentNo': instance.parentNo,
+      'userNumber': instance.userNumber,
+      'codeName': instance.codeName,
+      'aName': instance.aName,
+      'eName': instance.eName,
+      'aDescription': instance.aDescription,
+      'eDescription': instance.eDescription,
+      'accountNo': instance.accountNo,
+      'maxBalanceAllowed': instance.maxBalanceAllowed,
+      'minBalanceAllowed': instance.minBalanceAllowed,
+      'warnMinBalance': instance.warnMinBalance,
+      'warnMaxBalance': instance.warnMaxBalance,
+      'isLeaf': instance.isLeaf,
+      'isDisabled': instance.isDisabled,
+      'isCanDelete': instance.isCanDelete,
+      'isCanMove': instance.isCanMove,
+      'isCanAdd': instance.isCanAdd,
+      'isDeleted': instance.isDeleted,
+      'depthNum': instance.depthNum,
+      'typeNo': instance.typeNo,
+      'subTypeNo': instance.subTypeNo,
+      'statusNo': instance.statusNo,
+      'nature': instance.nature,
+      'note': instance.note,
+      'horizontalTreeNo': instance.horizontalTreeNo,
+      'isVisible': instance.isVisible,
+      'isVisibleAtUsersView': instance.isVisibleAtUsersView,
+      'isLanguageApplied': instance.isLanguageApplied,
+    };

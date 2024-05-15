@@ -30,12 +30,12 @@ class DioManager {
       _dioInstance!.options.sendTimeout = const Duration(seconds: 5);
 
       _dioInstance!.interceptors.addAll([
-        PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          error: true,
-          maxWidth: 60,
-        ),
+        // PrettyDioLogger(
+        //   requestHeader: true,
+        //   requestBody: true,
+        //   error: true,
+        //   maxWidth: 60,
+        // ),
       ]);
     }
 

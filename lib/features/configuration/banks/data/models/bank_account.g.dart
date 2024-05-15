@@ -11,7 +11,7 @@ BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
       bankAccountNo: (json['bankAccountNo'] as num).toInt(),
       parentNo: (json['parentNo'] as num?)?.toInt(),
       userNumber: json['userNumber'] as String,
-      depthNum: (json['depthNum'] as num?)?.toInt(),
+      depthNum: (json['depthNum'] as num?)?.toInt() ?? 0,
       aName: json['aName'] as String,
       eName: json['eName'] as String?,
       aDescription: json['aDescription'] as String?,
