@@ -215,7 +215,23 @@
   "export_as_pdf": "تصدير ك PDF",
   "export_as_excel": "تصدير ك Excel",
   "columns": "عواميد",
-  "bank_account": "الحساب البنكي"
+  "bank_account": "الحساب البنكي",
+
+
+  "main_options": "الخيارات الأساسية",
+  "main_currency_type": "نوع العملة الأساسي",
+  "main_currency_type_arabic": "العربية:نوع العملة الأساسي",
+  "main_currency_type_english": "الانجليزية:نوع العملة الأساسي",
+  "qr_size": "حجم Qr",
+  "a4_apply_options": "تطبيق الخيارات A4",
+  "a4_height": "الارتفاع A4",
+  "a4_width": "العرض A4",
+  "mm80_apply_options": "تطبيق الخيارات 80mm",
+  "mm80_height": "الارتفاع 80mm",
+  "mm80_width": "العرض 80mm",
+  "url_link_apply_options": "تطبيق خيارات الرابط URL",
+  "url_link_height": "ارتفاع الرابط URL",
+  "url_link_width": "عرض الرابط URL"
 
 
 

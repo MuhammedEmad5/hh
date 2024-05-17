@@ -7,6 +7,7 @@ import 'package:InvoiceF/features/configuration/company_bill_type_options/data/r
 import 'package:InvoiceF/features/configuration/company_bill_type_options/di/company_bill_type_service.dart';
 import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/manager/company_bill_type_options_cubit.dart';
 import 'package:InvoiceF/features/configuration/company_bill_type_options/presentation/views/company_bill_type_options_page.dart';
+import 'package:InvoiceF/features/configuration/accounting_options/presentation/pages/accounting_options_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -169,7 +170,13 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.accounting_options,
         'acc',
-        () {},
+        () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return const AccountingOptionsPage();
+            },
+          ));
+        },
       ),
       ScreenItem(
         appLocalizations.device_options,
