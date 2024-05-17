@@ -10,6 +10,6 @@ class UpdateCompanyUnitUseCase {
 
   Future<void> execute(CompanyUnitEntity companyUnit, {required id}) async {
     CompanyUnit unit = CompanyUnitMapper().convert(companyUnit);
-    await companyUnitRepo.update<CompanyUnit>(unit, id: id);
+    await companyUnitRepo.update<CompanyUnit>(unit, id: id, skipNo: 2);
   }
 }

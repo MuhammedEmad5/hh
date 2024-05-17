@@ -6,20 +6,27 @@ import '../../../../../core/presentation/widgets/label.dart';
 import 'package:InvoiceF/core/presentation/widgets/text_box.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
-class UnitCard extends StatelessWidget {
+class UnitCard extends StatefulWidget {
   final TextEditingController reference;
   final TextEditingController aName;
   final TextEditingController eName;
-  final AppLocalizations appLocalizations;
   const UnitCard({
     super.key,
     required this.reference,
     required this.aName,
     required this.eName,
-    required this.appLocalizations,
   });
+
+  @override
+  State<UnitCard> createState() => _UnitCardState();
+}
+
+class _UnitCardState extends State<UnitCard> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,35 +39,41 @@ class UnitCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Label(
-                text: appLocalizations.reference,
+                text: AppLocalizations.of(context)!.reference,
                 color: AppColors.primaryColor,
               ),
               TextBox(
                 labelWidth: width,
                 isEnabled: false,
-                controller: reference,
+                controller: widget.reference,
               )
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               Label(text: appLocalizations.arabic_name, color: AppColors.primaryColor),
+              Label(
+                  text: AppLocalizations.of(context)!.arabic_name,
+                  color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
-                controller: aName,
+                controller: widget.aName,
                 isEnabled: false,
+                textDirection: TextDirection.rtl,
               )
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Label(text: appLocalizations.english_name, color: AppColors.primaryColor),
+              Label(
+                  text: AppLocalizations.of(context)!.english_name,
+                  color: AppColors.primaryColor),
               TextBox(
                 labelWidth: width,
-                controller: eName,
+                controller: widget.eName,
                 isEnabled: false,
+                textDirection: TextDirection.ltr,
               )
             ],
           ),

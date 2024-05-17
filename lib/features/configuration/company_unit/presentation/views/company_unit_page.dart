@@ -139,8 +139,8 @@ class _CompanyUnitPageState extends State<CompanyUnitPage> {
           }, error: (e) {
             return CustomErrorWidget(errorMessage: e);
           }, empty: () {
-            return  CustomEmptyWidget(
-              text:  AppLocalizations.of(context)!.no_data,
+            return const CustomEmptyWidget(
+              text: 'No Company Unit available please insert one',
             );
           });
         },
