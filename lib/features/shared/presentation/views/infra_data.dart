@@ -1,5 +1,6 @@
 import 'package:InvoiceF/features/configuration/banks/data/repositories/banks_repo.dart';
 import 'package:InvoiceF/features/configuration/banks/presentation/manager/bank_cubit.dart';
+import 'package:InvoiceF/features/configuration/device_options/presentation/pages/device_option.dart';
 import 'package:InvoiceF/features/configuration/user_options/data/repositories/user_options_repo.dart';
 import 'package:InvoiceF/features/configuration/user_options/di/user_options_service.dart';
 import 'package:InvoiceF/features/configuration/user_options/presentation/manager/user_options_cubit.dart';
@@ -181,7 +182,13 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.device_options,
         'pc',
-        () {},
+            () {
+          AppNavigation.pushPageRoute(_buildPageRoute(
+            builder: (context) {
+              return DeviceOptionView();
+            },
+          ));
+        },
       ),
       ScreenItem(
         appLocalizations.barcode,

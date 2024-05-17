@@ -3,6 +3,7 @@ import 'package:InvoiceF/features/configuration/device_options/presentation/mana
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/blue_label_Widget.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/default_Check_box.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/default_text_box_widget.dart';
+import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/suffix_icons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants/colors.dart';
@@ -78,19 +79,25 @@ class DeviceOptionView extends StatelessWidget {
                       const SizedBox(height: 10),
                       DeviceOptionTextBoxWidget(
                         label: 'First 80 mm: Pc Logo Icon',
-                        initialValue: deviceOptionCubit.openResult,
+                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
                       ),
                       const SizedBox(height: 10),
-                      const DeviceOptionTextBoxWidget(
-                          label: 'First A4: Pc Logo Icon'),
+                      DeviceOptionTextBoxWidget(
+                          label: 'First A4: Pc Logo Icon',
+                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
+                      ),
                       const SizedBox(height: 10),
                       const DeviceOptionBlueLabelWidget(label: 'Footer Icon'),
                       const SizedBox(height: 10),
-                      const DeviceOptionTextBoxWidget(
-                          label: 'Second 80 mm: Pc Logo Icon'),
+                      DeviceOptionTextBoxWidget(
+                          label: 'Second 80 mm: Pc Logo Icon',
+                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
+                      ),
                       const SizedBox(height: 10),
-                      const DeviceOptionTextBoxWidget(
-                          label: 'Second 80 mm: Pc Logo Icon'),
+                      DeviceOptionTextBoxWidget(
+                          label: 'Second 80 mm: Pc Logo Icon',
+                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
+                      ),
                     ],
                   ),
                 ),

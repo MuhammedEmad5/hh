@@ -11,7 +11,6 @@ class DeviceOptionDropdownWidget extends StatelessWidget {
     return DropdownSearch(
       label: 'Data Filter',
       labelColor: AppColors.primaryColor,
-      size: 16,
       initialValue: 'All',
       items: const [
         'All',
