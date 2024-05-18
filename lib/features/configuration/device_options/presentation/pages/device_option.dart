@@ -1,4 +1,5 @@
 import 'package:InvoiceF/core/presentation/widgets/app_bar.dart';
+import 'package:InvoiceF/core/presentation/widgets/check_box_with_controller/check_box_controller.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/manager/device_option_cubit.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/blue_label_Widget.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/default_Check_box.dart';
@@ -9,102 +10,158 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../widgets/drop_down_search.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DeviceOptionView extends StatelessWidget {
-   DeviceOptionView({super.key});
+class DeviceOptionView extends StatefulWidget {
+  const DeviceOptionView({super.key});
 
-  bool? isTouchUiModeChecked;
-  bool? isShowStatusBarChecked;
-  bool? isWarningOnApplicationExitChecked;
-  bool? isAskForDataBaseBackupChecked;
+  @override
+  State<DeviceOptionView> createState() => _DeviceOptionViewState();
+}
+
+class _DeviceOptionViewState extends State<DeviceOptionView> {
+  late CustomCheckboxController isTouchUiModeChecked;
+  late CustomCheckboxController isShowStatusBarChecked;
+  late CustomCheckboxController isWarningOnApplicationExitChecked;
+  late CustomCheckboxController isAskForDataBaseBackupChecked;
+  late TextEditingController filterFromDaysController;
+  late TextEditingController touchScaleFactorController;
+  late TextEditingController first80mmPcLogoIconController;
+  late TextEditingController firstA4PcLogoIconController;
+  late TextEditingController second80mmPcLogoIconController;
+  late TextEditingController secondA4PcLogoIconController;
+  late AppLocalizations appLocalizations;
+
+  @override
+  void initState() {
+    super.initState();
+    isTouchUiModeChecked = CustomCheckboxController(false);
+    isShowStatusBarChecked = CustomCheckboxController(false);
+    isWarningOnApplicationExitChecked = CustomCheckboxController(false);
+    isAskForDataBaseBackupChecked = CustomCheckboxController(false);
+    filterFromDaysController = TextEditingController();
+    touchScaleFactorController = TextEditingController();
+    first80mmPcLogoIconController = TextEditingController();
+    firstA4PcLogoIconController = TextEditingController();
+    second80mmPcLogoIconController = TextEditingController();
+    secondA4PcLogoIconController = TextEditingController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    appLocalizations = AppLocalizations.of(context)!;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Device Options',
+        title: appLocalizations.device_options,
         color: AppColors.primaryColor,
         textColor: AppColors.onPrimary,
         saveBtnColor: AppColors.onPrimary,
-        onSavePressed: () {
-        },
+        onSavePressed: () {},
       ),
-      body: BlocProvider(
-        create: (context) => DeviceOptionCubit(),
-        child: BlocBuilder<DeviceOptionCubit, DeviceOptionState>(
-          builder: (context, state) {
-            final deviceOptionCubit = context.watch<DeviceOptionCubit>();
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomCard(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const DeviceOptionBlueLabelWidget(
-                          label: 'General Data Filter'),
-                      const SizedBox(height: 10),
-                      const DeviceOptionTextBoxWidget(
-                          label: 'Filter From Days',
-                          keyboardType: TextInputType.number),
-                      const SizedBox(height: 10),
-                      const DeviceOptionDropdownWidget(),
-                      const SizedBox(height: 15),
-                      const DeviceOptionBlueLabelWidget(label: 'Touch'),
-                      const SizedBox(height: 10),
-                      const DeviceOptionTextBoxWidget(
-                          label: 'Touch Scale Factor'),
-                      const SizedBox(height: 10),
-                      DeviceOptionCheckBoxWidget(
-                        checked: isTouchUiModeChecked??false,
-                        label: 'Touch i mode',
+      body: BlocBuilder<DeviceOptionCubit, DeviceOptionState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomCard(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DeviceOptionBlueLabelWidget(
+                        label: appLocalizations.general_data_filter),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.filter_from_days,
+                      controller: filterFromDaysController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionDropdownWidget(
+                        appLocalizations: appLocalizations),
+                    const SizedBox(height: 15),
+                    DeviceOptionBlueLabelWidget(
+                        label: appLocalizations.touch),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.touch_scale_factor,
+                      controller: touchScaleFactorController,
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionCheckBoxWidget(
+                      controller: isTouchUiModeChecked,
+                      label: appLocalizations.touch_ui_mode,
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionBlueLabelWidget(
+                        label: appLocalizations.main_form),
+                    const SizedBox(height: 10),
+                    DeviceOptionCheckBoxWidget(
+                      controller: isShowStatusBarChecked,
+                      label: appLocalizations.show_status_bar,
+                    ),
+                    DeviceOptionCheckBoxWidget(
+                      controller: isWarningOnApplicationExitChecked,
+                      label: appLocalizations.warning_on_application_exit,
+                    ),
+                    DeviceOptionCheckBoxWidget(
+                      controller: isAskForDataBaseBackupChecked,
+                      label: appLocalizations.ask_for_database_backup,
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionBlueLabelWidget(
+                        label: appLocalizations.head_icon),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.first_80_mm_pc_logo_icon,
+                      controller: first80mmPcLogoIconController,
+                      suffix: DeviceOptionSuffixIconWidget(
+                        moreFunction: () {
+                          //context.read<DeviceOptionCubit>().pickImage();
+                        },
+                        plusFunction: () {},
                       ),
-                      const SizedBox(height: 10),
-                      const DeviceOptionBlueLabelWidget(label: 'Main Form'),
-                      const SizedBox(height: 10),
-                      DeviceOptionCheckBoxWidget(
-                        checked: isShowStatusBarChecked??false,
-                        label: 'Show Status Bar',
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.first_a4_pc_logo_icon,
+                      controller: firstA4PcLogoIconController,
+                      suffix: DeviceOptionSuffixIconWidget(
+                        moreFunction: () {},
+                        plusFunction: () {},
                       ),
-                      DeviceOptionCheckBoxWidget(
-                        checked: isWarningOnApplicationExitChecked??false,
-                        label: 'Warning on Application Exit',
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionBlueLabelWidget(
+                        label: appLocalizations.footer_icon),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.second_80_mm_pc_logo_icon,
+                      controller: second80mmPcLogoIconController,
+                      suffix: DeviceOptionSuffixIconWidget(
+                        moreFunction: () {},
+                        plusFunction: () {},
                       ),
-                      DeviceOptionCheckBoxWidget(
-                        checked: isAskForDataBaseBackupChecked??false,
-                        label: 'Ask For DataBase backup',
+                    ),
+                    const SizedBox(height: 10),
+                    DeviceOptionTextBoxWidget(
+                      label: appLocalizations.second_a4_ac_logo_icon,
+                      controller: secondA4PcLogoIconController,
+                      suffix: DeviceOptionSuffixIconWidget(
+                        moreFunction: () {},
+                        plusFunction: () {},
                       ),
-                      const SizedBox(height: 10),
-                      const DeviceOptionBlueLabelWidget(label: 'Head Icon '),
-                      const SizedBox(height: 10),
-                      DeviceOptionTextBoxWidget(
-                        label: 'First 80 mm: Pc Logo Icon',
-                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
-                      ),
-                      const SizedBox(height: 10),
-                      DeviceOptionTextBoxWidget(
-                          label: 'First A4: Pc Logo Icon',
-                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
-                      ),
-                      const SizedBox(height: 10),
-                      const DeviceOptionBlueLabelWidget(label: 'Footer Icon'),
-                      const SizedBox(height: 10),
-                      DeviceOptionTextBoxWidget(
-                          label: 'Second 80 mm: Pc Logo Icon',
-                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
-                      ),
-                      const SizedBox(height: 10),
-                      DeviceOptionTextBoxWidget(
-                          label: 'Second 80 mm: Pc Logo Icon',
-                        suffix: DeviceOptionSuffixIconWidget(moreFunction: () {  }, plusFunction: () {  },),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

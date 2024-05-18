@@ -231,7 +231,31 @@
   "mm80_width": "العرض 80mm",
   "url_link_apply_options": "تطبيق خيارات الرابط URL",
   "url_link_height": "ارتفاع الرابط URL",
-  "url_link_width": "عرض الرابط URL"
+  "url_link_width": "عرض الرابط URL",
+  "general_data_filter": "فلترة البيانات العامة",
+  "filter_from_days": "فلتر من الايام",
+  "data_filter": "فلترة البيانات",
+  "all": "الجمبع",
+  "today": "اليوم",
+  "from_yesterday": "من البارحة",
+  "from_7_days": "من 7 ايام",
+  "from_30_days": "من 30 يوم",
+  "from_year_days": "من بداية العام",
+  "from_365_days": "من 365 يوم",
+  "custom": "العادة",
+  "touch": "لمس",
+  "touch_scale_factor": "عامل تحجيم للمس",
+  "touch_ui_mode": "للمس Ui وضع",
+  "main_form": "النموزج الرئيسى",
+  "show_status_bar": "عرض شريط الحالة",
+  "warning_on_application_exit": "تحذير عند خروج التطبيق",
+  "ask_for_database_backup": "اسأل عن نسخة احتياطية لقاعدة البيانات",
+  "head_icon": "شعار/رمز العنوان",
+  "first_80_mm_pc_logo_icon": "رمز شعار الحاسوب الاول :80mm",
+  "first_a4_pc_logo_icon": "رمز شعار الحاسوب الاول :A4",
+  "footer_icon": "شعار/رمز التذييل",
+  "second_80_mm_pc_logo_icon": "رمز شعار الحاسوب الثانى :80mm",
+  "second_a4_ac_logo_icon": "رمز شعار الحاسوب الثانى :A4"
 
 
 

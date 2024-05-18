@@ -233,8 +233,31 @@
   "mm80_width": "80mm Width",
   "url_link_apply_options": "URL Link Apply Options",
   "url_link_height": "URL Link Height",
-  "url_link_width": "URL Link Width"
-
+  "url_link_width": "URL Link Width",
+  "general_data_filter": "General Data Filter",
+  "filter_from_days": "Filter From Days",
+  "data_filter": "Data Filter",
+  "all": "All",
+  "today": "Today",
+  "from_yesterday": "From Yesterday",
+  "from_7_days": "From 7 Days",
+  "from_30_days": "From 30 Days",
+  "from_year_days": "From Year Days",
+  "from_365_days": "From 365 Days",
+  "custom": "Custom",
+  "touch": "Touch",
+  "touch_scale_factor": "Touch Scale Factor",
+  "touch_ui_mode": "Touch Ui Mode",
+  "main_form": "Main Form",
+  "show_status_bar": "Show Status Bar",
+  "warning_on_application_exit": "Warning on Application Exit",
+  "ask_for_database_backup": "Ask For Database backup",
+  "head_icon": "Head Icon",
+  "first_80_mm_pc_logo_icon": "First 80 mm: Pc Logo Icon",
+  "first_a4_pc_logo_icon": "First A4: Pc Logo Icon",
+  "footer_icon": "Footer Icon",
+  "second_80_mm_pc_logo_icon": "Second 80 mm: Pc Logo Icon",
+  "second_a4_ac_logo_icon": "Second A4: Pc Logo Icon"
 
 
 

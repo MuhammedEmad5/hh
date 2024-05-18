@@ -1,36 +1,20 @@
+import 'package:InvoiceF/core/presentation/widgets/check_box_with_controller/custom_check_box_with_controller.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/widgets/checkbox.dart';
+import '../../../../../core/presentation/widgets/check_box_with_controller/check_box_controller.dart';
 
-class DeviceOptionCheckBoxWidget extends StatefulWidget {
-  const DeviceOptionCheckBoxWidget({super.key, required this.checked, required this.label});
 
-  final bool checked;
+class DeviceOptionCheckBoxWidget extends StatelessWidget {
+  const DeviceOptionCheckBoxWidget({super.key, required this.controller, required this.label});
+
+  final CustomCheckboxController controller;
   final String label;
 
-  @override
-  _DeviceOptionCheckBoxWidgetState createState() => _DeviceOptionCheckBoxWidgetState();
-}
-
-class _DeviceOptionCheckBoxWidgetState extends State<DeviceOptionCheckBoxWidget> {
-  late bool _isChecked;
-
-  @override
-  void initState() {
-    super.initState();
-    _isChecked = widget.checked;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return CustomCheckbox(
-      label: widget.label,
-      initialValue: _isChecked,
-      onChanged: (v) {
-        setState(() {
-          _isChecked = v;
-        });
-        print(_isChecked);
-      },
+    return CustomCheckboxWithController(
+      label: label,
+      controller: controller,
     );
   }
 }

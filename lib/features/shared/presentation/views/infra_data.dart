@@ -1,5 +1,7 @@
 import 'package:InvoiceF/features/configuration/banks/data/repositories/banks_repo.dart';
 import 'package:InvoiceF/features/configuration/banks/presentation/manager/bank_cubit.dart';
+import 'package:InvoiceF/features/configuration/device_options/data/repositories/device_options_repo_impl.dart';
+import 'package:InvoiceF/features/configuration/device_options/presentation/manager/device_option_cubit.dart';
 import 'package:InvoiceF/features/configuration/device_options/presentation/pages/device_option.dart';
 import 'package:InvoiceF/features/configuration/user_options/data/repositories/user_options_repo.dart';
 import 'package:InvoiceF/features/configuration/user_options/di/user_options_service.dart';
@@ -33,6 +35,7 @@ import '../../../configuration/company_unit/data/repositories/company_unit_repo.
 import '../../../configuration/company_unit/di/company_unit_service.dart';
 import '../../../configuration/company_unit/presentation/manager/company_unit_cubit.dart';
 import '../../../configuration/company_unit/presentation/views/company_unit_page.dart';
+import '../../../configuration/device_options/di/device_option_service.dart';
 import '../../../configuration/unit/data/repositories/unit_repo.dart';
 import '../../../configuration/unit/di/unit_service.dart';
 import '../../../configuration/unit/presentation/manager/unit_cubit.dart';
@@ -45,6 +48,7 @@ import '../widgets/screen_item_card.dart';
 //todo: Make sure we close all bloc in dispose
 class InfraDataView extends StatelessWidget {
   late AppLocalizations appLocalizations;
+
   InfraDataView({super.key});
 
   @override
@@ -160,9 +164,9 @@ class InfraDataView extends StatelessWidget {
               return RepositoryProvider<UserOptionsRepo>(
                 create: (context) => GetIt.I<UserOptionsRepo>(),
                 child: BlocProvider<UserOptionsCubit>.value(
- value:  GetIt.I<UserOptionsCubit>()..getAllThemes(),
-  child: UserOptionView(),
-),
+                  value: GetIt.I<UserOptionsCubit>()..getAllThemes(),
+                  child: UserOptionView(),
+                ),
               );
             },
           ));
@@ -182,10 +186,15 @@ class InfraDataView extends StatelessWidget {
       ScreenItem(
         appLocalizations.device_options,
         'pc',
-            () {
+        () {
+          DeviceOptionService().initDi();
           AppNavigation.pushPageRoute(_buildPageRoute(
             builder: (context) {
-              return DeviceOptionView();
+              return RepositoryProvider(
+                  create: (context) => GetIt.I<DeviceOptionRepo>(),
+                  child: BlocProvider<DeviceOptionCubit>.value(
+                      value: GetIt.I<DeviceOptionCubit>(),
+                      child: const DeviceOptionView()));
             },
           ));
         },
