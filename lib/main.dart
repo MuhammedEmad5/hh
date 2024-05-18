@@ -38,7 +38,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    SharedService().initDi(LocalConnection());
+    SharedService().initDi(RemoteConnection());
 
     return MultiBlocProvider(
       providers: [

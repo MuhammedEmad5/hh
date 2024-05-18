@@ -7,6 +7,7 @@ import 'package:InvoiceF/features/configuration/device_options/presentation/widg
 import 'package:InvoiceF/features/configuration/device_options/presentation/widgets/suffix_icons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/presentation/widgets/card.dart';
 import '../widgets/drop_down_search.dart';
@@ -52,21 +53,7 @@ class _DeviceOptionViewState extends State<DeviceOptionView> with TickerProvider
     super.didChangeDependencies();
     appLocalizations = AppLocalizations.of(context)!;
   }
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   CustomCheckboxController.dispose();
-  //   CustomCheckboxController.dispose();
-  //   CustomCheckboxController.dispose();
-  //   CustomCheckboxController.dispose();
-  //   TextEditingController.dispose();
-  //   TextEditingController.dispose();
-  //   TextEditingController.dispose();
-  //   TextEditingController.dispose();
-  //   TextEditingController.dispose();
-  //   TextEditingController.dispose();
-  // }
+
   @override
   void dispose() {
     super.dispose();
@@ -99,91 +86,98 @@ class _DeviceOptionViewState extends State<DeviceOptionView> with TickerProvider
             padding: const EdgeInsets.all(8.0),
             child: CustomCard(
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: FB5Row(
+                  classNames: 'px-xs-1 px-lg-custom-10 mt-1 ',
                   children: [
-                    DeviceOptionBlueLabelWidget(
-                        label: appLocalizations.general_data_filter),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.filter_from_days,
-                      controller: filterFromDaysController,
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionDropdownWidget(
-                        appLocalizations: appLocalizations),
-                    const SizedBox(height: 15),
-                    DeviceOptionBlueLabelWidget(
-                        label: appLocalizations.touch),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.touch_scale_factor,
-                      controller: touchScaleFactorController,
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionCheckBoxWidget(
-                      controller: isTouchUiModeChecked,
-                      label: appLocalizations.touch_ui_mode,
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionBlueLabelWidget(
-                        label: appLocalizations.main_form),
-                    const SizedBox(height: 10),
-                    DeviceOptionCheckBoxWidget(
-                      controller: isShowStatusBarChecked,
-                      label: appLocalizations.show_status_bar,
-                    ),
-                    DeviceOptionCheckBoxWidget(
-                      controller: isWarningOnApplicationExitChecked,
-                      label: appLocalizations.warning_on_application_exit,
-                    ),
-                    DeviceOptionCheckBoxWidget(
-                      controller: isAskForDataBaseBackupChecked,
-                      label: appLocalizations.ask_for_database_backup,
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionBlueLabelWidget(
-                        label: appLocalizations.head_icon),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.first_80_mm_pc_logo_icon,
-                      controller: first80mmPcLogoIconController,
-                      suffix: DeviceOptionSuffixIconWidget(
-                        moreFunction: () {
-                          //context.read<DeviceOptionCubit>().pickImage();
-                        },
-                        plusFunction: () {},
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.first_a4_pc_logo_icon,
-                      controller: firstA4PcLogoIconController,
-                      suffix: DeviceOptionSuffixIconWidget(
-                        moreFunction: () {},
-                        plusFunction: () {},
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionBlueLabelWidget(
-                        label: appLocalizations.footer_icon),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.second_80_mm_pc_logo_icon,
-                      controller: second80mmPcLogoIconController,
-                      suffix: DeviceOptionSuffixIconWidget(
-                        moreFunction: () {},
-                        plusFunction: () {},
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    DeviceOptionTextBoxWidget(
-                      label: appLocalizations.second_a4_ac_logo_icon,
-                      controller: secondA4PcLogoIconController,
-                      suffix: DeviceOptionSuffixIconWidget(
-                        moreFunction: () {},
-                        plusFunction: () {},
+                    FB5Col(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          DeviceOptionBlueLabelWidget(
+                              label: appLocalizations.general_data_filter),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.filter_from_days,
+                            controller: filterFromDaysController,
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionDropdownWidget(
+                              appLocalizations: appLocalizations),
+                          const SizedBox(height: 15),
+                          DeviceOptionBlueLabelWidget(
+                              label: appLocalizations.touch),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.touch_scale_factor,
+                            controller: touchScaleFactorController,
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionCheckBoxWidget(
+                            controller: isTouchUiModeChecked,
+                            label: appLocalizations.touch_ui_mode,
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionBlueLabelWidget(
+                              label: appLocalizations.main_form),
+                          const SizedBox(height: 10),
+                          DeviceOptionCheckBoxWidget(
+                            controller: isShowStatusBarChecked,
+                            label: appLocalizations.show_status_bar,
+                          ),
+                          DeviceOptionCheckBoxWidget(
+                            controller: isWarningOnApplicationExitChecked,
+                            label: appLocalizations.warning_on_application_exit,
+                          ),
+                          DeviceOptionCheckBoxWidget(
+                            controller: isAskForDataBaseBackupChecked,
+                            label: appLocalizations.ask_for_database_backup,
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionBlueLabelWidget(
+                              label: appLocalizations.head_icon),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.first_80_mm_pc_logo_icon,
+                            controller: first80mmPcLogoIconController,
+                            suffix: DeviceOptionSuffixIconWidget(
+                              moreFunction: () {
+                                context.read<DeviceOptionCubit>().pickImage();
+                              },
+                              plusFunction: () {},
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.first_a4_pc_logo_icon,
+                            controller: firstA4PcLogoIconController,
+                            suffix: DeviceOptionSuffixIconWidget(
+                              moreFunction: () {},
+                              plusFunction: () {},
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionBlueLabelWidget(
+                              label: appLocalizations.footer_icon),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.second_80_mm_pc_logo_icon,
+                            controller: second80mmPcLogoIconController,
+                            suffix: DeviceOptionSuffixIconWidget(
+                              moreFunction: () {},
+                              plusFunction: () {},
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          DeviceOptionTextBoxWidget(
+                            label: appLocalizations.second_a4_ac_logo_icon,
+                            controller: secondA4PcLogoIconController,
+                            suffix: DeviceOptionSuffixIconWidget(
+                              moreFunction: () {},
+                              plusFunction: () {},
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

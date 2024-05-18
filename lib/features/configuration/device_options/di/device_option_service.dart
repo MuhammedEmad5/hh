@@ -14,7 +14,7 @@ class DeviceOptionService {
     );
 
     sl.registerLazySingletonSafely<PickImageDeviceOptionUseCase>(
-          () => PickImageDeviceOptionUseCase(sl<DeviceOptionRepo>()),
+          () => PickImageDeviceOptionUseCase(sl()),
     );
 
     sl.registerLazySingletonSafely<DeviceOptionCubit>(

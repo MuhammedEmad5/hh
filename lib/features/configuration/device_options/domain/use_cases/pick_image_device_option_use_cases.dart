@@ -7,7 +7,6 @@ class PickImageDeviceOptionUseCase {
 
   PickImageDeviceOptionUseCase(this.deviceOptionRepo);
   var openResult = 'Unknown';
-
   Future<void> execute() async {
     const filePath = '/storage/emulated/0/update.apk';
     final result = await OpenFile.open(filePath);
