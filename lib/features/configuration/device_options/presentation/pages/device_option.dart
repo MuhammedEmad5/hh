@@ -19,7 +19,7 @@ class DeviceOptionView extends StatefulWidget {
   State<DeviceOptionView> createState() => _DeviceOptionViewState();
 }
 
-class _DeviceOptionViewState extends State<DeviceOptionView> {
+class _DeviceOptionViewState extends State<DeviceOptionView> with TickerProviderStateMixin{
   late CustomCheckboxController isTouchUiModeChecked;
   late CustomCheckboxController isShowStatusBarChecked;
   late CustomCheckboxController isWarningOnApplicationExitChecked;
@@ -51,6 +51,36 @@ class _DeviceOptionViewState extends State<DeviceOptionView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     appLocalizations = AppLocalizations.of(context)!;
+  }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   CustomCheckboxController.dispose();
+  //   CustomCheckboxController.dispose();
+  //   CustomCheckboxController.dispose();
+  //   CustomCheckboxController.dispose();
+  //   TextEditingController.dispose();
+  //   TextEditingController.dispose();
+  //   TextEditingController.dispose();
+  //   TextEditingController.dispose();
+  //   TextEditingController.dispose();
+  //   TextEditingController.dispose();
+  // }
+  @override
+  void dispose() {
+    super.dispose();
+    isTouchUiModeChecked.dispose();
+    isShowStatusBarChecked.dispose();
+    isWarningOnApplicationExitChecked.dispose();
+    isAskForDataBaseBackupChecked.dispose();
+    filterFromDaysController.dispose();
+    touchScaleFactorController.dispose();
+    first80mmPcLogoIconController.dispose();
+    firstA4PcLogoIconController.dispose();
+    second80mmPcLogoIconController.dispose();
+    secondA4PcLogoIconController.dispose();
+
   }
 
   @override
