@@ -4,5 +4,6 @@ class SfKeys {
   static const String language = "language";
   static const String startPageTheme = "startPageTheme";
   static const String startListTheme = "startListTheme";
+  static const String deviceOption = "deviceOption";
 
 }

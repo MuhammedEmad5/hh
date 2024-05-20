@@ -193,7 +193,7 @@ class InfraDataView extends StatelessWidget {
               return RepositoryProvider(
                   create: (context) => GetIt.I<DeviceOptionRepo>(),
                   child: BlocProvider<DeviceOptionCubit>.value(
-                      value: GetIt.I<DeviceOptionCubit>(),
+                      value: GetIt.I<DeviceOptionCubit>()..getDeviceOptionObject(),
                       child: const DeviceOptionView()));
             },
           ));

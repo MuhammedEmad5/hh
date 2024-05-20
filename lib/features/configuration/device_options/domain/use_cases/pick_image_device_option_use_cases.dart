@@ -1,16 +1,18 @@
-import 'package:open_file_plus/open_file_plus.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../data/repositories/device_options_repo_impl.dart';
-
 
 class PickImageDeviceOptionUseCase {
   final DeviceOptionRepo deviceOptionRepo;
+  final ImagePicker _picker = ImagePicker();
 
   PickImageDeviceOptionUseCase(this.deviceOptionRepo);
-  var openResult = 'Unknown';
-  Future<void> execute() async {
-    const filePath = '/storage/emulated/0/update.apk';
-    final result = await OpenFile.open(filePath);
-    openResult = "type=${result.type}  message=${result.message}";
-    print(openResult);
+
+  Future<String?> execute() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      return image.path;
+    } else {
+      return null;
+    }
   }
 }
